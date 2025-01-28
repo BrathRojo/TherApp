@@ -4,21 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormularioComponent } from './formulario/formulario.component';
-import { RegistroComponent } from './registro/registro.component';
-import { SuscripcionComponent } from './suscripcion/suscripcion.component';
+import { SubscripcionComponent } from './componentes/subscripcion/subscripcion.component';
+import { RegistroComponent } from './componentes/registro/registro.component';
+import { InicioComponent } from './componentes/inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormularioComponent,
     RegistroComponent,
-    SuscripcionComponent
+    SubscripcionComponent,
+    InicioComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

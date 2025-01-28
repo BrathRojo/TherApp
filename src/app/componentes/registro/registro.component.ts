@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
-  // standalone: true,
-  // imports: [],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.scss'
 })
