@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 8rem;
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    a {
+      text-decoration: none;
+      background-color: #ff6b6b;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    a:hover {
+      background-color: #e55656;
+    }
+
+    .animation {
+      font-size: 5rem;
+      animation: shake 0.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(3deg); }
+      100% { transform: rotate(-3deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="animation">404</h1>
+    <p>Oops! The page you're looking for doesn't exist.</p>
+    <a routerLink="/">Return Home</a>
+  </div>
+</body>
+</html>

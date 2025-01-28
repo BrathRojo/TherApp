@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubscripcionComponent } from './componentes/subscripcion/subscripcion.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
+import { NotFoundComponent } from './componentes/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
     RegistroComponent,
     SubscripcionComponent,
     InicioComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
