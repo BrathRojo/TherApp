@@ -6,7 +6,14 @@ import { NotFoundComponent } from './componentes/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
+  { path: 'index', redirectTo: '' },
+  { path: 'home', component: RegistroComponent },
+  { path: 'usuario/:id', component: RegistroComponent },
+  { path: 'buscador', component: RegistroComponent },
+  { path: 'admin', component: RegistroComponent },
   { path: 'registro', component: RegistroComponent },
+  { path: 'login', component: RegistroComponent },
+  { path: 'validacion', component: RegistroComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
