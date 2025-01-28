@@ -16,7 +16,6 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'login', component: RegistroComponent },
   { path: 'validacion', component: RegistroComponent },
-  { path: 'terapeutas', component: TerapeutasComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
