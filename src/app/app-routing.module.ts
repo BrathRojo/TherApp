@@ -7,7 +7,14 @@ import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.compone
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
+  { path: 'index', redirectTo: '' },
+  { path: 'home', component: RegistroComponent },
+  { path: 'usuario/:id', component: RegistroComponent },
+  { path: 'buscador', component: RegistroComponent },
+  { path: 'admin', component: RegistroComponent },
   { path: 'registro', component: RegistroComponent },
+  { path: 'login', component: RegistroComponent },
+  { path: 'validacion', component: RegistroComponent },
   { path: 'terapeutas', component: TerapeutasComponent },
   { path: '**', component: NotFoundComponent }
 ];
