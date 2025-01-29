@@ -9,6 +9,7 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
 import { PublicacionComponent } from './componentes/publicacion/publicacion.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { PublicacionComponent } from './componentes/publicacion/publicacion.comp
     InicioComponent,
     NotFoundComponent,
     PublicacionComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,
