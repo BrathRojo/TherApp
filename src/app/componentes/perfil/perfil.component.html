@@ -1,3 +1,13 @@
-<div>
-    
-</div>
+<div class="profile-container">
+    <img [src]="foto" alt="Foto de perfil" class="profile-image">
+    <div class="profile-info">
+      <p><span>Usuario:</span> {{ nombreUsuario }}</p>
+      <p><span>Nombre:</span> {{ nombre }}</p>
+      <p><span>Apellidos:</span> {{ apellidos }}</p>
+      <p><span>Email:</span> <a href="mailto:{{ email }}" class="email">{{ email }}</a></p>
+      <p><span>Teléfono:</span> {{ telefono }}</p>
+      <p><span>Fecha de Nacimiento:</span> {{ fechaNacimiento | date }}</p>
+      <p><span>Presentación:</span> {{ presentacion }}</p>
+      <p><span>Ubicación:</span> {{ ubicacion }}</p>
+    </div>
+  </div>

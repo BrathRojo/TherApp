@@ -1,0 +1,45 @@
+$primary-color: #007bff;
+$text-color: #333;
+$background-color: #f9f9f9;
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: $background-color;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+
+  .profile-info {
+    text-align: center;
+
+    p {
+      margin: 5px 0;
+      font-size: 16px;
+      color: $text-color;
+
+      span {
+        font-weight: bold;
+      }
+
+      &.email {
+        color: $primary-color;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
