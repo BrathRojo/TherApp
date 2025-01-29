@@ -10,6 +10,7 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
 import { PublicacionComponent } from './componentes/publicacion/publicacion.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.component';
 import { UsuarioComponent } from './componentes/usuario/usuario.component';
 
@@ -21,6 +22,7 @@ import { UsuarioComponent } from './componentes/usuario/usuario.component';
     InicioComponent,
     NotFoundComponent,
     PublicacionComponent,
+    PerfilComponent,
     TerapeutasComponent,
     UsuarioComponent,
   ],
