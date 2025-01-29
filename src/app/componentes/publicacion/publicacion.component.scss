@@ -1,0 +1,71 @@
+.card {
+  max-width: 500px; /* Limita el tamaño máximo de las cards */
+  margin: 0 auto; /* Centra las cards horizontalmente */
+}
+
+.card img,
+.card video {
+  max-width: 100%; /* Asegura que las imágenes y videos no excedan el ancho de la card */
+  height: auto; /* Mantiene la proporción de las imágenes y videos */
+  object-fit: cover; /* Cubre el área del contenedor sin distorsionar */
+}
+
+.carousel-inner {
+  max-height: 300px; /* Limita la altura máxima del carrusel */
+}
+
+.carousel-item img,
+.carousel-item video {
+  width: 100%; /* Asegura que las imágenes y videos ocupen todo el ancho del carrusel */
+  height: 300px; /* Establece una altura fija para las imágenes y videos */
+  object-fit: cover; /* Cubre el área del contenedor sin distorsionar */
+}
+
+.modal-dialog {
+  max-width: 80%; /* Ajusta el tamaño del modal */
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: row;
+  max-height: 70vh; /* Limita la altura máxima del contenido del modal */
+  overflow-y: auto; /* Permite el scroll cuando el contenido excede la altura máxima */
+}
+
+.modal-body .me-3 {
+  flex: 1;
+  max-width: 50%;
+}
+
+.modal-body .flex-grow-1 {
+  flex: 2;
+  overflow-y: auto; /* Permite el scroll cuando el contenido excede la altura máxima */
+}
+
+.modal-body .flex-grow-1 .comentario {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.modal-body .flex-grow-1 .comentario img {
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.modal-body .flex-grow-1 .comentario .comentario-texto {
+  flex: 1;
+  word-wrap: break-word;
+  white-space: pre-wrap; /* Permite saltos de línea y espacios en blanco */
+  word-break: break-word; /* Permite que las palabras largas se dividan y ajusten */
+}
+
+.modal-body .flex-grow-1 .comentario .comentario-likes {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.modal-body .flex-grow-1 .comentario .comentario-likes i {
+  cursor: pointer;
+}

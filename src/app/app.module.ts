@@ -8,6 +8,7 @@ import { SubscripcionComponent } from './componentes/subscripcion/subscripcion.c
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
+import { PublicacionComponent } from './componentes/publicacion/publicacion.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NotFoundComponent } from './componentes/not-found/not-found.component';
     SubscripcionComponent,
     InicioComponent,
     NotFoundComponent,
+    PublicacionComponent,
   ],
   imports: [
     BrowserModule,
