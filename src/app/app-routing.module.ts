@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'index', redirectTo: '' },
   { path: 'home', component: RegistroComponent },
-  { path: 'perfil/:id', component: RegistroComponent },
+  { path: 'perfil', component: PerfilComponent },
   { path: 'buscador', component: RegistroComponent },
   { path: 'admin', component: RegistroComponent },
   { path: 'registro', component: RegistroComponent },
