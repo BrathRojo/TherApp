@@ -21,7 +21,7 @@ export class PerfilComponent {
     this.foto = 'assets/ejemplo.jpg'
     this.nombreUsuario = 'didilombi';
     this.nombre = 'Didier';
-    this.apellidos = 'Lombi';
+    this.apellidos = 'Lombi Ocaña';
     this.email = 'didier.lombi@iesdoctorbalmis.com';
     this.telefono = '622400809';
     this.fechaNacimiento = new Date('2001-01-29');

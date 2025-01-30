@@ -11,6 +11,7 @@ import { PublicacionComponent } from './componentes/publicacion/publicacion.comp
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.component';
+import { FormularioCuentaComponent } from './componentes/formulario-cuenta/formulario-cuenta.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.compone
     PublicacionComponent,
     PerfilComponent,
     TerapeutasComponent,
+    FormularioCuentaComponent,
   ],
   imports: [
     HttpClientModule,
