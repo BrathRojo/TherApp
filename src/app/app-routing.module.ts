@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'home', component: RegistroComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'terapeutas', component: PerfilComponent },
-  { path: 'buscador', component: RegistroComponent },
   { path: 'admin', component: RegistroComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'login', component: RegistroComponent },
