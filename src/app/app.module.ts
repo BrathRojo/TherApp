@@ -11,7 +11,6 @@ import { PublicacionComponent } from './componentes/publicacion/publicacion.comp
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.component';
-import { UsuarioComponent } from './componentes/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -23,15 +22,13 @@ import { UsuarioComponent } from './componentes/usuario/usuario.component';
     PublicacionComponent,
     PerfilComponent,
     TerapeutasComponent,
-    UsuarioComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
