@@ -15,6 +15,9 @@ import { CardComponent } from './componentes/card/card.component';
 import { CarruselComponent } from './componentes/carrusel/carrusel.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { VerticalcardComponent } from './componentes/verticalcard/verticalcard.component';
+import { CarruselverticalComponent } from './componentes/carruselvertical/carruselvertical.component';
+import { BarrabusquedaComponent } from './componentes/barrabusqueda/barrabusqueda.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { FooterComponent } from './componentes/footer/footer.component';
     CarruselComponent,
     HomeComponent,
     FooterComponent,
+    VerticalcardComponent,
+    CarruselverticalComponent,
+    BarrabusquedaComponent,
   ],
   imports: [
     BrowserModule,
