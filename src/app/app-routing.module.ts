@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'terapeutas', component: TerapeutasComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'terapeutas', component: TerapeutasComponent},
   { path: '**', component: NotFoundComponent }
 ];
 
