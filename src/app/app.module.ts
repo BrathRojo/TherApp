@@ -10,6 +10,11 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
 import { PublicacionComponent } from './componentes/publicacion/publicacion.component';
 import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.component';
+import { HeaderComponent } from './componentes/header/header.component';
+import { CardComponent } from './componentes/card/card.component';
+import { CarruselComponent } from './componentes/carrusel/carrusel.component';
+import { HomeComponent } from './componentes/home/home.component';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,11 @@ import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.compone
     NotFoundComponent,
     PublicacionComponent,
     TerapeutasComponent,
+    HeaderComponent,
+    CardComponent,
+    CarruselComponent,
+    HomeComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
