@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubscripcionComponent } from './componentes/subscripcion/subscripcion.component';
-import { HttpClientModule } from '@angular/common/http';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
