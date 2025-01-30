@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'index', redirectTo: '' },
   { path: 'home', component: RegistroComponent },
   { path: 'perfil', component: PerfilComponent },
-  { path: 'buscador', component: RegistroComponent },
+  { path: 'terapeutas', component: PerfilComponent },
   { path: 'admin', component: RegistroComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'login', component: RegistroComponent },
