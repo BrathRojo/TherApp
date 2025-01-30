@@ -25,11 +25,11 @@ export class PerfilComponent {
     this.email = 'didier.lombi@iesdoctorbalmis.com';
     this.telefono = '622400809';
     this.fechaNacimiento = new Date('2001-01-29');
-    this.presentacion = 'Soy un pelotudo que no sabe hacer nada, pero me gusta sqlear';
+    this.presentacion = 'Soy didier, me gusta el sql';
     this.ubicacion = 'Alicante';
   }
 
   ngOnInit() {
-  }
 
+  }
 }
