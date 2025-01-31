@@ -5,6 +5,7 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.component';
+import { CursosComponent } from './componentes/cursos/cursos.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'terapeutas', component: TerapeutasComponent },
   { path: 'home', component: HomeComponent },
   { path: 'terapeutas', component: TerapeutasComponent},
+  { path: 'cursos', component: CursosComponent},
   { path: '**', component: NotFoundComponent }
 ];
 
