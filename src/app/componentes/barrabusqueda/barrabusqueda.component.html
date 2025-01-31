@@ -8,21 +8,21 @@
         <form class="d-flex flex-row">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item me-3">
-            <input class="form-control me-2" type="search" placeholder="Especialidad" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="{{datos[0]}}" aria-label="Search">
           </li>
           <li class="nav-item me-3">
-            <input class="form-control me-2" type="search" placeholder="Ubicación" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="{{datos[1]}}" aria-label="Search">
           </li>
           <li class="nav-item me-3">
             <select class="form-select" aria-label="Default select example">
                 <option selected>Ordenar por</option>
-                <option value="1">Valoración</option>
-                <option value="2">Nº de reseñas</option>
-                <option value="3">Más cercanos</option>
+                <option value="1">{{datos[2]}}</option>
+                <option value="2">{{datos[3]}}</option>
+                <option value="3">{{datos[4]}}</option>
             </select>
           </li>
           <li class="nav-item me-3">
-            <input class="form-control me-2" type="search" placeholder="Nombre" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="{{datos[5]}}" aria-label="Search">
           </li>
         </ul>
           <button class="btn btn-outline-success" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

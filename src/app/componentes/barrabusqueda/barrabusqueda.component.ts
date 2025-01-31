@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-barrabusqueda',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './barrabusqueda.component.scss'
 })
 export class BarrabusquedaComponent {
+
+  @Input() datos: string[] = [];
 
 }

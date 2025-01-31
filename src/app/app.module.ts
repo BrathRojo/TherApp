@@ -18,6 +18,7 @@ import { FooterComponent } from './componentes/footer/footer.component';
 import { VerticalcardComponent } from './componentes/verticalcard/verticalcard.component';
 import { CarruselverticalComponent } from './componentes/carruselvertical/carruselvertical.component';
 import { BarrabusquedaComponent } from './componentes/barrabusqueda/barrabusqueda.component';
+import { CursosComponent } from './componentes/cursos/cursos.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { BarrabusquedaComponent } from './componentes/barrabusqueda/barrabusqued
     VerticalcardComponent,
     CarruselverticalComponent,
     BarrabusquedaComponent,
+    CursosComponent,
   ],
   imports: [
     BrowserModule,
