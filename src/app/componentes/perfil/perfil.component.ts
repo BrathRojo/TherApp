@@ -25,7 +25,7 @@ export class PerfilComponent {
     this.email = 'didier.lombi@iesdoctorbalmis.com';
     this.telefono = '622400809';
     this.fechaNacimiento = new Date('2001-01-29');
-    this.presentacion = 'Soy didier, me gusta el sql';
+    this.presentacion = 'El nuevo CEO de DeepSeek';
     this.ubicacion = 'Alicante';
   }
 
