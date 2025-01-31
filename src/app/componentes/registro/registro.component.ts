@@ -15,15 +15,12 @@ export class RegistroComponent {
     this.registroForm = this.fb.group({
       nombreUsuario: ['', [Validators.required, Validators.minLength(3)]],
       nombre: ['', [Validators.required, Validators.minLength(3)]],
-      nombreUsuario: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       clave: ['', [Validators.required, Validators.minLength(8)]],
-      fotoPerfil: ['', Validators.required],
-      dni: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      fotoPerfil: [''],
       fechaNacimiento: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-      ubicacion: ['', Validators.required],
-      biografica: ['', Validators.required],
+      ubicacion: ['']
     });
   }
 
@@ -40,25 +37,25 @@ export class RegistroComponent {
     }
   }
 
-  onSubmit() {
-    if (this.registroForm.valid) {
-      console.log('Datos del formulario:', this.registroForm.value);
-    }
-  }
-
-  // onSubmit(): void {
-  //   if (this.registroForm.valid && this.selectedFile) {
-  //     const formData = new FormData();
-  //     formData.append('nombreUsuario', this.registroForm.get('nombreUsuario')?.value);
-  //     formData.append('nombre', this.registroForm.get('nombre')?.value);
-  //     formData.append('email', this.registroForm.get('email')?.value);
-  //     formData.append('password', this.registroForm.get('password')?.value);
-  //     formData.append('telefono', this.registroForm.get('telefono')?.value);
-  //     formData.append('fotoPerfil', this.selectedFile);
-  
-  //     this.http.post('URL_DEL_SERVIDOR', formData).subscribe(response => {
-  //       console.log('Registro exitoso:', response);
-  //     });
+  // onSubmit() {
+  //   if (this.registroForm.valid) {
+  //     console.log('Datos del formulario:', this.registroForm.value);
   //   }
   // }
+
+  onSubmit(): void {
+    if (this.registroForm.valid && this.selectedFile) {
+      const formData = new FormData();
+      formData.append('nombreUsuario', this.registroForm.get('nombreUsuario')?.value);
+      formData.append('nombre', this.registroForm.get('nombre')?.value);
+      formData.append('email', this.registroForm.get('email')?.value);
+      formData.append('password', this.registroForm.get('password')?.value);
+      formData.append('telefono', this.registroForm.get('telefono')?.value);
+      formData.append('fotoPerfil', this.selectedFile);
+  
+      this.http.post('URL_DEL_SERVIDOR', formData).subscribe(response => {
+        console.log('Registro exitoso:', response);
+      });
+    }
+  }
 }
