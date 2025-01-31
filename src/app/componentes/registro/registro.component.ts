@@ -17,9 +17,6 @@ export class RegistroComponent {
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       nombreUsuario: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]]
-    });
       clave: ['', [Validators.required, Validators.minLength(8)]],
       fotoPerfil: ['', Validators.required],
       dni: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
@@ -42,31 +39,6 @@ export class RegistroComponent {
       );
     }
   }
-
-  // selectedFile: File | null = null; // Propiedad para almacenar el archivo seleccionado
-
-  // onFileSelected(event: any): void {
-  //   const file: File = event.target.files[0]; // Captura el archivo seleccionado
-  //   if (file) {
-  //     this.selectedFile = file; // Guarda el archivo en la propiedad
-  //     this.registroForm.patchValue({ fotoPerfil: file }); // Actualiza el campo en el formulario si es necesario
-  //   }
-  // }
-
-  // previewUrl: string | ArrayBuffer | null = null;
-
-// onFileSelected(event: any): void {
-//   const file: File = event.target.files[0];
-//   if (file) {
-//     this.selectedFile = file;
-
-//     const reader = new FileReader();
-//     reader.onload = () => {
-//       this.previewUrl = reader.result; // Almacena la URL de la imagen para la vista previa
-//     };
-//     reader.readAsDataURL(file); // Lee el archivo como URL base64
-//   }
-// }
 
   onSubmit() {
     if (this.registroForm.valid) {
