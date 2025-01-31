@@ -10,7 +10,6 @@ import { CursosComponent } from './componentes/cursos/cursos.component';
 const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'terapeutas', component: TerapeutasComponent },
   { path: 'home', component: HomeComponent },
   { path: 'terapeutas', component: TerapeutasComponent},
   { path: 'cursos', component: CursosComponent},
