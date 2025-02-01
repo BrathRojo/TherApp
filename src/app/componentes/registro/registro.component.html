@@ -5,7 +5,7 @@
 
     <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
       
-      <label for="nombreUsuario">Usuario: </label>
+      <label for="nombreUsuario">Nombre de Usuario: </label>
       <input id="nombreUsuario" formControlName="nombreUsuario" type="text" />
 
       <label for="nombre">Nombre:</label>
@@ -29,6 +29,9 @@
 
        <label for="ubicacion">Ubicación: </label>
        <input id="ubicacion" formControlName="ubicacion" type="text" />
+
+        <label for="biografia">Biografía: </label>
+        <input id="biografia" formControlName="biografia" type="text" />
       
       <button type="submit" [disabled]="!registroForm.valid">Registrar</button>
     </form>
