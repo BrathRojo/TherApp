@@ -12,6 +12,14 @@
     </div>
   </div>
 
+  <button>
+    <a routerLink="/editar-perfil">Cambiar a organizacion</a>
+  </button>
+
+  <button>
+    <a [routerLink]="['cambioCuenta', true]">Cambiar a terapeuta</a>
+  </button>
+
   <app-terapeutas></app-terapeutas>
 
   <app-publicacion></app-publicacion>

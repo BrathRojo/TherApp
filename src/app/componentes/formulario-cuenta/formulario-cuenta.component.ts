@@ -11,7 +11,7 @@ export class FormularioCuentaComponent {
 
   // en la pagina de perfil habrá un boton de cambiar cuenta a organizacion y otro para terapeuta
   // este boton te manda a este formulario que cambiara a traves de una variable tipoCambio para ahorrar componentes, y el formulario tendra los campos
-  // exclusivos de organizacion 
+  // exclusivos de organizacion/terapeuta ademas del nombre ya rellenado con el nombre actual por si el usuario quiere cambiarlo
 
   tipoCambio: boolean = false;
 
