@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'terapeutas', component: PerfilComponent },
   { path: 'admin', component: RegistroComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'cambioCuenta', component: FormularioCuentaComponent },
+  { path: 'cambioCuenta/:modo', component: FormularioCuentaComponent },
   { path: 'login', component: RegistroComponent },
   { path: 'validacion', component: RegistroComponent },
   { path: '**', component: NotFoundComponent }
