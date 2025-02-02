@@ -20,6 +20,7 @@ import { VerticalcardComponent } from './componentes/verticalcard/verticalcard.c
 import { CarruselverticalComponent } from './componentes/carruselvertical/carruselvertical.component';
 import { BarrabusquedaComponent } from './componentes/barrabusqueda/barrabusqueda.component';
 import { CursosComponent } from './componentes/cursos/cursos.component';
+import { ChatComponent } from './componentes/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CursosComponent } from './componentes/cursos/cursos.component';
     CarruselverticalComponent,
     BarrabusquedaComponent,
     CursosComponent,
+    ChatComponent,
   ],
   imports: [
     HttpClientModule,
