@@ -1,10 +1,10 @@
-@use "sass:map";
+// @use "sass:map";
 
-$font-size-base: 2rem;
-$border-radius: 1.5rem;
+// $font-size-base: 2rem;
+// $border-radius: 1.5rem;
 
-$theme-colors: map.merge(
-    $theme-colors, ("main":rgb(0, 217, 255))
-);
+// $theme-colors: map.merge(
+//     $theme-colors, ("main":rgb(0, 217, 255))
+// );
 
-@import "../node_modules/bootstrap/scss/bootstrap"
+// @import "../node_modules/bootstrap/scss/bootstrap"

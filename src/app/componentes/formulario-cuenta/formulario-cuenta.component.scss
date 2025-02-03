@@ -1,0 +1,30 @@
+.form-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f0f8ff; /* Azul claro */
+    border: 2px solid #87ceeb; /* Borde azul */
+    border-radius: 10px;
+  }
+  
+  .form-container label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .form-container input,
+  .form-container textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #87ceeb;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  textarea {
+    min-height: 80px;
+    display: flex;
+    align-items: flex-end; /* Alinea el contenido abajo */
+    padding-top: 40px; /* Ajusta este valor según el tamaño deseado */
+  }

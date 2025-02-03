@@ -1,7 +1,7 @@
 .hero {
     position: relative;
     height: 100vh; /* La sección ocupa toda la altura de la pantalla */
-    // background-image: url('../../../../public/assets/herosection.jpg');
+    background-image: url('/assets/herosection.jpg');
     background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
     background-position: center; /* Centra la imagen */
     display: flex;
