@@ -1,0 +1,62 @@
+.inicio-container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+  
+    header {
+      margin-bottom: 2rem;
+  
+      h1 {
+        font-size: 2.5rem;
+        color: #2c3e50;
+      }
+  
+      p {
+        font-size: 1.2rem;
+        color: #555;
+      }
+    }
+  
+    .descripcion {
+      text-align: left;
+      margin-bottom: 2rem;
+  
+      h2 {
+        color: #2c3e50;
+      }
+  
+      p {
+        font-size: 1.1rem;
+        color: #333;
+      }
+  
+      ul {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          font-size: 1rem;
+          margin: 0.5rem 0;
+        }
+      }
+    }
+  
+    .acciones {
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        font-size: 1.2rem;
+        color: white;
+        background: #3498db;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s;
+  
+        &:hover {
+          background: #2980b9;
+        }
+      }
+    }
+  }
+  

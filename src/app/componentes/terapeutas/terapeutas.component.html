@@ -1,7 +1,6 @@
-<h2>Lista de Terapeutas</h2>
-<ul>
-  <li *ngFor="let terapeuta of terapeutas">
-    {{ terapeuta.nombre }} - {{ terapeuta.email }} - {{ terapeuta.especialidad }}
-  </li>
-</ul>
-
+<app-header></app-header>
+<app-barrabusqueda [datos]="filtros"></app-barrabusqueda>
+<h1>¡Nuestros terapeutas premium!</h1>
+<app-carrusel></app-carrusel>
+<h2>¡Los más recomendados!</h2>
+<app-carruselvertical></app-carruselvertical>

@@ -11,6 +11,16 @@ import { PublicacionComponent } from './componentes/publicacion/publicacion.comp
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.component';
+import { HeaderComponent } from './componentes/header/header.component';
+import { CardComponent } from './componentes/card/card.component';
+import { CarruselComponent } from './componentes/carrusel/carrusel.component';
+import { HomeComponent } from './componentes/home/home.component';
+import { FooterComponent } from './componentes/footer/footer.component';
+import { VerticalcardComponent } from './componentes/verticalcard/verticalcard.component';
+import { CarruselverticalComponent } from './componentes/carruselvertical/carruselvertical.component';
+import { BarrabusquedaComponent } from './componentes/barrabusqueda/barrabusqueda.component';
+import { CursosComponent } from './componentes/cursos/cursos.component';
+import { ChatComponent } from './componentes/chat/chat.component';
 import { FormularioCuentaComponent } from './componentes/formulario-cuenta/formulario-cuenta.component';
 
 @NgModule({
@@ -23,6 +33,16 @@ import { FormularioCuentaComponent } from './componentes/formulario-cuenta/formu
     PublicacionComponent,
     PerfilComponent,
     TerapeutasComponent,
+    HeaderComponent,
+    CardComponent,
+    CarruselComponent,
+    HomeComponent,
+    FooterComponent,
+    VerticalcardComponent,
+    CarruselverticalComponent,
+    BarrabusquedaComponent,
+    CursosComponent,
+    ChatComponent,
     FormularioCuentaComponent,
   ],
   imports: [
