@@ -21,7 +21,7 @@ export class FormularioCuentaComponent implements OnInit {
   
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private usuarioService: UsuarioService) {
     this.registroForm = this.fb.group({
-      nombre: [this.nombreUsuario, [Validators.required, Validators.minLength(3)], Validators.maxLength(50)],
+      nombre: [this.nombreUsuario, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
 
       numeroColegiado: [''],
       experiencia: [''],
@@ -66,8 +66,6 @@ export class FormularioCuentaComponent implements OnInit {
       this.registroForm.get('direccion')?.setValidators([Validators.required]);
       this.registroForm.get('telefono')?.setValidators([Validators.required]);
     }
-
-    
   }
 
   onSubmit() {

@@ -120,6 +120,14 @@ export class PublicacionComponent {
     comentario.liked = !comentario.liked;
   }
 
+  toggleOpciones(index: number) {
+    const opciones = document.getElementById(`opciones-${index}`);
+  
+    if (opciones) {
+      opciones.style.display = opciones.style.display === 'block' ? 'none' : 'block';
+    }
+  }
+  
   get nuevoComentario(): string {
     return this.selectedPublicacion?.nuevoComentario || '';
   }
