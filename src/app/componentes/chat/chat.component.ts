@@ -51,20 +51,25 @@ export class ChatComponent implements OnInit {
   enviarMensaje(): void {
     if (this.nuevoMensaje.trim() && this.usuarioId > 0 && this.receptorId > 0) {
       this.chatService.enviarMensaje(this.usuarioId, this.receptorId, this.nuevoMensaje).subscribe({
-        next: (response) => {
-          if (response.status === 200 && response.body) { //Asegurar que hay respuesta
-            console.log('Mensaje enviado:', response.body);
-            this.mensajes.push(response.body); //Agregar mensaje correctamente
-            this.nuevoMensaje = ''; //Limpiar input
-          } else {
-            console.error('Error: Respuesta inesperada del servidor', response);
-          }
+        next: (mensajeEnviado) => {
+          console.log('✅ Mensaje enviado:', mensajeEnviado);
+  
+          //Agregar mensaje a la lista sin recargar toda la conversación
+          this.mensajes.push(mensajeEnviado);
+  
+          //Limpiar el campo de entrada después de enviar
+          this.nuevoMensaje = '';
+  
+          //Desplazar la vista al último mensaje
+          setTimeout(() => {
+            const chatContainer = document.querySelector('.chat-container');
+            if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
+          }, 100);
         },
         error: (error) => {
-          console.error('Error al enviar el mensaje:', error);
+          console.error('🚨 Error al enviar el mensaje:', error);
         }
       });
     }
-  }
-  
+  }   
 }
