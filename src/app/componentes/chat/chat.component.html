@@ -1,6 +1,6 @@
 <div class="chat-container">
   <div *ngFor="let mensaje of mensajes">
-    <strong>{{ mensaje.emisor?.nombre }}:</strong> {{ mensaje.contenido }}
+    <strong>{{ mensaje.emisor?.nombre || 'Usuario' }}:</strong> {{ mensaje.contenido }}
   </div>
 
   <div class="input-section">

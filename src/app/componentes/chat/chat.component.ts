@@ -32,41 +32,38 @@ export class ChatComponent implements OnInit {
     if (this.usuarioId > 0 && this.receptorId > 0) {
       this.chatService.obtenerMensajes(this.usuarioId, this.receptorId).subscribe({
         next: (data) => {
-          console.log('Mensajes recibidos:', data); // 🔍 Log para verificar los mensajes
+          console.log('🔍 Mensajes recibidos:', data); // 👀 Verifica si los mensajes están llegando desde la API
           if (Array.isArray(data)) {
-            this.mensajes = [...data]; // ✅ Guardar todos los mensajes
+            this.mensajes = [...data]; 
           } else {
-            console.error('La respuesta de la API no es un array:', data);
+            console.error('❌ La respuesta de la API no es un array:', data);
             this.mensajes = [];
           }
         },
         error: (error) => {
-          console.error('Error al cargar los mensajes:', error);
+          console.error('🚨 Error al cargar los mensajes:', error);
           this.mensajes = [];
         }
       });
     }
-  }
+  }  
 
   enviarMensaje(): void {
     if (this.nuevoMensaje.trim() && this.usuarioId > 0 && this.receptorId > 0) {
       this.chatService.enviarMensaje(this.usuarioId, this.receptorId, this.nuevoMensaje).subscribe({
-        next: (nuevoMensaje) => {
-          console.log('Mensaje enviado correctamente:', nuevoMensaje);
-          this.nuevoMensaje = '';
-  
-          // ✅ Agregamos el nuevo mensaje directamente en la lista
-          this.mensajes.push(nuevoMensaje);
-  
-          // ✅ Recargar la lista de mensajes desde la API
-          this.cargarMensajes();
+        next: (response) => {
+          if (response.status === 200 && response.body) { //Asegurar que hay respuesta
+            console.log('Mensaje enviado:', response.body);
+            this.mensajes.push(response.body); //Agregar mensaje correctamente
+            this.nuevoMensaje = ''; //Limpiar input
+          } else {
+            console.error('Error: Respuesta inesperada del servidor', response);
+          }
         },
         error: (error) => {
           console.error('Error al enviar el mensaje:', error);
         }
       });
-    } else {
-      console.error('Error: No se puede enviar un mensaje vacío.');
     }
   }
   

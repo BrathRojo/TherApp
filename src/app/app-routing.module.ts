@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'terapeutas', component: TerapeutasComponent},
   { path: 'cursos', component: CursosComponent},
-  { path: 'chat/:usuarioId/:terapeutaId',component: ChatComponent },
+  { path: 'chat/:usuarioId/:receptorId',component: ChatComponent },
   { path: 'cambioCuenta/:modo', component: FormularioCuentaComponent },
   { path: 'login', component: LoginComponent},
   { path: 'validacion', component: RegistroComponent },
