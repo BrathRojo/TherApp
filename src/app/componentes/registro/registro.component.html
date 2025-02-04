@@ -41,12 +41,7 @@
       <label for="ubicacion">Ubicación:</label>
       <input id="ubicacion" formControlName="ubicacion" type="text" placeholder="Ciudad, País" />
     </div>
-
-    <div class="form-group">
-      <label for="biografia">Biografía:</label>
-      <textarea id="biografia" formControlName="biografia" rows="3" placeholder="Escribe una breve biografía"></textarea>
-    </div>
-
+    
     <button type="submit" [disabled]="!registroForm.valid">Registrar</button>
   </form>
 </div>

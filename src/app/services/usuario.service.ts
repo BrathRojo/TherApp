@@ -14,7 +14,6 @@ export interface Usuario {
   fechaNacimiento: Date;
   telefono: string;
   ubicacion: string;
-  biografica: string;
 }
 
 @Injectable({

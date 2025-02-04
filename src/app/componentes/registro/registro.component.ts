@@ -42,7 +42,6 @@ export class RegistroComponent {
         telefono: this.registroForm.get('telefono')?.value,
         fechaNacimiento: this.registroForm.get('fechaNacimiento')?.value,
         ubicacion: this.registroForm.get('ubicacion')?.value,
-        biografia: this.registroForm.get('biografia')?.value
       };
       
       // Enviar datos sin rol (Spring lo asignará)
