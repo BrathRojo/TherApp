@@ -2,9 +2,9 @@
     <div class="card border border-black d-flex flex-row align-items-center" style="width: 100%;">
         <img [src]="datos.foto" class="card-img-left" alt="..." style="width: 480px; height: 480px; object-fit: cover;">
         <div class="card-body" style="flex-grow: 1;">
-          <h5 class="card-title">{{datos.titulo}}</h5>
-          <p class="card-text">{{datos.texto}}</p>
-          <p>Precio: {{datos.precio}} €/consulta</p>
-          <a routerLink="{{datos.enlace}}" class="btn btn-primary">Perfil completo</a>
+          <h2 class="card-title p-3">{{datos.titulo}}</h2>
+          <p [innerHTML]="datos.texto" class="card-text p-3"></p>
+          <p class="p-3">Precio: {{datos.precio}} €/consulta</p>
+          <a routerLink="{{datos.enlace}}" class="btn btn-primary p-3">Perfil completo</a>
         </div>
       </div>
