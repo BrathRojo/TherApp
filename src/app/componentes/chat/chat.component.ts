@@ -9,41 +9,65 @@ import { ChatService } from '../../services/chat.service';
 })
 export class ChatComponent implements OnInit {
   usuarioId!: number;
-  terapeutaId!: number;
+  receptorId!: number;
   mensajes: any[] = [];
   nuevoMensaje: string = '';
 
   constructor(private route: ActivatedRoute, private chatService: ChatService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.usuarioId = +params['usuarioId']; // Obtiene el usuarioId de la URL
-      this.terapeutaId = +params['terapeutaId']; // Obtiene el terapeutaId de la URL
-  
-      // Obtener los mensajes cuando se carga el componente
-      this.chatService.obtenerMensajes(this.usuarioId, this.terapeutaId).subscribe(data => {
-        // Verificar cómo se estructura el objeto
-        console.log(data); // ver los datos para entender cómo están estructurados los mensajes
-        // Asegurarse de que los mensajes son solo texto
-        this.mensajes = data.map(mensaje => {
-          return {
-            ...mensaje,
-            contenido: mensaje.contenido && typeof mensaje.contenido === 'string' ? mensaje.contenido : ''
-          };
-        });
-      });
+      this.usuarioId = Number(params['usuarioId']) || 0;
+      this.receptorId = Number(params['receptorId']) || 0;
+
+      if (this.usuarioId > 0 && this.receptorId > 0) {
+        this.cargarMensajes();
+      } else {
+        console.error('Error: usuarioId o receptorId no son válidos.', this.usuarioId, this.receptorId);
+      }
     });
   }
-  
-  
 
-  // Enviar el mensaje al backend
-  enviarMensaje() {
-    if (this.nuevoMensaje.trim()) {
-      this.chatService.enviarMensaje(this.usuarioId, this.terapeutaId, this.nuevoMensaje).subscribe(mensaje => {
-        this.mensajes.push(mensaje);  // Añadir el nuevo mensaje a la lista
-        this.nuevoMensaje = '';  // Limpiar el campo de texto
+  cargarMensajes(): void {
+    if (this.usuarioId > 0 && this.receptorId > 0) {
+      this.chatService.obtenerMensajes(this.usuarioId, this.receptorId).subscribe({
+        next: (data) => {
+          console.log('Mensajes recibidos:', data); // 🔍 Log para verificar los mensajes
+          if (Array.isArray(data)) {
+            this.mensajes = [...data]; // ✅ Guardar todos los mensajes
+          } else {
+            console.error('La respuesta de la API no es un array:', data);
+            this.mensajes = [];
+          }
+        },
+        error: (error) => {
+          console.error('Error al cargar los mensajes:', error);
+          this.mensajes = [];
+        }
       });
     }
   }
+
+  enviarMensaje(): void {
+    if (this.nuevoMensaje.trim() && this.usuarioId > 0 && this.receptorId > 0) {
+      this.chatService.enviarMensaje(this.usuarioId, this.receptorId, this.nuevoMensaje).subscribe({
+        next: (nuevoMensaje) => {
+          console.log('Mensaje enviado correctamente:', nuevoMensaje);
+          this.nuevoMensaje = '';
+  
+          // ✅ Agregamos el nuevo mensaje directamente en la lista
+          this.mensajes.push(nuevoMensaje);
+  
+          // ✅ Recargar la lista de mensajes desde la API
+          this.cargarMensajes();
+        },
+        error: (error) => {
+          console.error('Error al enviar el mensaje:', error);
+        }
+      });
+    } else {
+      console.error('Error: No se puede enviar un mensaje vacío.');
+    }
+  }
+  
 }
