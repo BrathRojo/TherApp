@@ -12,6 +12,7 @@ export class ChatComponent implements OnInit {
   receptorId!: number;
   mensajes: any[] = [];
   nuevoMensaje: string = '';
+  archivoSeleccionado?: File;
 
   constructor(private route: ActivatedRoute, private chatService: ChatService) {}
 
@@ -32,13 +33,8 @@ export class ChatComponent implements OnInit {
     if (this.usuarioId > 0 && this.receptorId > 0) {
       this.chatService.obtenerMensajes(this.usuarioId, this.receptorId).subscribe({
         next: (data) => {
-          console.log('🔍 Mensajes recibidos:', data); // 👀 Verifica si los mensajes están llegando desde la API
-          if (Array.isArray(data)) {
-            this.mensajes = [...data]; 
-          } else {
-            console.error('❌ La respuesta de la API no es un array:', data);
-            this.mensajes = [];
-          }
+          console.log('🔍 Mensajes recibidos:', data);
+          this.mensajes = Array.isArray(data) ? [...data] : [];
         },
         error: (error) => {
           console.error('🚨 Error al cargar los mensajes:', error);
@@ -46,21 +42,24 @@ export class ChatComponent implements OnInit {
         }
       });
     }
-  }  
+  }
+
+  seleccionarArchivo(event: any): void {
+    if (event.target.files.length > 0) {
+      this.archivoSeleccionado = event.target.files[0];
+    }
+  }
 
   enviarMensaje(): void {
-    if (this.nuevoMensaje.trim() && this.usuarioId > 0 && this.receptorId > 0) {
-      this.chatService.enviarMensaje(this.usuarioId, this.receptorId, this.nuevoMensaje).subscribe({
+    if ((this.nuevoMensaje.trim() || this.archivoSeleccionado) && this.usuarioId > 0 && this.receptorId > 0) {
+      this.chatService.enviarMensaje(this.usuarioId, this.receptorId, this.nuevoMensaje, this.archivoSeleccionado).subscribe({
         next: (mensajeEnviado) => {
           console.log('✅ Mensaje enviado:', mensajeEnviado);
-  
-          //Agregar mensaje a la lista sin recargar toda la conversación
+
           this.mensajes.push(mensajeEnviado);
-  
-          //Limpiar el campo de entrada después de enviar
           this.nuevoMensaje = '';
-  
-          //Desplazar la vista al último mensaje
+          this.archivoSeleccionado = undefined;
+
           setTimeout(() => {
             const chatContainer = document.querySelector('.chat-container');
             if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -71,5 +70,5 @@ export class ChatComponent implements OnInit {
         }
       });
     }
-  }   
+  }
 }
