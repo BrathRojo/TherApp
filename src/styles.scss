@@ -12,7 +12,7 @@ $border-radius: 1.5rem;
 @import "../node_modules/bootstrap/scss/_variables-dark.scss";
 
 $theme-colors: map.merge(
-    $theme-colors, ("main":rgb(0, 217, 255), "fondos": #f0f8ff, "bordes":#87ceeb)
+    $theme-colors, ("main":rgb(0, 217, 255), "fondos": #074c83, "bordes":#87ceeb)
 );
 
 @import "../node_modules/bootstrap/scss/_maps.scss";
