@@ -1,3 +1,9 @@
 .card-text {
     line-height: 1.8; /* Ajusta según el espacio que quieras */
   }
+
+  .btn:hover {
+    background-color: #ffffffee; /* Un dorado más oscuro */
+    transform: scale(1.05); /* Hace que el botón crezca un poco */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); /* Aumenta la sombra */
+  }
