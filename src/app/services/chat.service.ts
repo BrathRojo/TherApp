@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '@stomp/stompjs';
-import * as SockJS from 'sockjs-client';  // ✅ Importar SockJS
+import SockJS from 'sockjs-client';  // ✅ Importar SockJS
 
 @Injectable({
   providedIn: 'root'

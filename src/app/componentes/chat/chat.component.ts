@@ -36,8 +36,7 @@ export class ChatComponent implements OnInit {
       console.log('📩 Mensaje recibido en tiempo real:', mensaje);
       this.mensajes.push(mensaje);
     });
-  }
-  
+  }  
 
   cargarMensajes(): void {
     if (this.usuarioId > 0 && this.receptorId > 0) {
