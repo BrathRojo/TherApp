@@ -1,0 +1,59 @@
+.card-header {
+    background-color: #f8f9fa; /* Color de fondo suave */
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .card-header img {
+    border: 2px solid #ddd; /* Borde alrededor de la foto */
+  }
+  
+//   .opciones {
+//     position: absolute;
+//     top: 35px;
+//     right: 10px;
+//     background: white;
+//     border: 1px solid #ccc;
+//     padding: 10px;
+//     border-radius: 5px;
+//     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+//   }
+
+.comentarios-container {
+  max-height: 400px;  /* Altura máxima antes de hacer scroll */
+  overflow-y: auto;   /* Solo scroll vertical */
+  padding-right: 10px;
+}
+
+.comentario-texto {
+  word-wrap: break-word;  /* Rompe las palabras largas */
+  white-space: normal;    /* Asegura que el texto fluya bien */
+  max-width: 100%;        /* Evita que se salga del contenedor */
+}
+
+.comentario-corto {
+  max-height: 3.5em;  /* Muestra solo 2-3 líneas */
+  overflow: hidden;
+}
+
+.comentario-largo {
+  max-height: none;  /* Muestra todo el comentario */
+}
+
+.btn-link {
+  font-size: 14px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.comentario-likes {
+  cursor: pointer;
+}
+
+.comentario-likes i:hover {
+  color: #007bff;
+}

@@ -1,5 +1,10 @@
 <div class="container mt-4" *ngFor="let publicacion of publicaciones; let i = index">
   <div class="card mb-4 position-relative">
+     <!-- Envoltura para el nombre del usuario y su foto -->
+     <div class="card-header d-flex align-items-center">
+      <img src="" alt="Foto de perfil" class="rounded-circle me-2" width="40" height="40">
+      <strong>Usuario que publica</strong>
+    </div>
     <div class="card-body d-flex justify-content-between">
       <div>
         <p>{{ publicacion.texto }}</p>
@@ -58,59 +63,92 @@
   <div class="modal fade" id="comentariosModal" tabindex="-1" aria-labelledby="comentariosModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
+        
         <div class="modal-header">
           <h5 class="modal-title" id="comentariosModalLabel">Comentarios</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+  
         <div class="modal-body">
-          <div class="me-3">
-            <ng-container *ngIf="selectedPublicacion && selectedPublicacion.multimedia.length > 0">
-              <div id="carouselExampleIndicatorsModal" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                  <button *ngFor="let media of selectedPublicacion.multimedia; let j = index" type="button" data-bs-target="#carouselExampleIndicatorsModal" [attr.data-bs-slide-to]="j" [class.active]="j === 0"></button>
+          <div class="row">
+            
+            <!-- Sección izquierda: Imagen o video -->
+            <div class="col-md-6">
+              <ng-container *ngIf="selectedPublicacion && selectedPublicacion.multimedia.length > 0">
+                <div id="carouselExampleIndicatorsModal" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-indicators">
+                    <button *ngFor="let media of selectedPublicacion.multimedia; let j = index" 
+                      type="button" 
+                      data-bs-target="#carouselExampleIndicatorsModal" 
+                      [attr.data-bs-slide-to]="j" 
+                      [class.active]="j === 0">
+                    </button>
+                  </div>
+                  <div class="carousel-inner">
+                    <div *ngFor="let media of selectedPublicacion.multimedia; let j = index" class="carousel-item" [class.active]="j === 0">
+                      <ng-container *ngIf="media.tipo === 'imagen'">
+                        <img [src]="media.url" class="d-block w-100 rounded" alt="...">
+                      </ng-container>
+                      <ng-container *ngIf="media.tipo === 'video'">
+                        <video controls class="d-block w-100 rounded">
+                          <source [src]="media.url" type="video/mp4">
+                          Tu navegador no soporta el video.
+                        </video>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicatorsModal" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicatorsModal" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                  </button>
                 </div>
-                <div class="carousel-inner">
-                  <div *ngFor="let media of selectedPublicacion.multimedia; let j = index" class="carousel-item" [class.active]="j === 0">
-                    <ng-container *ngIf="media.tipo === 'imagen'">
-                      <img [src]="media.url" class="d-block w-100" alt="...">
-                    </ng-container>
-                    <ng-container *ngIf="media.tipo === 'video'">
-                      <video controls class="d-block w-100">
-                        <source [src]="media.url" type="video/mp4">
-                        Your browser does not support the video tag.
-                      </video>
-                    </ng-container>
+              </ng-container>
+            </div>
+  
+            <!-- Sección derecha: Comentarios -->
+            <div class="col-md-6 d-flex flex-column">
+              <div class="comentarios-container overflow-auto">
+                <div *ngFor="let comentario of selectedPublicacion?.comentarios" class="comentario d-flex align-items-start mb-3">
+                  <img [src]="comentario.usuario.fotoPerfil" alt="Foto de perfil" class="rounded-circle me-2" width="40" height="40">
+                  
+                  <div class="comentario-texto flex-grow-1">
+                    <strong>{{ comentario.usuario.nombre }}</strong>
+            
+                    <p class="mb-0 text-break"
+                       [class.comentario-corto]="!comentario.mostrarCompleto"
+                       [class.comentario-largo]="comentario.mostrarCompleto">
+                      {{ comentario.mostrarCompleto ? comentario.texto : (comentario.texto | slice:0:100) + '...' }}
+                    </p>
+            
+                    <!-- Botón para mostrar más/más corto -->
+                    <button *ngIf="comentario.texto.length > 100" class="btn btn-link p-0" (click)="comentario.mostrarCompleto = !comentario.mostrarCompleto">
+                      {{ comentario.mostrarCompleto ? 'Mostrar menos' : 'Mostrar más' }}
+                    </button>
+                  </div>
+            
+                  <div class="comentario-likes">
+                    <i class="bi bi-hand-thumbs-up" [class.text-primary]="comentario.liked" (click)="toggleLikeComentario(comentario)"></i>
+                    <span class="ms-2">{{ comentario.likes }}</span>
                   </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicatorsModal" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicatorsModal" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
               </div>
-            </ng-container>
-          </div>
-          <div class="flex-grow-1">
-            <div *ngFor="let comentario of selectedPublicacion?.comentarios" class="comentario">
-              <img [src]="comentario.usuario.fotoPerfil" alt="Foto de perfil" class="rounded-circle" width="40" height="40">
-              <div class="comentario-texto">
-                <strong>{{ comentario.usuario.nombre }}</strong>
-                <p class="mb-0">{{ comentario.texto }}</p>
-              </div>
-              <div class="comentario-likes">
-                <i class="bi bi-hand-thumbs-up" [class.text-primary]="comentario.liked" (click)="toggleLikeComentario(comentario)"></i>
-                <span class="ms-2">{{ comentario.likes }}</span>
+            
+              <!-- Caja de comentario -->
+              <div class="mt-auto">
+                <input [(ngModel)]="nuevoComentario" class="form-control mb-2" placeholder="Escribe un comentario...">
+                <button class="btn btn-primary w-100" (click)="comentar()">Publicar</button>
               </div>
             </div>
-            <div class="mt-2">
-              <input [(ngModel)]="nuevoComentario" class="form-control" placeholder="Escribe un comentario...">
-              <button class="btn btn-primary mt-2" (click)="comentar()">Publicar</button>
-            </div>
-          </div>
-        </div>
+            
+  
+          </div> <!-- Cierre row -->
+        </div> <!-- Cierre modal-body -->
+  
       </div>
     </div>
   </div>
+  
