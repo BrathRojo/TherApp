@@ -20,23 +20,14 @@ export class ChatComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.usuarioId = Number(params['usuarioId']) || 0;
       this.receptorId = Number(params['receptorId']) || 0;
-  
+
       if (this.usuarioId > 0 && this.receptorId > 0) {
         this.cargarMensajes();
-        this.suscribirseAlChat(); // ✅ Escuchar mensajes en tiempo real
       } else {
-        console.error('Error: usuarioId o receptorId no son válidos.');
+        console.error('Error: usuarioId o receptorId no son válidos.', this.usuarioId, this.receptorId);
       }
     });
   }
-  
-  // ✅ Escuchar mensajes en tiempo real
-  suscribirseAlChat(): void {
-    this.chatService.subscribeToChat(this.usuarioId, (mensaje) => {
-      console.log('📩 Mensaje recibido en tiempo real:', mensaje);
-      this.mensajes.push(mensaje);
-    });
-  }  
 
   cargarMensajes(): void {
     if (this.usuarioId > 0 && this.receptorId > 0) {
