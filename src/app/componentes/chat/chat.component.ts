@@ -23,7 +23,6 @@ export class ChatComponent implements OnInit {
 
       if (this.usuarioId > 0 && this.receptorId > 0) {
         this.cargarMensajes();
-        this.suscribirseAlChat(); // ✅ Ahora escucha mensajes en tiempo real
       } else {
         console.error('Error: usuarioId o receptorId no son válidos.', this.usuarioId, this.receptorId);
       }
@@ -43,14 +42,6 @@ export class ChatComponent implements OnInit {
         }
       });
     }
-  }
-
-  // ✅ Nueva función: Escuchar mensajes en tiempo real con WebSockets
-  suscribirseAlChat(): void {
-    this.chatService.subscribeToChat(this.usuarioId, (mensaje) => {
-      console.log('📩 Mensaje recibido en tiempo real:', mensaje);
-      this.mensajes.push(mensaje);
-    });
   }
 
   seleccionarArchivo(event: any): void {

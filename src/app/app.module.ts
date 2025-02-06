@@ -24,6 +24,7 @@ import { ChatComponent } from './componentes/chat/chat.component';
 import { FormularioCuentaComponent } from './componentes/formulario-cuenta/formulario-cuenta.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { HeadersinbotonesComponent } from './componentes/headersinbotones/headersinbotones.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { HeadersinbotonesComponent } from './componentes/headersinbotones/header
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     FormsModule
   ],
   providers: [],
