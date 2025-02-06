@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from "../../services/usuario.service";
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-registro',
@@ -12,7 +14,7 @@ export class RegistroComponent {
   registroForm: FormGroup;
   selectedFile: File | null = null; // ✅ Se declara la variable para almacenar la imagen
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private http: HttpClient,private router: Router, private snackBar: MatSnackBar) {
     this.registroForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       nombreUsuario: ['', [Validators.required, Validators.minLength(3)]],
@@ -45,14 +47,19 @@ export class RegistroComponent {
       };
       
       // Enviar datos sin rol (Spring lo asignará)
-      this.http.post('http://localhost:9000/api/usuarios/registro', usuario).subscribe(
-        response => {
-          console.log('Usuario registrado con éxito:', response);
+      this.http.post('http://localhost:9000/api/usuarios/registro', usuario).subscribe({
+        next: (response) => {
+          console.log('✅ Usuario registrado con éxito:', response);
+          this.snackBar.open('Registro exitoso. Redirigiendo...', 'Cerrar', { duration: 3000 });
+          setTimeout(() => {
+            this.router.navigate(['/home']); // 🔄 Redirigir a la página de inicio
+          }, 3000);
         },
-        error => {
-          console.error('Error al registrar usuario:', error);
+        error: (error) => {
+          console.error('🚨 Error al registrar usuario:', error);
+          this.snackBar.open('Error en el registro. Inténtalo de nuevo.', 'Cerrar', { duration: 4000 });
         }
-      );
+      });
     }
   }
 }
