@@ -98,6 +98,7 @@ export class PublicacionComponent {
   }
 
   comentar() {
+
     if (this.selectedPublicacion && this.selectedPublicacion.nuevoComentario.trim()) {
       this.selectedPublicacion.comentarios.push({
         texto: this.selectedPublicacion.nuevoComentario,
