@@ -25,6 +25,7 @@ import { FormularioCuentaComponent } from './componentes/formulario-cuenta/formu
 import { LoginComponent } from './componentes/login/login.component';
 import { HeadersinbotonesComponent } from './componentes/headersinbotones/headersinbotones.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConversacionesComponent } from './componentes/conversaciones/conversaciones.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FormularioCuentaComponent,
     LoginComponent,
     HeadersinbotonesComponent,
+    ConversacionesComponent,
   ],
   imports: [
     HttpClientModule,

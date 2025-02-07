@@ -1,4 +1,4 @@
-<app-header></app-header>
+
 <div class="chat-container">
   <div *ngFor="let mensaje of mensajes">
     <strong>{{ mensaje.emisorNombre || 'Usuario' }}:</strong> {{ mensaje.contenido }}
@@ -14,7 +14,6 @@
         <source [src]="'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl" type="video/mp4">
       </video>
 
-      <!-- ✅ Agregar botón de descarga -->
       <a [href]="'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl"
          download
          target="_blank"
