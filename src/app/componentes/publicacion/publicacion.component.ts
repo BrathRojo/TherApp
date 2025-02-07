@@ -124,7 +124,7 @@ export class PublicacionComponent {
     const opciones = document.getElementById(`opciones-${index}`);
   
     if (opciones) {
-      opciones.style.display = opciones.style.display === 'block' ? 'none' : 'block';
+      opciones.style.display = opciones.style.display == 'none' ? 'block' : 'none';
     }
   }
   
