@@ -121,7 +121,7 @@
                     <p class="mb-0 text-break"
                        [class.comentario-corto]="!comentario.mostrarCompleto"
                        [class.comentario-largo]="comentario.mostrarCompleto">
-                      {{ comentario.mostrarCompleto ? comentario.texto : (comentario.texto | slice:0:100) + '...' }}
+                      {{ comentario.mostrarCompleto ? comentario.texto : (comentario.texto | slice:0:100) }}
                     </p>
             
                     <!-- Botón para mostrar más/más corto -->
