@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Instala dependencias y construye la aplicación
-RUN npm install && npm run build --prod
+RUN npm install && npm run build --configuration=production
 
 # Usa Nginx para servir Angular
 FROM nginx:alpine
