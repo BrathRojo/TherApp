@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class TerapeutasComponent {
 
-  filtros: string[] = ['Especialidad', 'Ubicación', 'Valoración', 'Nº de reseñas', 'Más cercanos', 'Nombre'];
+  filtros: string[] = ['Especialidad', 'Ubicación', 'Valoración', 'Nº de reseñas', 'Más cercanos', 'Nombre', 'Precio'];
 
 }

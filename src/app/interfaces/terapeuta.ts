@@ -6,4 +6,5 @@ export interface Terapeuta extends Usuario {
     experiencia: string;
     especialidad: string;
     idiomas: string;
+    precio: number;
 }
