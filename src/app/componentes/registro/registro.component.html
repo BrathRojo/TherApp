@@ -1,56 +1,235 @@
 <app-headersinbotones></app-headersinbotones>
+
 <div class="form-container p-4">
   <h3>Empieza a cuidar tu salud mental con unos sencillos pasos</h3>
 
-  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+  <p id="formHelp" class="visually-hidden">
+    Todos los campos con * son obligatorios.
+  </p>
+
+  <form
+    [formGroup]="registroForm"
+    (ngSubmit)="onSubmit()"
+    aria-describedby="formHelp"
+  >
+    <!-- FILA 1: nombreUsuario, nombre -->
     <div class="form-row">
-    <div class="form-group">
-      <label for="nombreUsuario">Nombre de Usuario:</label>
-      <input id="nombreUsuario" formControlName="nombreUsuario" type="text" placeholder="Ingrese su usuario" />
+      <!-- Nombre de Usuario -->
+      <div
+        class="form-group"
+        [ngClass]="{
+          'has-error': registroForm.get('nombreUsuario')?.invalid
+            && registroForm.get('nombreUsuario')?.touched
+        }"
+      >
+        <label for="nombreUsuario">
+          Nombre de Usuario <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="nombreUsuario"
+          formControlName="nombreUsuario"
+          type="text"
+          placeholder="Ingrese su usuario"
+          aria-required="true"
+          [attr.aria-invalid]="
+            registroForm.get('nombreUsuario')?.invalid
+              && registroForm.get('nombreUsuario')?.touched
+              ? 'true'
+              : 'false'
+          "
+          (blur)="registroForm.get('nombreUsuario')?.markAsTouched()"
+        />
+        <div
+          *ngIf="registroForm.get('nombreUsuario')?.invalid
+            && registroForm.get('nombreUsuario')?.touched"
+          class="error-message"
+          aria-live="assertive"
+        >
+          El nombre de usuario es obligatorio y debe tener al menos 3 caracteres.
+        </div>
+      </div>
+
+      <!-- Nombre -->
+      <div
+        class="form-group"
+        [ngClass]="{
+          'has-error': registroForm.get('nombre')?.invalid
+            && registroForm.get('nombre')?.touched
+        }"
+      >
+        <label for="nombre">
+          Nombre <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="nombre"
+          formControlName="nombre"
+          type="text"
+          placeholder="Ingrese su nombre"
+          aria-required="true"
+          [attr.aria-invalid]="
+            registroForm.get('nombre')?.invalid
+              && registroForm.get('nombre')?.touched
+              ? 'true'
+              : 'false'
+          "
+          (blur)="registroForm.get('nombre')?.markAsTouched()"
+        />
+        <div
+          *ngIf="registroForm.get('nombre')?.invalid
+            && registroForm.get('nombre')?.touched"
+          class="error-message"
+          aria-live="assertive"
+        >
+          El nombre es obligatorio y debe tener al menos 3 caracteres.
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="nombre">Nombre:</label>
-      <input id="nombre" formControlName="nombre" type="text" placeholder="Ingrese su nombre" />
-    </div>
-  </div>
-
+    <!-- FILA 2: email, clave -->
     <div class="form-row">
-    <div class="form-group">
-      <label for="email">Correo Electrónico:</label>
-      <input id="email" formControlName="email" type="email" placeholder="Ingrese su correo" />
+      <!-- Email -->
+      <div
+        class="form-group"
+        [ngClass]="{
+          'has-error':
+            registroForm.get('email')?.invalid
+            && registroForm.get('email')?.touched
+        }"
+      >
+        <label for="email">
+          Correo Electrónico <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          placeholder="ejemplo@ejemplo.com"
+          aria-required="true"
+          aria-describedby="emailHelp"
+          [attr.aria-invalid]="
+            registroForm.get('email')?.invalid
+              && registroForm.get('email')?.touched
+              ? 'true'
+              : 'false'
+          "
+          (blur)="registroForm.get('email')?.markAsTouched()"
+        />
+        <small id="emailHelp" class="form-text text-muted">
+          Nunca compartiremos tu correo con nadie.
+        </small>
+
+        <div
+          *ngIf="registroForm.get('email')?.invalid
+            && registroForm.get('email')?.touched"
+          class="error-message"
+          aria-live="assertive"
+        >
+          Debes introducir un correo electrónico válido.
+        </div>
+      </div>
+
+      <!-- Clave -->
+      <div
+        class="form-group"
+        [ngClass]="{
+          'has-error':
+            registroForm.get('clave')?.invalid
+            && registroForm.get('clave')?.touched
+        }"
+      >
+        <label for="clave">
+          Contraseña <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="clave"
+          formControlName="clave"
+          type="password"
+          placeholder="Ingrese su contraseña"
+          aria-required="true"
+          [attr.aria-invalid]="
+            registroForm.get('clave')?.invalid
+              && registroForm.get('clave')?.touched
+              ? 'true'
+              : 'false'
+          "
+          (blur)="registroForm.get('clave')?.markAsTouched()"
+        />
+        <div
+          *ngIf="registroForm.get('clave')?.invalid
+            && registroForm.get('clave')?.touched"
+          class="error-message"
+          aria-live="assertive"
+        >
+          La contraseña es obligatoria y debe tener al menos 8 caracteres.
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="clave">Contraseña:</label>
-      <input id="clave" formControlName="clave" type="password" placeholder="Ingrese su contraseña" />
-    </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-group">
-      <label for="telefono">Teléfono:</label>
-      <input id="telefono" formControlName="telefono" type="text" placeholder="Ej. 987654321" />
-    </div>
-
-    <div class="form-group">
-      <label for="fotoPerfil">Foto de Perfil</label>
-      <input id="fotoPerfil" formControlName="fotoPerfil" type="text" placeholder="URL de la imagen" />
-    </div>
-  </div>
-
+    <!-- FILA 3: telefono, fotoPerfil (ahora "type=file") -->
     <div class="form-row">
-    <div class="form-group">
-      <label for="fechaNacimiento">Fecha de nacimiento:</label>
-      <input id="fechaNacimiento" formControlName="fechaNacimiento" type="date" />
+      <!-- Teléfono -->
+      <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input
+          id="telefono"
+          formControlName="telefono"
+          type="text"
+          placeholder="Ej. 987654321"
+        />
+      </div>
+
+      <!-- Foto de Perfil: input file -->
+      <div class="form-group">
+        <label for="fotoPerfilFile">Foto de Perfil</label>
+        <input
+          id="fotoPerfilFile"
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="ubicacion">Ubicación:</label>
-      <input id="ubicacion" formControlName="ubicacion" type="text" placeholder="Ciudad, País" />
+    <!-- FILA 4: fechaNacimiento y ubicacion -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="fechaNacimiento">
+          Fecha de nacimiento <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="fechaNacimiento"
+          formControlName="fechaNacimiento"
+          type="date"
+          aria-required="true"
+        />
+      </div>
+
+      <!-- Ubicación (con datalist de provincias, si quieres) -->
+      <div class="form-group">
+        <label for="ubicacion">Ubicación:</label>
+        <input
+          id="ubicacion"
+          formControlName="ubicacion"
+          type="text"
+          placeholder="Ej. Madrid"
+          list="provinciasList"
+        />
+        <datalist id="provinciasList">
+          <option
+            *ngFor="let provincia of provincias"
+            [value]="provincia"
+          ></option>
+        </datalist>
+      </div>
     </div>
-  </div>
-    
-    <button type="submit" [disabled]="!registroForm.valid">Registrar</button>
+
+    <!-- Botón de envío -->
+    <button
+      type="submit"
+      [disabled]="!registroForm.valid"
+      aria-label="Registrarse"
+    >
+      Registrar
+    </button>
   </form>
 </div>
