@@ -1,22 +1,30 @@
+<app-header></app-header>
 <div class="inicio-container">
     <header>
       <h1>Bienvenido a TherApp</h1>
       <p>Conectamos terapeutas y organizaciones con usuarios que necesitan ayuda profesional.</p>
     </header>
-  
-    <section class="descripcion">
-      <h2>¿Cómo funciona?</h2>
-      <p>TherApp facilita el contacto entre terapeutas calificados y personas que buscan mejorar su bienestar.</p>
-      <ul>
-        <li>👩‍⚕️ Encuentra terapeutas profesionales.</li>
-        <li>🏢 Conéctate con organizaciones especializadas.</li>
-        <li>📅 Programa sesiones fácilmente.</li>
-      </ul>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Los mejores profesionales para tu salud mental</h1>
+        <p>Contacta con ellos y déjate ayudar</p>
+        <a routerLink="/terapeutas" class="btn">Empieza a buscar</a>
+      </div>
     </section>
-  
-    <div class="acciones">
-      <a routerLink="/registro" class="btn">Regístrate ahora</a>
+
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">¿Cómo funciona?</h1>
+        <p class="col-md-8 fs-4">TherApp facilita el contacto entre terapeutas calificados y personas que buscan mejorar su bienestar.</p>
+        <ul class="lista">
+          <li>👩‍⚕️ Encuentra terapeutas profesionales.</li>
+          <li>🏢 Conéctate con organizaciones especializadas.</li>
+          <li>📅 Programa sesiones fácilmente.</li>
+        </ul>
+        <button class="btn btn-primary btn-lg" routerLink="/registro" type="button">Regístrate ahora</button>
+      </div>
     </div>
   </div>
 
-<app-publicacion></app-publicacion>
+  <app-footer></app-footer>
