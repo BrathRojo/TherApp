@@ -1,11 +1,14 @@
+<app-header></app-header>
+
 <div class="profile-container">
+  <!-- Muestra la foto del usuario si la tienes en 'foto' -->
   <img [src]="foto" alt="Foto de perfil" class="profile-image">
 
   <div class="profile-info">
     <p><span>Usuario:</span> {{ nombreUsuario }}</p>
     <p><span>Nombre:</span> {{ nombre }}</p>
     <p><span>Apellidos:</span> {{ apellidos }}</p>
-    <p><span>Email:</span> {{ email }}</p>
+    <p><span>Email:</span> <a href="mailto:{{ email }}" class="email">{{ email }}</a></p>
     <p><span>Teléfono:</span> {{ telefono }}</p>
     <p><span>Fecha de Nacimiento:</span> {{ fechaNacimiento | date }}</p>
     <p><span>Presentación:</span> {{ presentacion }}</p>
@@ -13,7 +16,25 @@
   </div>
 </div>
 
-<div>
-  <input type="file" (change)="onFileSelected($event)" accept="image/*">
-  <button (click)="onSubirFoto()">Cambiar foto</button>
+<!-- Nuevo: Subir/cambiar foto -->
+<div class="upload-foto">
+  <label for="fotoInput">Cambiar foto de perfil:</label>
+  <input
+    id="fotoInput"
+    type="file"
+    accept="image/*"
+    (change)="onFileSelected($event)"
+  />
+  <button (click)="onSubirFoto()">Subir foto</button>
 </div>
+
+<!-- Botones cambio cuenta -->
+<button>
+  <a routerLink="/cambioCuenta/terapeuta">Cambiar a terapeuta</a>
+</button>
+
+<button>
+  <a routerLink="/cambioCuenta/organizacion">Cambiar a organizacion</a>
+</button>
+
+<app-publicacion></app-publicacion>
