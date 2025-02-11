@@ -36,7 +36,7 @@ export class RegistroComponent {
   ) {
     this.registroForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
-      nombreUsuario: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       clave: ['', [Validators.required, Validators.minLength(8)]],
       // ❌ Eliminamos 'fotoPerfil' del form control
@@ -58,7 +58,7 @@ export class RegistroComponent {
     if (this.registroForm.valid) {
       // Datos del formulario
       const usuario = {
-        nombreUsuario: this.registroForm.get('nombreUsuario')?.value,
+        username: this.registroForm.get('username')?.value,
         nombre: this.registroForm.get('nombre')?.value,
         email: this.registroForm.get('email')?.value,
         clave: this.registroForm.get('clave')?.value,
