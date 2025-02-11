@@ -4,6 +4,8 @@ import { UsuarioService } from "../../services/usuario.service";
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
 
 @Component({
   selector: 'app-registro',
@@ -28,7 +30,7 @@ export class RegistroComponent {
     });
   }
 
-  // ✅ Método para capturar el archivo cuando el usuario sube una imagen
+  //Método para capturar el archivo cuando el usuario sube una imagen
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
@@ -49,15 +51,13 @@ export class RegistroComponent {
       // Enviar datos sin rol (Spring lo asignará)
       this.http.post('http://localhost:9000/api/usuarios/registro', usuario).subscribe({
         next: (response) => {
-          console.log('✅ Usuario registrado con éxito:', response);
-          this.snackBar.open('Registro exitoso. Redirigiendo...', 'Cerrar', { duration: 3000 });
-          setTimeout(() => {
-            this.router.navigate(['/home']); // 🔄 Redirigir a la página de inicio
-          }, 3000);
+          console.log('✅ Usuario registrado:', response);
+          this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
+          setTimeout(() => this.router.navigate(['/home']), 3000);
         },
         error: (error) => {
           console.error('🚨 Error al registrar usuario:', error);
-          this.snackBar.open('Error en el registro. Inténtalo de nuevo.', 'Cerrar', { duration: 4000 });
+          this.snackBar.open('Error en el registro', 'Cerrar', { duration: 4000 });
         }
       });
     }

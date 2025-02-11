@@ -25,6 +25,7 @@ import { FormularioCuentaComponent } from './componentes/formulario-cuenta/formu
 import { LoginComponent } from './componentes/login/login.component';
 import { HeadersinbotonesComponent } from './componentes/headersinbotones/headersinbotones.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     MatSnackBarModule,
     FormsModule
   ],
