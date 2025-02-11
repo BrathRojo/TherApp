@@ -12,15 +12,34 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class RegistroComponent {
   registroForm: FormGroup;
-  selectedFile: File | null = null; // ✅ Se declara la variable para almacenar la imagen
+  selectedFile: File | null = null; // ✅ Guardamos el archivo aquí si se selecciona
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private http: HttpClient,private router: Router, private snackBar: MatSnackBar) {
+  // Lista de provincias de ejemplo
+  provincias: string[] = [
+    "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila",
+    "Badajoz", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria",
+    "Castellón", "Ciudad Real", "Córdoba", "Cuenca", "Gerona", "Granada",
+    "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares",
+    "Jaén", "La Coruña", "La Rioja", "Las Palmas", "León", "Lérida",
+    "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense",
+    "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife",
+    "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo",
+    "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"
+  ];
+
+  constructor(
+    private fb: FormBuilder,
+    private usuarioService: UsuarioService,
+    private http: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
     this.registroForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
-      nombreUsuario: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      clave: ['', [Validators.required, Validators.minLength(8)]], // Usamos "clave" como en el formulario
-      fotoPerfil: [''],
+      clave: ['', [Validators.required, Validators.minLength(8)]],
+      // ❌ Eliminamos 'fotoPerfil' del form control
       fechaNacimiento: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
       ubicacion: [''],
@@ -28,36 +47,55 @@ export class RegistroComponent {
     });
   }
 
-  // ✅ Método para capturar el archivo cuando el usuario sube una imagen
+  // ✅ Capturar el archivo seleccionado en selectedFile
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
+    console.log('Archivo seleccionado:', this.selectedFile);
   }
 
   // ✅ Método para enviar datos al backend
   onSubmit(): void {
     if (this.registroForm.valid) {
+      // Datos del formulario
       const usuario = {
-        nombreUsuario: this.registroForm.get('nombreUsuario')?.value,
+        username: this.registroForm.get('username')?.value,
         nombre: this.registroForm.get('nombre')?.value,
         email: this.registroForm.get('email')?.value,
         clave: this.registroForm.get('clave')?.value,
         telefono: this.registroForm.get('telefono')?.value,
         fechaNacimiento: this.registroForm.get('fechaNacimiento')?.value,
-        ubicacion: this.registroForm.get('ubicacion')?.value,
+        ubicacion: this.registroForm.get('ubicacion')?.value
       };
-      
-      // Enviar datos sin rol (Spring lo asignará)
+
+      // Opcional: preparar para enviar foto como FormData si tu backend lo maneja
+      // Si tu backend recibe multipart/form-data:
+      /*
+      const formData = new FormData();
+      formData.append('usuario', new Blob([JSON.stringify(usuario)], { type: 'application/json' }));
+      if (this.selectedFile) {
+        formData.append('foto', this.selectedFile);
+      }
+      // Y luego harías:
+      // this.http.post('http://localhost:9000/api/usuarios/registro', formData)...
+      */
+
+      // Aquí, simplemente lo enviamos como JSON
+      // (la foto se podría enviar luego o con un endpoint distinto)
       this.http.post('http://localhost:9000/api/usuarios/registro', usuario).subscribe({
         next: (response) => {
           console.log('✅ Usuario registrado con éxito:', response);
-          this.snackBar.open('Registro exitoso. Redirigiendo...', 'Cerrar', { duration: 3000 });
+          this.snackBar.open('Registro exitoso. Redirigiendo...', 'Cerrar', {
+            duration: 3000
+          });
           setTimeout(() => {
-            this.router.navigate(['/home']); // 🔄 Redirigir a la página de inicio
+            this.router.navigate(['/home']);
           }, 3000);
         },
         error: (error) => {
           console.error('🚨 Error al registrar usuario:', error);
-          this.snackBar.open('Error en el registro. Inténtalo de nuevo.', 'Cerrar', { duration: 4000 });
+          this.snackBar.open('Error en el registro. Inténtalo de nuevo.', 'Cerrar', {
+            duration: 4000
+          });
         }
       });
     }
