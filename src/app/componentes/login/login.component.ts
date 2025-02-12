@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsuarioService } from '../../services/usuario.service';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,27 +12,31 @@ export class LoginComponent {
     loginForm: FormGroup;
       selectedFile: File | null = null; // ✅ Se declara la variable para almacenar la imagen
     
-      constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private http: HttpClient) {
+      constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {
         this.loginForm = this.fb.group({
-          email: ['', [Validators.required, Validators.email]],
-          clave: ['', [Validators.required, Validators.minLength(8)]]
+          usuEmailTlf: ['', Validators.required],
+          clave: ['', [Validators.required, Validators.minLength(5)]]
         });
       }
       // ✅ Método para enviar datos al backend
       onSubmit(): void {
         if (this.loginForm.valid) {
           const usuario = {
-            email: this.loginForm.get('email')?.value,
+            usuEmailTlf: this.loginForm.get('usuEmailTlf')?.value,
             clave: this.loginForm.get('clave')?.value
           };
           
-          // Enviar datos sin rol (Spring lo asignará)
-          this.http.post('http://localhost:9000/api/usuarios/login', usuario).subscribe(
+
+          this.auth.login(usuario.usuEmailTlf, usuario.clave).subscribe(
             response => {
               console.log('Sesión iniciada', response);
+              // Almacenar el token en localStorage
+              localStorage.setItem('authToken', response.token);
+              // Redirigir al usuario a la página de inicio
+              this.router.navigate(['/home']);
             },
             error => {
-              console.error('Email o contraseña incorrectos', error);
+              console.error('Usuario o contraseña incorrectos', error);
             }
           );
         }

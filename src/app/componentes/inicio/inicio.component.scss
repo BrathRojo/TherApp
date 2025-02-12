@@ -1,62 +1,101 @@
 .inicio-container {
-    text-align: center;
-    padding: 2rem;
-    max-width: 800px;
-    margin: auto;
-  
-    header {
-      margin-bottom: 2rem;
-  
-      h1 {
-        font-size: 2.5rem;
-        color: #2c3e50;
-      }
-  
-      p {
-        font-size: 1.2rem;
-        color: #555;
-      }
+  padding: 2rem;
+  max-width: 100%;
+  margin: auto;
+
+  header {
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2.5rem;
+      color: #2c3e50;
     }
-  
-    .descripcion {
-      text-align: left;
-      margin-bottom: 2rem;
-  
-      h2 {
-        color: #2c3e50;
-      }
-  
-      p {
-        font-size: 1.1rem;
-        color: #333;
-      }
-  
-      ul {
-        list-style: none;
-        padding: 0;
-  
-        li {
-          font-size: 1rem;
-          margin: 0.5rem 0;
-        }
-      }
+
+    p {
+      font-size: 1.2rem;
+      color: #555;
     }
-  
-    .acciones {
-      .btn {
-        display: inline-block;
-        padding: 0.8rem 1.5rem;
-        font-size: 1.2rem;
-        color: white;
-        background: #3498db;
-        border-radius: 5px;
-        text-decoration: none;
-        transition: background 0.3s;
-  
-        &:hover {
-          background: #2980b9;
-        }
+  }
+
+  .lista {
+    list-style: none;
+  }
+
+  .acciones {
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      font-size: 1.2rem;
+      color: white;
+      background: #3498db;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s;
+
+      &:hover {
+        background: #2980b9;
       }
     }
   }
-  
+}
+
+.hero {
+  position: relative;
+  height: 100vh; /* La sección ocupa toda la altura de la pantalla */
+  background-image: url('/assets/herosection.jpg');
+  background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
+  background-position: center; /* Centra la imagen */
+  display: flex;
+  align-items: center; /* Centra el contenido verticalmente */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  color: white; /* Texto en blanco */
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Capa negra semitransparente */
+  z-index: 1; /* Coloca la capa detrás del texto */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2; /* Asegura que el texto quede encima de la capa oscura */
+  max-width: 800px; /* Limita el ancho del contenido */
+  padding: 20px;
+}
+
+.hero-content h1 {
+  font-size: 3rem; /* Tamaño del título */
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.5rem; /* Tamaño del texto */
+  margin-bottom: 30px;
+  line-height: 1.6; /* Espaciado entre líneas */
+}
+
+.hero-content .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #007bff; /* Azul predeterminado */
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.hero-content .btn:hover {
+  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+}
+
+

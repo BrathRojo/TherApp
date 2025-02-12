@@ -29,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ConversacionesComponent } from './componentes/conversaciones/conversaciones.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormularioCuentaComponent,
     LoginComponent,
     HeadersinbotonesComponent,
+    ConversacionesComponent,
   ],
   imports: [
     HttpClientModule,

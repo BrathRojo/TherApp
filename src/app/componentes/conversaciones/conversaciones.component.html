@@ -1,0 +1,15 @@
+<app-header></app-header>
+
+<div class="conversaciones-container">
+  <div class="sidebar">
+    <h3>Conversaciones</h3>
+    <ul>
+      <li *ngFor="let conversacion of conversaciones" (click)="seleccionarConversacion(conversacion)">
+        {{ conversacion.nombre }}
+      </li>
+    </ul>
+  </div>
+  <div class="chat-container">
+    <app-chat [usuarioId]="userId" [receptorId]="conversacionId"></app-chat>
+  </div>
+</div>

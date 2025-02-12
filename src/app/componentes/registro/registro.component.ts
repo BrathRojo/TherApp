@@ -88,14 +88,19 @@ export class RegistroComponent {
           console.log('✅ Usuario registrado con éxito:', response);
           this.snackBar.open('Registro exitoso. Redirigiendo...', 'Cerrar', { duration: 3000 });
           setTimeout(() => {
-            this.router.navigate(['/home']); // 🔄 Redirigir a la página de inicio
+            this.router.navigate(['/']); // 🔄 Redirigir a la página de inicio
           }, 3000);
         },
         error: (error) => {
           console.error('🚨 Error al registrar usuario:', error);
-          this.snackBar.open('Error en el registro. Inténtalo de nuevo.', 'Cerrar', { duration: 4000 });
+          if (error.error && error.error.message) {
+            this.snackBar.open(`Error en el registro: ${error.error.message}`, 'Cerrar', { duration: 4000 });
+          } else {
+            this.snackBar.open('Error en el registro. Inténtalo de nuevo.', 'Cerrar', { duration: 4000 });
+          }
         }
       });
     }
+
   }
 }

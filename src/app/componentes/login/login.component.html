@@ -4,13 +4,8 @@
   
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="nombreUsuario">Nombre de Usuario:</label>
-        <input id="nombreUsuario" formControlName="nombreUsuario" type="text" placeholder="Ingrese su usuario" />
-      </div>
-  
-      <div class="form-group">
-        <label for="email">Correo Electrónico:</label>
-        <input id="email" formControlName="email" type="email" placeholder="Ingrese su correo" />
+        <label for="usuEmailTlf">Usuario:</label>
+        <input id="usuEmailTlf" formControlName="usuEmailTlf" type="text" placeholder="Ingrese su usuario, email o teléfono" />
       </div>
   
       <div class="form-group">
