@@ -1,14 +1,13 @@
-import { RouterLink } from "@angular/router";
-
 export interface Usuario {
   id: number;
-  nombreUsuario: string;
+  username: string;
   nombre: string;
   apellidos?: string;
   email: string;
-  telefono?: string;
-  fechaNacimiento?: string; // o Date
+  telefono: string;
+  fechaNacimiento: Date; // o Date
   presentacion?: string;
+  biografia?: string;
   ubicacion?: string;
   fotoPerfil?: string; // Ruta a la foto en el backend
 }

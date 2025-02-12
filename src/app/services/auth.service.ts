@@ -20,6 +20,7 @@ export class AuthService {
     return this.http.post<any>(this.urlApi, { identifier: identifier, password: password }).pipe(
       tap((response: any) => {
         localStorage.setItem('authToken', response.token);
+        localStorage.setItem('usuario', response.username);
         this.loggedIn.next(true);
       })
     );
@@ -27,6 +28,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('usuario');
     this.loggedIn.next(false);
   }
 

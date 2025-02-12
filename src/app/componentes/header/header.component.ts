@@ -11,12 +11,17 @@ export class HeaderComponent implements OnInit {
   
   logged: boolean = false;
 
+  usuario?: string;
+
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.auth.isLoggedIn().subscribe(loggedIn => {
       this.logged = loggedIn;
     });
+    if (this.logged) {
+      this.usuario = localStorage.getItem('usuario') || '';
+    }
   }
 
   redirectHome(): void {

@@ -2,30 +2,29 @@
 
 <div class="profile-container">
   <!-- Muestra la foto del usuario si la tienes en 'foto' -->
-  <img [src]="foto" alt="Foto de perfil" class="profile-image">
-
-  <div class="profile-info">
-    <p><span>Usuario:</span> {{ nombreUsuario }}</p>
-    <p><span>Nombre:</span> {{ nombre }}</p>
-    <p><span>Apellidos:</span> {{ apellidos }}</p>
-    <p><span>Email:</span> <a href="mailto:{{ email }}" class="email">{{ email }}</a></p>
-    <p><span>Teléfono:</span> {{ telefono }}</p>
-    <p><span>Fecha de Nacimiento:</span> {{ fechaNacimiento | date }}</p>
-    <p><span>Presentación:</span> {{ presentacion }}</p>
-    <p><span>Ubicación:</span> {{ ubicacion }}</p>
+  <div class="profile-image-container" (click)="triggerInput()">
+    <img [src]="foto" alt="Foto de perfil" class="profile-image">
+    <button class="camera-button">
+      <i class="bi bi-camera"></i>
+    </button>
   </div>
-</div>
-
-<!-- Nuevo: Subir/cambiar foto -->
-<div class="upload-foto">
-  <label for="fotoInput">Cambiar foto de perfil:</label>
+  
   <input
     id="fotoInput"
     type="file"
     accept="image/*"
     (change)="onFileSelected($event)"
   />
-  <button (click)="onSubirFoto()">Subir foto</button>
+
+  <div class="profile-info">
+    <p><span>Usuario:</span> {{ nombreUsuario }}</p>
+    <p><span>Nombre:</span> {{ nombre }}</p>
+    <p><span>Email: </span> <a href="mailto:{{ email }}" class="email">{{ email }}</a></p>
+    <p><span>Teléfono:</span> {{ telefono }}</p>
+    <p><span>Fecha de Nacimiento:</span> {{ fechaNacimiento | date }}</p>
+    <p><span>Biografía:</span> {{ biografia }}</p>
+    <p><span>Ubicación:</span> {{ ubicacion }}</p>
+  </div>
 </div>
 
 <!-- Botones cambio cuenta -->

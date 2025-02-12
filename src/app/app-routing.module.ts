@@ -14,7 +14,7 @@ import { ConversacionesComponent } from './componentes/conversaciones/conversaci
 const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'index', redirectTo: '' },
-  { path: 'perfil', component: PerfilComponent },
+  { path: 'perfil/:nombreUsuario', component: PerfilComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'home', component: HomeComponent },
   { path: 'terapeutas', component: TerapeutasComponent},

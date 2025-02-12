@@ -46,7 +46,7 @@
             <a class="nav-link" routerLink="/cursos">Vídeos</a>
           </li>
           <li *ngIf="logged" class="nav-item">
-            <a class="nav-link" routerLink="/perfil">Perfil</a>
+            <a class="nav-link" routerLink="/perfil/{{ usuario }}">Perfil</a>
           </li>
           <li *ngIf="!logged" class="nav-item">
             <a class="btn btn-primary" routerLink="/login">Iniciar sesión</a>

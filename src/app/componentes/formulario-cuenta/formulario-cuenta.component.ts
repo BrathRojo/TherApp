@@ -14,11 +14,6 @@ export class FormularioCuentaComponent implements OnInit {
   modoCambio: string = '';
   nombreUsuario: string = '';
 
-  // Cookie para el frontend para validar al usuario
-
-  // Authorithation: Bearer
-  // HttpOnly
-  
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private usuarioService: UsuarioService) {
     this.registroForm = this.fb.group({
       nombre: [this.nombreUsuario, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],

@@ -13,11 +13,47 @@ $box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-shadow: $box-shadow;
 
   .profile-image {
-    width: 150px;
-    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 20px;
+  }
+
+  .profile-image-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .camera-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .camera-button i {
+    color: #fff;
+    font-size: 20px;
+  }
+  
+  .profile-image-container:hover {
+    cursor: pointer;
+    .camera-button {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
   }
 
   .profile-info {
@@ -41,5 +77,9 @@ $box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
       }
     }
+  }
+
+  #fotoInput {
+    display: none;
   }
 }
