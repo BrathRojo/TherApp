@@ -213,8 +213,9 @@
           type="text"
           placeholder="Ej. Madrid"
           list="provinciasList"
+          (input)="onInput($event)"
         />
-        <datalist id="provinciasList">
+        <datalist id="provinciasList" *ngIf="mostrarDatalist">
           <option
             *ngFor="let provincia of provincias"
             [value]="provincia"

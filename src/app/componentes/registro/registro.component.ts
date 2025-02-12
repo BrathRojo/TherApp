@@ -14,6 +14,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class RegistroComponent {
   registroForm: FormGroup;
+  mostrarDatalist = false;
   selectedFile: File | null = null; // ✅ Guardamos el archivo aquí si se selecciona
 
   // Lista de provincias de ejemplo
@@ -53,6 +54,13 @@ export class RegistroComponent {
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     console.log('Archivo seleccionado:', this.selectedFile);
+  }
+
+
+  // para que el datalist solo aparezca cuando el usuario escriba algo
+  onInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.mostrarDatalist = input.value.length > 0;
   }
 
   // ✅ Método para enviar datos al backend
