@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
 
@@ -7,9 +7,9 @@ import { ChatService } from '../../services/chat.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
-  usuarioId!: number;
-  receptorId!: number;
+export class ChatComponent implements OnInit, OnChanges {
+  @Input() usuarioId!: number;
+  @Input() receptorId!: number;
   mensajes: any[] = [];
   nuevoMensaje: string = '';
   archivoSeleccionado?: File;
@@ -18,8 +18,8 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.usuarioId = Number(params['usuarioId']) || 0;
-      this.receptorId = Number(params['receptorId']) || 0;
+      // this.usuarioId = Number(params['usuarioId']) || 0;
+      // this.receptorId = Number(params['receptorId']) || 0;
 
       if (this.usuarioId > 0 && this.receptorId > 0) {
         this.cargarMensajes();
@@ -27,6 +27,14 @@ export class ChatComponent implements OnInit {
         console.error('Error: usuarioId o receptorId no son válidos.', this.usuarioId, this.receptorId);
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('🔄 Cambios en las propiedades:', changes);
+    
+    if (changes) { 
+      this.cargarMensajes();
+    }
   }
 
   cargarMensajes(): void {
