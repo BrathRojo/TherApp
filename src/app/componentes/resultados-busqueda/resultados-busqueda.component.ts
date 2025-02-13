@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../interfaces/usuario';
 
@@ -15,6 +15,7 @@ export class ResultadosBusquedaComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private usuarioService: UsuarioService
   ) {}
 
@@ -61,5 +62,9 @@ export class ResultadosBusquedaComponent implements OnInit {
     const nombres = seguidores.slice(0, 2).map(s => s.username).join(', ');
     const restantes = seguidores.length > 2 ? ` y ${seguidores.length - 2} personas más siguen a este usuario` : '';
     return `${nombres}${restantes}`;
+  }
+
+  verPerfil(username: string): void {
+    this.router.navigate(['/perfil', username]);
   }
 }
