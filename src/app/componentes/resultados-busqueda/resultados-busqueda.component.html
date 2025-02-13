@@ -1,0 +1,19 @@
+<app-header></app-header>
+
+<div class="resultados-busqueda-container">
+  <h2>Resultados de búsqueda para "{{ searchQuery }}"</h2>
+  <div *ngIf="resultadosBusqueda.length > 0; else noResults">
+    <div *ngFor="let usuario of resultadosBusqueda" class="usuario-card">
+      <img [src]="usuario.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+      <div class="usuario-info">
+        <h3>{{ usuario.nombre }}</h3>
+        <p>&#64;{{ usuario.username }}</p>
+      </div>
+    </div>
+  </div>
+  <ng-template #noResults>
+    <p>No se encontraron usuarios.</p>
+  </ng-template>
+</div>
+
+<app-footer></app-footer>

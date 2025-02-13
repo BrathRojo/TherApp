@@ -45,8 +45,7 @@ export class RegistroComponent {
       // ❌ Eliminamos 'fotoPerfil' del form control
       fechaNacimiento: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-      ubicacion: [''],
-      biografia: ['']
+      ubicacion: ['']
     });
   }
 
