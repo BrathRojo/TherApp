@@ -11,6 +11,7 @@ import { Usuario } from '../../interfaces/usuario';
 export class ResultadosBusquedaComponent implements OnInit {
   searchQuery: string = '';
   resultadosBusqueda: Usuario[] = [];
+  seguidoresComunes: { [key: string]: Usuario[] } = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -30,10 +31,35 @@ export class ResultadosBusquedaComponent implements OnInit {
     this.usuarioService.buscarUsuarios(this.searchQuery).subscribe({
       next: (usuarios: Usuario[]) => {
         this.resultadosBusqueda = usuarios;
+        this.resultadosBusqueda.forEach(usuario => {
+          this.obtenerSeguidoresComunes(usuario.id);
+        });
       },
       error: (error) => {
         console.error('Error al buscar usuarios:', error);
       }
     });
+  }
+
+  obtenerSeguidoresComunes(buscadoId: number): void {
+    const usuarioId = 1; // Reemplaza con el ID del usuario autenticado
+    this.usuarioService.obtenerSeguidoresComunes(usuarioId, buscadoId).subscribe({
+      next: (seguidores: Usuario[]) => {
+        this.seguidoresComunes[buscadoId] = seguidores;
+      },
+      error: (error) => {
+        console.error('Error al obtener seguidores comunes:', error);
+      }
+    });
+  }
+
+  getSeguidoresComunesText(usuarioId: number): string {
+    const seguidores = this.seguidoresComunes[usuarioId];
+    if (!seguidores || seguidores.length === 0) {
+      return '';
+    }
+    const nombres = seguidores.slice(0, 2).map(s => s.username).join(', ');
+    const restantes = seguidores.length > 2 ? ` y ${seguidores.length - 2} personas más siguen a este usuario` : '';
+    return `${nombres}${restantes}`;
   }
 }

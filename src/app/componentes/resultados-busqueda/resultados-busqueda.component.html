@@ -8,6 +8,9 @@
       <div class="usuario-info">
         <h3>{{ usuario.nombre }}</h3>
         <p>&#64;{{ usuario.username }}</p>
+        <div *ngIf="seguidoresComunes[usuario.id].length > 0">
+          <p>{{ getSeguidoresComunesText(usuario.id) }}</p>
+        </div>
       </div>
     </div>
   </div>

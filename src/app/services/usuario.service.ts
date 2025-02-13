@@ -27,5 +27,9 @@ export class UsuarioService {
 
   buscarUsuarios(query: string): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/buscar?query=${query}`);
-}
+  }
+
+  obtenerSeguidoresComunes(usuarioId: number, buscadoId: number): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/seguidores-comunes?usuarioId=${usuarioId}&buscadoId=${buscadoId}`);
+  }
 }
