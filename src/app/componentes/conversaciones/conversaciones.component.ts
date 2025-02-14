@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ChatService } from '../../services/chat.service'; // Importa el servicio de chat
+import { Usuario } from '../../interfaces/usuario'; // Importa el modelo de Usuario
 
 @Component({
   selector: 'app-conversaciones',
@@ -7,27 +9,31 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./conversaciones.component.scss']
 })
 export class ConversacionesComponent implements OnInit {
-
-  constructor(private routes: ActivatedRoute) {}
-
-  conversaciones = [
-    { id: 1, nombre: 'didier' },
-    { id: 2, nombre: 'miguel' },
-    { id: 3, nombre: 'lorensou' },
-    // Agrega más conversaciones según sea necesario
-  ];
-
   userId: number = 0;
-  conversacionId: number = this.conversaciones[0].id;
+  conversaciones: Usuario[] = [];
+  selectedConversacion?: Usuario;
+
+  constructor(private route: ActivatedRoute, private chatService: ChatService) {}
 
   ngOnInit(): void {
-    this.routes.params.subscribe(params => {
-      this.userId = params['usuarioId'] || 0;
+    this.userId = Number(localStorage.getItem('usuarioId'));
+    if (this.userId > 0) {
+      this.cargarConversaciones();
+    }
+  }
+
+  cargarConversaciones(): void {
+    this.chatService.obtenerConversaciones(this.userId).subscribe({
+      next: (conversaciones) => {
+        this.conversaciones = conversaciones;
+      },
+      error: (error) => {
+        console.error('Error al cargar las conversaciones:', error);
+      }
     });
   }
 
-  seleccionarConversacion(conversacion: any): void {
-    this.conversacionId = conversacion.id;
-    console.log('Conversación seleccionada:', this.userId, this.conversacionId);
+  seleccionarConversacion(conversacion: Usuario): void {
+    this.selectedConversacion = conversacion;
   }
 }
