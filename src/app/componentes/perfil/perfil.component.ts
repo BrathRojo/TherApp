@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsuarioService } from '../../services/usuario.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SeguidoresService } from '../../services/seguidores.service';
 
 @Component({
   selector: 'app-perfil',
@@ -10,6 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PerfilComponent implements OnInit {
 
+  nombreUsuarioLogueado?: string;
+  siguiendo: boolean = false;
+
+  id: number = 0;
   foto?: string;
   nombreUsuario: string = '';
   nombre: string = '';
@@ -21,11 +26,19 @@ export class PerfilComponent implements OnInit {
 
   selectedFile?: File;
 
-  constructor(private http: HttpClient, private servicio: UsuarioService, private route: ActivatedRoute) {}
+  constructor(private http: HttpClient, private servicio: UsuarioService, private route: ActivatedRoute, private seguidores: SeguidoresService, private router: Router) {}
 
   ngOnInit() {
-    this.nombreUsuario = this.route.snapshot.params['nombreUsuario'];
+    this.route.params.subscribe(params => {
+      this.nombreUsuarioLogueado = localStorage.getItem('usuario')!;
+      this.nombreUsuario = params['nombreUsuario'];
+      this.cargarPerfil();
+    });
+  }
+
+  cargarPerfil() {
     this.servicio.getPerfilUsuario(this.nombreUsuario).subscribe(usuario => {
+      this.id = usuario.id;
       this.foto = usuario.fotoPerfil ? usuario.fotoPerfil : 'assets/default.png';
       this.nombreUsuario = usuario.username;
       this.nombre = usuario.nombre;
@@ -34,6 +47,10 @@ export class PerfilComponent implements OnInit {
       this.fechaNacimiento = usuario.fechaNacimiento;
       this.biografia = usuario.biografia ? usuario.biografia : 'Este usuario no tiene biografía';
       this.ubicacion = usuario.ubicacion ? usuario.ubicacion : 'No especificada';
+
+      this.seguidores.estaSiguiendo(Number(localStorage.getItem('usuarioId'))!, this.id).subscribe(siguiendo => {
+        this.siguiendo = siguiendo;
+      });
     });
   }
 
@@ -46,6 +63,20 @@ export class PerfilComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     console.log('Archivo seleccionado:', this.selectedFile);
     this.onSubirFoto();
+  }
+
+  seguir() {
+    console.log(this.id);
+    this.seguidores.seguirUsuario(Number(localStorage.getItem('usuarioId'))!, this.id).subscribe(() => {
+      this.cargarPerfil();
+    });
+  }
+
+  dejarDeSeguir() {
+    console.log(this.id);
+    this.seguidores.dejarDeSeguirUsuario(Number(localStorage.getItem('usuarioId'))!, this.id).subscribe(() => {
+      this.cargarPerfil();
+    });
   }
 
   // Subir foto al backend

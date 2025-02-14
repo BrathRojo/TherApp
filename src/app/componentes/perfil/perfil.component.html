@@ -17,6 +17,7 @@
   />
 
   <div class="profile-info">
+    <p><span>Usuarioid:</span> {{ id }}</p>
     <p><span>Usuario:</span> {{ nombreUsuario }}</p>
     <p><span>Nombre:</span> {{ nombre }}</p>
     <p><span>Email: </span> <a href="mailto:{{ email }}" class="email">{{ email }}</a></p>
@@ -25,7 +26,17 @@
     <p><span>Biografía:</span> {{ biografia }}</p>
     <p><span>Ubicación:</span> {{ ubicacion }}</p>
   </div>
+
+  <div *ngIf="nombreUsuario !== nombreUsuarioLogueado">
+    <button *ngIf="!siguiendo" (click)="seguir()">
+      Seguir <i class="bi bi-plus"></i>
+    </button>
+    <button *ngIf="siguiendo" (click)="dejarDeSeguir()">
+      Siguiendo <i class="bi bi-check"></i>
+    </button>
+  </div>
 </div>
+
 
 <!-- Botones cambio cuenta -->
 <button>
