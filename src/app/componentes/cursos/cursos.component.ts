@@ -8,32 +8,31 @@ import { Multimedia } from '../../interfaces/multimedia';
   templateUrl: './cursos.component.html',
   styleUrl: './cursos.component.scss'
 })
-export class CursosComponent implements OnInit {
+export class CursosComponent implements OnInit{
+  
+  videos: Multimedia[] = [];
 
   publicaciones: Publicacion[] = [];
 
-  constructor(private videoService: VideoService) { }
+  constructor(private servicio: VideoService) { }
 
   ngOnInit(): void {
-    this.videoService.mostrarVideos().subscribe({
-      next: (videos: Multimedia[]) => {
-        // Transformamos cada objeto Multimedia en una Publicacion
-        this.publicaciones = videos.map(video => ({
-          titulo: video.titulo, // Puedes personalizar este texto
-          multimedia: [video], // Se incluye el video o imagen
-          likes: 0,
-          comentarios: [],
-          mostrarInputComentario: false,
-          nuevoComentario: '',
-          liked: false
-        }));
-      },
-      error: (err) => {
-        console.error("Error cargando videos", err);
-      }
-    });
+    // this.servicio.mostrarVideos().subscribe({
+    //   next:(videos)=>{
+    //     this.publicaciones = videos.map(v=>({
+    //       titulo:v.titulo,
+    //       multimedia:[v],
+    //       likes:0,
+    //       comentarios:[],
+    //       mostrarInputComentario: false,
+    //       nuevoComentario: '',
+    //       liked: false
+    //     }));
+    //   },error: (err) => {
+    //     console.error("Error cargando videos", err);
+    //   }
+    // })
   }
-
 
   filtros: string[] = ['Temática', 'Terapeuta', 'Valoración', 'Duración', 'Más nuevos', 'Nombre'];
 }

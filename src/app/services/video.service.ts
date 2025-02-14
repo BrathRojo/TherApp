@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Multimedia } from '../interfaces/multimedia';
+<<<<<<< HEAD
 import { Publicacion } from '../interfaces/publicacion';
+=======
+>>>>>>> 12b8aeb (implementando cosas de los videos)
 
 @Injectable({
   providedIn: 'root'
