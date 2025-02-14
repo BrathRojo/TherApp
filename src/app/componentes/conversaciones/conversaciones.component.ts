@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-conversaciones',
@@ -8,12 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ConversacionesComponent implements OnInit {
 
-  constructor(private routes: ActivatedRoute) {}
+  constructor(private routes: ActivatedRoute, private usuarioService: UsuarioService) {}
 
   conversaciones = [
-    { id: 1, nombre: 'didier' },
-    { id: 2, nombre: 'miguel' },
-    { id: 3, nombre: 'lorensou' },
+    { id: 1, nombre: 'didier', foto: 'assets/ejemplo.jpg' },
+    { id: 2, nombre: 'miguel', foto: 'assets/default.png' },
+    { id: 3, nombre: 'lorensou', foto: 'assets/default.png' },
     // Agrega más conversaciones según sea necesario
   ];
 
@@ -24,6 +25,12 @@ export class ConversacionesComponent implements OnInit {
     this.routes.params.subscribe(params => {
       this.userId = params['usuarioId'] || 0;
     });
+
+    this.usuarioService.getConversaciones(this.userId).subscribe(
+      (data) => {
+        this.conversaciones = data;
+      }
+    );
   }
 
   seleccionarConversacion(conversacion: any): void {
