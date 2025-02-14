@@ -30,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ConversacionesComponent } from './componentes/conversaciones/conversaciones.component';
+import { AgregarPublicacionComponent } from './componentes/agregar-publicacion/agregar-publicacion.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ConversacionesComponent } from './componentes/conversaciones/conversaci
     LoginComponent,
     HeadersinbotonesComponent,
     ConversacionesComponent,
+    AgregarPublicacionComponent,
   ],
   imports: [
     HttpClientModule,

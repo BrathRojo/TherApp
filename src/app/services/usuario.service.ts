@@ -23,4 +23,8 @@ export class UsuarioService {
   getNombreUsuario(): Observable<{ nombre: string }> {
     return this.http.get<{ nombre: string }>(this.apiUrl);
   }
+
+  getConversaciones(usuarioId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/conversaciones/${usuarioId}`);
+  }
 }
