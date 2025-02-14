@@ -7,6 +7,6 @@
       </div>
     </section>
       <app-barrabusqueda [datos]="filtros"></app-barrabusqueda>
-      <app-publicacion></app-publicacion>
+      <app-publicacion *ngFor="let publicacion of publicaciones" [publicacion]="publicacion"></app-publicacion>
   </main>
 <app-footer></app-footer>
