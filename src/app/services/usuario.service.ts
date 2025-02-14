@@ -36,4 +36,8 @@ export class UsuarioService {
   getConversaciones(usuarioId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/conversaciones/${usuarioId}`);
   }
+
+  getConversaciones(usuarioId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/conversaciones/${usuarioId}`);
+  }
 }
