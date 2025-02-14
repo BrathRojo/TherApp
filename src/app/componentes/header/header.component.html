@@ -59,6 +59,18 @@
           </li>
         </ul>
       </div>
+      <div class="search-container">
+        <input type="text" placeholder="Buscar usuarios..." (input)="onSearch($event)">
+        <button (click)="buscarUsuarios()">Buscar</button>
+        <div *ngIf="resultadosBusqueda.length > 0" class="search-results">
+          <ul>
+            <li *ngFor="let usuario of resultadosBusqueda" (click)="verPerfil(usuario.username)">
+              <img [src]="usuario.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+              <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </nav>
 </header>

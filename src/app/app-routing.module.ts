@@ -10,6 +10,7 @@ import { CursosComponent } from './componentes/cursos/cursos.component';
 import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { ConversacionesComponent } from './componentes/conversaciones/conversaciones.component';
+import { ResultadosBusquedaComponent } from './componentes/resultados-busqueda/resultados-busqueda.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'cambioCuenta/:modo', component: FormularioCuentaComponent },
   { path: 'login', component: LoginComponent},
   { path: 'validacion', component: RegistroComponent },
+  { path: 'resultados-busqueda', component: ResultadosBusquedaComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

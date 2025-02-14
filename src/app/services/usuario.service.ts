@@ -22,6 +22,15 @@ export class UsuarioService {
 
   getNombreUsuario(): Observable<{ nombre: string }> {
     return this.http.get<{ nombre: string }>(this.apiUrl);
+ 
+  }
+
+  buscarUsuarios(query: string): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/buscar?query=${query}`);
+  }
+
+  obtenerSeguidoresComunes(usuarioId: number, buscadoId: number): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/seguidores-comunes?usuarioId=${usuarioId}&buscadoId=${buscadoId}`);
   }
 
   getUsuarioById(id: number): Observable<Usuario> {

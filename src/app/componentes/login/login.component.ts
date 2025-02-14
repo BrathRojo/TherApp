@@ -30,8 +30,9 @@ export class LoginComponent {
           this.auth.login(usuario.usuEmailTlf, usuario.clave).subscribe(
             response => {
               console.log('Sesión iniciada', response);
-              // Almacenar el token en localStorage
+              // Almacenar el token y el ID en localStorage
               localStorage.setItem('authToken', response.token);
+              localStorage.setItem('usuarioId', response.id); // Guardar el ID del usuario
               // Redirigir al usuario a la página de inicio
               this.router.navigate(['/home']);
             },

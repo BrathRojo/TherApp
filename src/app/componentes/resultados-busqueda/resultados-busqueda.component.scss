@@ -1,0 +1,31 @@
+.resultados-busqueda-container {
+  padding: 20px;
+}
+
+.usuario-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.foto-perfil {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.usuario-info {
+  h3 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+  }
+}
