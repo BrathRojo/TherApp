@@ -1,16 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Card } from '../../interfaces/card';
+import { TerapeutaService } from '../../services/terapeuta.service';
+import { terapeutaMostrable } from '../../interfaces/terapeutaMostrable';
 
 @Component({
   selector: 'app-carruselvertical',
   templateUrl: './carruselvertical.component.html',
   styleUrl: './carruselvertical.component.scss'
 })
-export class CarruselverticalComponent {
+export class CarruselverticalComponent implements OnInit{
 
-  cards:Card[] = [
-      {foto:"assets/terapeuta1.jpg", titulo:"Nombre de persona", texto:"Datos específicos de la persona", precio:50, enlace:"/"}, 
-      {foto:"assets/terapeuta2.jpg", titulo:"Nombre de persona 2", texto:"Datos de la persona 2", precio:200, enlace:"/"}, 
-      {foto:"assets/terapeuta3.jpg", titulo:"Nombre de persona 3", texto:"Datos de la persona 3", precio:-1, enlace:"/"},
-      {foto:"assets/terapeuta1.jpg", titulo:"Nombre de persona", texto:"Datos específicos de la persona", precio:50, enlace:"/"}];
+ terapeutas: terapeutaMostrable[] = [];
+   cards: Card[] = [];
+ 
+   @Input() datos: Card[] = [];
+   @Output() datosActualizados = new EventEmitter<Card[]>(); // Notifica al padre
+ 
+   constructor(private servicio: TerapeutaService) { }
+ 
+   ngOnInit(): void {
+     this.servicio.getTerapeutasParaMostrar().subscribe({
+       next:(datos)=>{
+           this.datos = datos.map(t => ({
+           titulo: `${t.nombre} ${t.apellidos}`,
+           foto: t.foto,
+           texto: `Especialidad: ${t.especialidad} - Experiencia: ${t.experiencia}`,
+           precio: t.precio,
+           enlace: "/"
+         }));
+ 
+         this.datosActualizados.emit(this.datos);
+       }
+         })
+   }
+
+   dividirEnGrupos(array: any[], tamanoGrupo: number): any[][] {
+    const grupos = [];
+    for (let i = 0; i < array.length; i += tamanoGrupo) {
+      grupos.push(array.slice(i, i + tamanoGrupo));
+    }
+    return grupos;
+  }
 }

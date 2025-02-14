@@ -1,18 +1,8 @@
 <div id="carouselExample" class="carousel slide mb-5">
   <div class="carousel-inner">
-    <!-- Item 1 -->
-    <div class="carousel-item active">
+    <div *ngFor="let grupo of dividirEnGrupos(datos, 4); let i = index" class="carousel-item" [class.active]="i === 0">
       <div class="d-flex justify-content-center gap-3">
-        <div *ngFor="let card of cards">
-          <app-verticalcard [datos]="card"></app-verticalcard>
-        </div>
-      </div>
-    </div>
-
-    <!-- Item 2 -->
-    <div class="carousel-item">
-      <div class="d-flex justify-content-center gap-3">
-        <div *ngFor="let card of cards">
+        <div *ngFor="let card of grupo">
           <app-verticalcard [datos]="card"></app-verticalcard>
         </div>
       </div>
@@ -29,3 +19,4 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+

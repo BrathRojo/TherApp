@@ -10,6 +10,7 @@ interface Comentario {
   texto: string;
   likes: number;
   liked: boolean;
+  mostrarCompleto?: boolean;
   usuario: {
     nombre: string;
     fotoPerfil: string;
@@ -97,14 +98,16 @@ export class PublicacionComponent {
   }
 
   comentar() {
+
     if (this.selectedPublicacion && this.selectedPublicacion.nuevoComentario.trim()) {
       this.selectedPublicacion.comentarios.push({
         texto: this.selectedPublicacion.nuevoComentario,
         likes: 0,
         liked: false,
+        mostrarCompleto: false, // 👈 Se agrega aquí
         usuario: {
-          nombre: 'Usuario Ejemplo', // Puedes cambiar esto por el nombre del usuario actual
-          fotoPerfil: 'https://via.placeholder.com/50' // Puedes cambiar esto por la URL de la foto de perfil del usuario actual
+          nombre: 'Usuario Ejemplo', // Cambiar por el usuario actual
+          fotoPerfil: 'https://via.placeholder.com/50' // Cambiar por la foto del usuario
         }
       });
       this.selectedPublicacion.nuevoComentario = '';

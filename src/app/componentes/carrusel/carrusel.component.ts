@@ -1,18 +1,37 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Card } from '../../interfaces/card';
+import { TerapeutaService } from '../../services/terapeuta.service';
+import { terapeutaMostrable } from '../../interfaces/terapeutaMostrable';
 
 @Component({
   selector: 'app-carrusel',
   templateUrl: './carrusel.component.html',
   styleUrl: './carrusel.component.scss'
 })
-export class CarruselComponent {
+export class CarruselComponent implements OnInit {
 
-  cards:Card[] = [
-    {foto:"assets/terapeuta1.jpg", titulo:"Manolo Pérez", texto:"Psicólogo con más de 20 años de experiencia en clínicas especializadas en TCAs<br>Especialista en EMDR y mindfullness<br>Formación actualizada y constante ", precio:50, enlace:"/"}, 
-    {foto:"assets/terapeuta2.jpg", titulo:"Nombre de persona 2", texto:"Datos de la persona 2", precio:200, enlace:"/"}, 
-    {foto:"assets/terapeuta3.jpg", titulo:"Nombre de persona 3", texto:"Datos de la persona 3", precio:-1, enlace:"/"}];
+  terapeutas: terapeutaMostrable[] = [];
+  cards: Card[] = [];
 
-    @Input() datos: Card[] = [];
+  @Input() datos: Card[] = [];
+  @Output() datosActualizados = new EventEmitter<Card[]>(); // Notifica al padre
 
-}
+  constructor(private servicio: TerapeutaService) { }
+
+  ngOnInit(): void {
+    this.servicio.getTerapeutasParaMostrar().subscribe({
+      next:(datos)=>{
+          this.datos = datos.map(t => ({
+          titulo: `${t.nombre} ${t.apellidos}`,
+          foto: t.foto,
+          texto: `Especialidad: ${t.especialidad} - Experiencia: ${t.experiencia}`,
+          precio: t.precio,
+          enlace: "/"
+        }));
+
+        this.datosActualizados.emit(this.datos);
+      }
+        })
+  }
+    }
+ 

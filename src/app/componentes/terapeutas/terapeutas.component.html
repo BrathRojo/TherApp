@@ -1,7 +1,7 @@
 <app-header></app-header>
 <app-barrabusqueda [datos]="filtros"></app-barrabusqueda>
 <h1>¡Nuestros terapeutas premium!</h1>
-<app-carrusel></app-carrusel>
+<app-carrusel [datos]="misDatos" (datosActualizados)="actualizarDatos($event)"></app-carrusel>
 <h2>¡Los más recomendados!</h2>
 <app-carruselvertical></app-carruselvertical>
 <app-footer></app-footer>

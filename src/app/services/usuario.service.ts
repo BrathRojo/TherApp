@@ -32,4 +32,8 @@ export class UsuarioService {
   obtenerSeguidoresComunes(usuarioId: number, buscadoId: number): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/seguidores-comunes?usuarioId=${usuarioId}&buscadoId=${buscadoId}`);
   }
+
+  getUsuarioById(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
+  }
 }
