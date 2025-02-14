@@ -6,6 +6,7 @@
     <ul>
       <li *ngFor="let conversacion of conversaciones" (click)="seleccionarConversacion(conversacion)">
         {{ conversacion.nombre }}
+        <img [src]="conversacion.foto" alt="foto de usuario {{ conversacion.id }}">
       </li>
     </ul>
   </div>
