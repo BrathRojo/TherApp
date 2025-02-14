@@ -1,31 +1,8 @@
 import { Component } from '@angular/core';
 import * as bootstrap from 'bootstrap';
+import { Publicacion } from '../../interfaces/publicacion';
+import { Comentario } from '../../interfaces/comentario';
 
-interface Multimedia {
-  tipo: 'imagen' | 'video';
-  url: string;
-}
-
-interface Comentario {
-  texto: string;
-  likes: number;
-  liked: boolean;
-  mostrarCompleto?: boolean;
-  usuario: {
-    nombre: string;
-    fotoPerfil: string;
-  };
-}
-
-interface Publicacion {
-  texto: string;
-  multimedia: Multimedia[];
-  likes: number;
-  comentarios: Comentario[];
-  mostrarInputComentario: boolean;
-  nuevoComentario: string;
-  liked: boolean;
-}
 
 @Component({
   selector: 'app-publicacion',
