@@ -20,14 +20,16 @@ export class CarruselverticalComponent implements OnInit{
  
    ngOnInit(): void {
      this.servicio.getTerapeutasParaMostrar().subscribe({
-       next:(datos)=>{
-           this.datos = datos.map(t => ({
-           titulo: `${t.nombre} ${t.apellidos}`,
-           foto: t.foto,
-           texto: `Especialidad: ${t.especialidad} - Experiencia: ${t.experiencia}`,
-           precio: t.precio,
-           enlace: "/"
-         }));
+      next:(datos)=>{
+        this.datos = datos
+        .filter(t => !t.premium) // Filtramos los que tengan premium = true
+        .map(t => ({
+          titulo: `${t.nombre} ${t.apellidos}`,
+          foto: t.foto,
+          texto: `Especialidad: ${t.especialidad} - Experiencia: ${t.experiencia}`,
+          precio: t.precio,
+          enlace: "/"
+        }));
  
          this.datosActualizados.emit(this.datos);
        }

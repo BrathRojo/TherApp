@@ -21,7 +21,9 @@ export class CarruselComponent implements OnInit {
   ngOnInit(): void {
     this.servicio.getTerapeutasParaMostrar().subscribe({
       next:(datos)=>{
-          this.datos = datos.map(t => ({
+        this.datos = datos
+        .filter(t => t.premium) // Filtramos los que tengan premium = true
+        .map(t => ({
           titulo: `${t.nombre} ${t.apellidos}`,
           foto: t.foto,
           texto: `Especialidad: ${t.especialidad} - Experiencia: ${t.experiencia}`,
