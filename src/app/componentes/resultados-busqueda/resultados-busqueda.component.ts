@@ -43,7 +43,7 @@ export class ResultadosBusquedaComponent implements OnInit {
   }
 
   obtenerSeguidoresComunes(buscadoId: number): void {
-    const usuarioId = 1; // Reemplaza con el ID del usuario autenticado
+    const usuarioId = Number(localStorage.getItem('usuarioId'));
     this.usuarioService.obtenerSeguidoresComunes(usuarioId, buscadoId).subscribe({
       next: (seguidores: Usuario[]) => {
         this.seguidoresComunes[buscadoId] = seguidores;
