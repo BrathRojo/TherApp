@@ -11,6 +11,6 @@
     </ul>
   </div>
   <div class="chat-container">
-    <app-chat [usuarioId]="userId" [receptorId]="conversacionId"></app-chat>
+    <app-chat [usuarioId]="userId" [receptorId]="selectedConversacion?.id || 0"></app-chat>
   </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UsuarioService } from '../../services/usuario.service';
+import { ChatService } from '../../services/chat.service'; // Importa el servicio de chat
+import { Usuario } from '../../interfaces/usuario'; // Importa el modelo de Usuario
 
 @Component({
   selector: 'app-conversaciones',
@@ -8,33 +9,31 @@ import { UsuarioService } from '../../services/usuario.service';
   styleUrls: ['./conversaciones.component.scss']
 })
 export class ConversacionesComponent implements OnInit {
-
-  constructor(private routes: ActivatedRoute, private usuarioService: UsuarioService) {}
-
-  conversaciones = [
-    { id: 1, nombre: 'didier', foto: 'assets/ejemplo.jpg' },
-    { id: 2, nombre: 'miguel', foto: 'assets/default.png' },
-    { id: 3, nombre: 'lorensou', foto: 'assets/default.png' },
-    // Agrega más conversaciones según sea necesario
-  ];
-
   userId: number = 0;
-  conversacionId: number = this.conversaciones[0].id;
+  conversaciones: Usuario[] = [];
+  selectedConversacion?: Usuario;
+
+  constructor(private route: ActivatedRoute, private chatService: ChatService) {}
 
   ngOnInit(): void {
-    this.routes.params.subscribe(params => {
-      this.userId = params['usuarioId'] || 0;
-    });
-
-    this.usuarioService.getConversaciones(this.userId).subscribe(
-      (data) => {
-        this.conversaciones = data;
-      }
-    );
+    this.userId = Number(localStorage.getItem('usuarioId'));
+    if (this.userId > 0) {
+      this.cargarConversaciones();
+    }
   }
 
-  seleccionarConversacion(conversacion: any): void {
-    this.conversacionId = conversacion.id;
-    console.log('Conversación seleccionada:', this.userId, this.conversacionId);
+  cargarConversaciones(): void {
+    this.chatService.obtenerConversaciones(this.userId).subscribe({
+      next: (conversaciones) => {
+        this.conversaciones = conversaciones;
+      },
+      error: (error) => {
+        console.error('Error al cargar las conversaciones:', error);
+      }
+    });
+  }
+
+  seleccionarConversacion(conversacion: Usuario): void {
+    this.selectedConversacion = conversacion;
   }
 }
