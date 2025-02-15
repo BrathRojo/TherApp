@@ -1,8 +1,8 @@
 .footer {
-    background-color:  rgb(7, 76, 131); // Color de fondo oscuro elegante
-    color: #ffffff; // Texto en blanco para buen contraste
-    padding: 1.5rem 0; // Espaciado superior e inferior
-    text-align: center; // Centra el texto
+    background-color:  rgb(7, 76, 131);
+    color: #ffffff;
+    padding: 1.5rem 0;
+    text-align: center;
   
     .container {
       max-width: 1200px;
@@ -11,18 +11,18 @@
     }
   
     p {
-      margin: 0.5rem 0; // Espacio entre los párrafos
-      font-size: 1rem; // Tamaño de texto moderado
+      margin: 0.5rem 0;
+      font-size: 1rem;
     }
   
     a {
-      color: #f39c12; // Naranja vibrante para los enlaces
+      color: #f39c12;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease;
   
       &:hover {
-        color: #e67e22; // Un tono más oscuro en hover
+        color: #e67e22;
       }
     }
   }
