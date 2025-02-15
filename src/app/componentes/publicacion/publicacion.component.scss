@@ -1,59 +1,105 @@
-.card-header {
-    background-color: #f8f9fa; /* Color de fondo suave */
-    padding: 10px 15px;
-    border-bottom: 1px solid #ddd;
+/* publicacion.component.scss */
+
+/* Envoltorio global de todas tus publicaciones */
+.publicaciones-wrapper {
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 800px;
+    background-color: #f9fafc; /* Fondo suave, similar a inicio */
+    color: #404040;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    /* text-align: center; // solo si quieres centrar el texto global */
   }
   
-  .card-header img {
-    border: 2px solid #ddd; /* Borde alrededor de la foto */
+  /* Cada publicación (card) */
+  .publicacion-card {
+    background-color: #fff;
+    border: none; 
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    position: relative;
+    padding: 1rem 1.5rem;
+  
+    display: flex; 
+    justify-content: space-between;
+    align-items: flex-start;
+  
+    /* Texto principal de la publicación */
+    p {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
+    }
+  
+    /* Iconos (like, comentarios) */
+    .d-flex.align-items-center.mt-2 {
+      font-size: 1rem;
+  
+      i {
+        cursor: pointer;
+        margin-right: 0.3rem;
+  
+        &:hover {
+          color: #2980b9; /* Azul más oscuro en hover */
+        }
+  
+        /* Focus visible */
+        &:focus {
+          outline: 3px dashed #2980b9;
+          outline-offset: 2px;
+        }
+      }
+    }
+  
+    /* Botón de 3 puntos (menú) */
+    .bi.bi-three-dots {
+      cursor: pointer;
+      border: 1px solid transparent; /* Evita salto al hover */
+  
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+  
+      &:focus {
+        outline: 3px dashed #2980b9;
+        outline-offset: 2px;
+      }
+    }
+  
+    /* Menú desplegable de opciones */
+    .opciones {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      position: absolute;
+      top: 2.5rem; /* Un poco debajo del ícono */
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.3rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      z-index: 10;
+  
+      p {
+        margin: 0.3rem 0;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+    }
   }
   
-//   .opciones {
-//     position: absolute;
-//     top: 35px;
-//     right: 10px;
-//     background: white;
-//     border: 1px solid #ccc;
-//     padding: 10px;
-//     border-radius: 5px;
-//     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-//   }
-
-.comentarios-container {
-  max-height: 400px;  /* Altura máxima antes de hacer scroll */
-  overflow-y: auto;   /* Solo scroll vertical */
-  padding-right: 10px;
-}
-
-.comentario-texto {
-  word-wrap: break-word;  /* Rompe las palabras largas */
-  white-space: normal;    /* Asegura que el texto fluya bien */
-  max-width: 100%;        /* Evita que se salga del contenedor */
-}
-
-.comentario-corto {
-  max-height: 3.5em;  /* Muestra solo 2-3 líneas */
-  overflow: hidden;
-}
-
-.comentario-largo {
-  max-height: none;  /* Muestra todo el comentario */
-}
-
-.btn-link {
-  font-size: 14px;
-  text-decoration: none;
-  color: #007bff;
-}
-
-.btn-link:hover {
-  text-decoration: underline;
-}
-
-.comentario-likes {
-  cursor: pointer;
-}
-
-.comentario-likes i:hover {
-  color: #007bff;
-}
+  /* Carrusel (opcional si quieres personalizar un poco) */
+  .carousel-inner {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    img, video {
+      /* Mantén 100% ancho, altura auto */
+      width: 100%;
+      height: auto;
+    }
+  }
+  

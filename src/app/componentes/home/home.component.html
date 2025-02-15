@@ -1,6 +1,25 @@
+<!-- home.component.html -->
 <app-header></app-header>
-    <main class="m-5">
-      <app-carrusel></app-carrusel>
-      <app-publicacion></app-publicacion>
-    </main>
+
+<main class="home-container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Los mejores profesionales para tu salud mental</h1>
+      <p>Contacta con ellos y déjate ayudar</p>
+      <a href="#terapeutas" class="btn">Empieza a buscar</a>
+    </div>
+  </section>
+
+  <!-- Carrusel de terapeutas -->
+  <section id="terapeutas" class="carousel-section">
+    <app-carrusel></app-carrusel>
+  </section>
+
+  <!-- Publicaciones -->
+  <section class="publicaciones-section">
+    <app-publicacion></app-publicacion>
+  </section>
+</main>
+
 <app-footer></app-footer>
