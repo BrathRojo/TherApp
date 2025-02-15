@@ -1,0 +1,60 @@
+// Estilos generales del carrusel
+.carousel-inner {
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  // Tarjeta dentro del carrusel
+  .card {
+    display: flex;
+    align-items: center;
+    border-radius: 15px; // Bordes redondeados
+    overflow: hidden; // Asegura que la imagen no sobresalga
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    .card-img-container {
+      width: 180px; // Tamaño de la imagen
+      height: 180px;
+      overflow: hidden;
+      border-radius: 15px 0 0 15px; // Redondea solo la parte izquierda
+      flex-shrink: 0; // Evita que se deforme al cambiar el tamaño del contenedor
+    }
+  
+    .card-img-left {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // Mantiene proporciones sin distorsión
+    }
+  
+    .card-body {
+      flex-grow: 1;
+      padding: 1rem;
+      
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+  
+      p {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+    }
+  }
+  
+  // Mejorar visibilidad de botones de navegación
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 8%;
+    opacity: 1; // Asegura que sean visibles
+    filter: invert(1); // Hace que los íconos sean visibles en fondos oscuros
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    padding: 20px;
+  }
+  
