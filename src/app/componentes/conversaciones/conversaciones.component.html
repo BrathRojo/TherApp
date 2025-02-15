@@ -3,10 +3,13 @@
 <div class="conversaciones-container">
   <div class="sidebar">
     <h3>Conversaciones</h3>
+    <div class="search-container">
+      <input type="text" placeholder="Buscar usuarios..." (input)="onSearch($event)">
+    </div>
     <ul>
-      <li *ngFor="let conversacion of conversaciones" (click)="seleccionarConversacion(conversacion)">
-        {{ conversacion.nombre }}
-        <img [src]="conversacion.foto" alt="foto de usuario {{ conversacion.id }}">
+      <li *ngFor="let conversacion of conversacionesFiltradas" (click)="abrirConversacion(conversacion)">
+        <img [src]="conversacion.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+        <span>{{ conversacion.username }} - {{ conversacion.nombre }}</span>
       </li>
     </ul>
   </div>
