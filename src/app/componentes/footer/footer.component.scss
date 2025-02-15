@@ -1,4 +1,29 @@
-* {
-    padding: .2em 0;
-    margin: 0;
-}
+.footer {
+    background-color:  rgb(7, 76, 131); // Color de fondo oscuro elegante
+    color: #ffffff; // Texto en blanco para buen contraste
+    padding: 1.5rem 0; // Espaciado superior e inferior
+    text-align: center; // Centra el texto
+  
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 1rem;
+    }
+  
+    p {
+      margin: 0.5rem 0; // Espacio entre los párrafos
+      font-size: 1rem; // Tamaño de texto moderado
+    }
+  
+    a {
+      color: #f39c12; // Naranja vibrante para los enlaces
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+  
+      &:hover {
+        color: #e67e22; // Un tono más oscuro en hover
+      }
+    }
+  }
+  
