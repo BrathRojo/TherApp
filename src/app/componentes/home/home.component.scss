@@ -1,17 +1,20 @@
+/* home.component.scss */
+
 /* Contenedor principal de la página Home */
 .home-container {
+  /* Padding general para dar aire */
   padding: 0;
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 100%; /* O un ancho fijo si lo deseas */
 
-  //esta linea si queremos un fondo gris claro
-  // background-color: #f9fafc;
-
+  background-color: #f9fafc;
+  
 }
 
+/* Sección Hero con una imagen de fondo */
 .hero {
   position: relative;
-  height: 100vh;
+  height: 100vh;                /* Ocupa todo el alto de la ventana */
   background-image: url('/assets/herosection.jpg');
   background-size: cover;
   background-position: center;
@@ -22,6 +25,7 @@
   text-align: center;
   overflow: hidden;
 
+  /* Oscurece la imagen un poco con un after */
   &::after {
     content: "";
     position: absolute;
@@ -33,6 +37,7 @@
     z-index: 1;
   }
 
+  /* Contenido, para que esté por encima del overlay */
   .hero-content {
     position: relative;
     z-index: 2;
@@ -51,6 +56,7 @@
       line-height: 1.6;
     }
 
+    /* Botón estilo minimal */
     .btn {
       display: inline-block;
       padding: 10px 20px;
@@ -76,15 +82,21 @@
 
 /* Sección para el carrusel de terapeutas */
 .carousel-section {
+  /* Espaciado arriba-abajo */
   padding: 2rem 1rem;
+
+  /* Opcional: estilizar tu app-carrusel 
+     si necesitas anidar más SCSS, hazlo aquí */
   app-carrusel {
+    /* Un ejemplo: centrar */
     margin: 0 auto;
     max-width: 960px;
   }
 }
 
-/* Sección publicaciones */
+/* Sección publicaciones 
+   (ya tienes .publicaciones-wrapper y .publicacion-card en publicacion.component.scss) */
 .publicaciones-section {
   margin: 2rem auto;
-  max-width: 1000px;
+  max-width: 1000px; /* Ajusta si gustas */
 }
