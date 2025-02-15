@@ -15,6 +15,7 @@ export class ConversacionesComponent implements OnInit {
   userId: number = 0;
   conversaciones: Usuario[] = [];
   conversacionesFiltradas: Usuario[] = [];
+  usuariosSeguidosSinConversacion: Usuario[] = [];
   selectedConversacion?: Usuario;
   searchQuery: string = '';
   private searchTerms = new Subject<string>();
@@ -30,6 +31,7 @@ export class ConversacionesComponent implements OnInit {
     this.userId = Number(localStorage.getItem('usuarioId'));
     if (this.userId > 0) {
       this.cargarConversaciones();
+      this.cargarUsuariosSeguidosSinConversacion();
     }
 
     this.searchTerms.pipe(
@@ -54,6 +56,17 @@ export class ConversacionesComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cargar las conversaciones:', error);
+      }
+    });
+  }
+
+  cargarUsuariosSeguidosSinConversacion(): void {
+    this.usuarioService.obtenerUsuariosSeguidosSinConversacion(this.userId).subscribe({
+      next: (usuarios) => {
+        this.usuariosSeguidosSinConversacion = usuarios;
+      },
+      error: (error) => {
+        console.error('Error al cargar los usuarios seguidos sin conversación:', error);
       }
     });
   }
