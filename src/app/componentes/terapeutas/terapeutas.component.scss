@@ -1,0 +1,125 @@
+/* Contenedor principal */
+.terapeutas-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem 1rem;
+  }
+  
+  /* Hero Section */
+  .hero {
+    position: relative;
+    height: 40vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('/assets/terapeutas-banner.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+  
+    .hero-content {
+      max-width: 70vw;
+      padding: 1rem;
+  
+      h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+  
+      p {
+        font-size: 1.3rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+  
+  /* Barra de búsqueda */
+  .busqueda-section {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+  
+  /* Secciones de terapeutas */
+  .terapeutas-premium,
+  .terapeutas-recomendados {
+    text-align: center;
+    margin-bottom: 3rem;
+  
+    h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+  }
+  
+  /* Estilo para los carruseles */
+  .carousel {
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+  }
+  
+  /* Ajustes en las tarjetas de terapeutas */
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .card-img-top {
+    height: 220px;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  
+    h5 {
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+  
+    p {
+      font-size: 1rem;
+      color: #666;
+    }
+  
+    .btn {
+      margin-top: 0.5rem;
+      background-color: #007bff;
+      color: white;
+      transition: background 0.3s;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      height: 35vh;
+    }
+  
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+  
+    .busqueda-section {
+      padding: 1rem;
+    }
+  
+    .card {
+      margin-bottom: 1.5rem;
+    }
+  }
+  

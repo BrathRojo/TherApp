@@ -6,7 +6,7 @@
 
 @import "../node_modules/bootstrap/scss/_functions.scss";
 
-$font-size-base: 2rem;
+$font-size-base: 1rem;
 $border-radius: 1.5rem;
 
 @import "../node_modules/bootstrap/scss/_variables.scss";
@@ -65,3 +65,75 @@ $theme-colors: map.merge($theme-colors, $custom-colors);
 @import "../node_modules/bootstrap/scss/utilities/_api.scss";
 // scss-docs-end import-stack
 
+// ===========================
+// EJEMPLOS DE SASS
+// ===========================
+
+// 1) FUNCIONES CUSTOM
+// Ejemplo: oscurece un poco el color si su "lightness" es alta
+@function darkenIfBright($color, $percentage: 10%) {
+    @if (lightness($color) > 50%) {
+      @return darken($color, $percentage);
+    } @else {
+      @return $color;
+    }
+  }
+  
+  // 2) MIXIN
+  // Mixin para estilos de encabezados, reutilizable en banners, secciones, etc.
+  @mixin heading-style($size, $color, $weight: 600) {
+    font-size: $size;
+    color: $color;
+    font-weight: $weight;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  // 3) NESTING
+  // Un ejemplo de bloque "banner" con estilos anidados
+  .banner {
+    background-color: map-get($custom-colors, "fondos");
+    color: map-get($custom-colors, "boton");
+    padding: 2rem;
+    text-align: center;
+  
+    .banner-title {
+      @include heading-style(2rem, map-get($custom-colors, "main"));
+      // Podrías extender (inherit) estilos de .h2 de Bootstrap, p.ej:
+      @extend .h2;  
+    }
+  
+    .banner-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      // Ejemplo de usar la función:
+      color: darkenIfBright(map-get($custom-colors, "main"), 5%);
+    }
+  
+    .banner-cta {
+      @extend .btn;            // Usar estilos de Bootstrap .btn
+      @extend .btn-primary;    // Y mezclarlos con .btn-primary
+      border-radius: 1rem;
+      padding: 0.75rem 1.5rem;
+    }
+  }
+  
+  // 4) CONTROL FLOW STATEMENTS
+  // Generar 3 clases con colores distintos según nivel
+  @for $i from 1 through 3 {
+    .alert-level-#{$i} {
+      @if $i == 1 {
+        background-color: map-get($custom-colors, "main");
+      } @else if $i == 2 {
+        background-color: map-get($custom-colors, "fondos");
+      } @else {
+        background-color: map-get($custom-colors, "bordes");
+      }
+  
+      color: #fff;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0.5rem;
+    }
+  }
+  
