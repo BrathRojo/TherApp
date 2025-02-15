@@ -1,22 +1,26 @@
-<div class="inicio-container">
-    <header>
-      <h1>Bienvenido a TherApp</h1>
-      <p>Conectamos terapeutas y organizaciones con usuarios que necesitan ayuda profesional.</p>
-    </header>
-  
-    <section class="descripcion">
-      <h2>¿Cómo funciona?</h2>
-      <p>TherApp facilita el contacto entre terapeutas calificados y personas que buscan mejorar su bienestar.</p>
-      <ul>
-        <li>👩‍⚕️ Encuentra terapeutas profesionales.</li>
-        <li>🏢 Conéctate con organizaciones especializadas.</li>
-        <li>📅 Programa sesiones fácilmente.</li>
-      </ul>
-    </section>
-  
-    <div class="acciones">
-      <a routerLink="/registro" class="btn">Regístrate ahora</a>
-    </div>
+<div class="inicio">
+  <app-header></app-header>
+  <div class="inicio-container">
+      <header>
+        <h1>Bienvenido a TherApp</h1>
+        <p>Conectamos terapeutas y organizaciones con usuarios que necesitan ayuda profesional.</p>
+      </header>
+
+      <section class="descripcion">
+        <h2>¿Cómo funciona?</h2>
+        <p>TherApp facilita el contacto entre terapeutas calificados y personas que buscan mejorar su bienestar.</p>
+        <ul>
+          <li>👩‍⚕️ Encuentra terapeutas profesionales.</li>
+          <li>🏢 Conéctate con organizaciones especializadas.</li>
+          <li>📅 Programa sesiones fácilmente.</li>
+        </ul>
+      </section>
+
+      <div class="acciones">
+        <a routerLink="/registro" class="btn">Regístrate ahora</a>
+        <a routerLink="/login" class="btn btn-secundario">Inicia sesión</a>
+      </div>
   </div>
 
-<app-publicacion></app-publicacion>
+  <app-publicacion></app-publicacion>
+</div>

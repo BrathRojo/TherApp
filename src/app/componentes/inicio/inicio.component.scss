@@ -1,62 +1,97 @@
 .inicio-container {
-    text-align: center;
-    padding: 2rem;
-    max-width: 800px;
-    margin: auto;
-  
-    header {
-      margin-bottom: 2rem;
-  
-      h1 {
-        font-size: 2.5rem;
-        color: #2c3e50;
-      }
-  
-      p {
-        font-size: 1.2rem;
-        color: #555;
-      }
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 800px;
+  background-color: #f9fafc;
+  color: #404040;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  text-align: center;
+
+  header {
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
     }
-  
-    .descripcion {
-      text-align: left;
-      margin-bottom: 2rem;
-  
-      h2 {
-        color: #2c3e50;
-      }
-  
-      p {
-        font-size: 1.1rem;
-        color: #333;
-      }
-  
-      ul {
-        list-style: none;
-        padding: 0;
-  
-        li {
-          font-size: 1rem;
-          margin: 0.5rem 0;
-        }
-      }
+
+    p {
+      font-size: 1.2rem;
+      color: #555;
     }
-  
-    .acciones {
-      .btn {
-        display: inline-block;
-        padding: 0.8rem 1.5rem;
-        font-size: 1.2rem;
-        color: white;
-        background: #3498db;
-        border-radius: 5px;
-        text-decoration: none;
-        transition: background 0.3s;
-  
-        &:hover {
-          background: #2980b9;
+  }
+
+  .descripcion {
+    text-align: left;
+    margin-bottom: 2rem;
+
+    h2 {
+      color: #2c3e50;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+        
+        &::before {
+          content: "•";
+          color: #3498db;
+          margin-right: 0.5rem;
         }
       }
     }
   }
-  
+
+  .acciones {
+    display: flex; /* Activa flexbox */
+    flex-direction: column; /* Alinea los botones en columna */
+    align-items: center; /* Centra horizontalmente */
+    gap: 1rem; /* Espacio entre los botones */
+
+    .btn {
+      display: block;
+      width: 80%; /* Hace que los botones sean más anchos pero no ocupen todo */
+      max-width: 300px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1.2rem;
+      color: #fff;
+      background: #3498db;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.3s;
+
+      &:hover {
+        background: #2980b9;
+      }
+
+      &:focus {
+        outline: 3px dashed #2980b9;
+        outline-offset: 2px;
+      }
+    }
+
+    .btn-secundario {
+      background: #95a5a6; /* Un gris suave */
+      
+      &:hover {
+        background: #7f8c8d;
+      }
+    }
+  }
+}

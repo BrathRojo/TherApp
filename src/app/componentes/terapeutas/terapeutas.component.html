@@ -1,7 +1,26 @@
-<app-header></app-header>
-<app-barrabusqueda [datos]="filtros"></app-barrabusqueda>
-<h1>¡Nuestros terapeutas premium!</h1>
-<app-carrusel></app-carrusel>
-<h2>¡Los más recomendados!</h2>
-<app-carruselvertical></app-carruselvertical>
+<app-header class="inicio"></app-header>
+
+<main class="terapeutas-container">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Encuentra el terapeuta ideal para ti</h1>
+      <p>Búscalo por especialidad, ubicación y/o valoración</p>
+    </div>
+  </section>
+
+  <section class="busqueda-section">
+    <app-barrabusqueda></app-barrabusqueda>
+  </section>
+
+  <section class="terapeutas-premium">
+    <h2>¡Nuestros terapeutas premium!</h2>
+    <app-carrusel></app-carrusel>
+  </section>
+
+  <section class="terapeutas-recomendados">
+    <h2>¡Los más recomendados!</h2>
+    <app-carruselvertical></app-carruselvertical>
+  </section>
+</main>
+
 <app-footer></app-footer>
