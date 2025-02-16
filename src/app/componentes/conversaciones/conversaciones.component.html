@@ -21,7 +21,7 @@
         </li>
       </ul>
     </ng-container>
-    <ng-container *ngIf="masEnTherAppFiltrados.length > 0">
+    <ng-container *ngIf="searchQuery.length > 0 && masEnTherAppFiltrados.length > 0">
       <h3>Más en TherApp</h3>
       <ul>
         <li *ngFor="let usuario of masEnTherAppFiltrados" (click)="abrirConversacion(usuario)">
