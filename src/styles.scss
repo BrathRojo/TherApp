@@ -9,14 +9,20 @@
 $font-size-base: 1rem;
 $border-radius: 1.5rem;
 
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$text-color: #333;
+$background-color: #f9f9f9;
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 @import "../node_modules/bootstrap/scss/_variables.scss";
 @import "../node_modules/bootstrap/scss/_variables-dark.scss";
 
 $custom-colors: (
-    "main":rgb(0, 217, 255),
-    "fondos": rgb(7, 76, 131),
-    "bordes":rgb(7, 76, 131),
-    "boton":rgb(255, 255, 255)
+    "main":#00d9ff,
+    "fondos": #074c83,
+    "bordes":#074c83,
+    "boton":#ffffff
 );
 
 $theme-colors: map.merge($theme-colors, $custom-colors);
