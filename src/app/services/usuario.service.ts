@@ -6,9 +6,8 @@ import { Usuario } from '../interfaces/usuario';
 @Injectable({
   providedIn: 'root'
 })
-
 export class UsuarioService {
-  private apiUrl = 'http://localhost:9000/api/usuarios'; // URL del backend
+  private apiUrl = 'http://localhost:9000/api/usuarios';
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +21,6 @@ export class UsuarioService {
 
   getNombreUsuario(): Observable<{ nombre: string }> {
     return this.http.get<{ nombre: string }>(this.apiUrl);
- 
   }
 
   buscarUsuarios(query: string): Observable<Usuario[]> {
@@ -35,5 +33,9 @@ export class UsuarioService {
 
   obtenerUsuariosSeguidosSinConversacion(usuarioId: number): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/seguidos-sin-conversacion?usuarioId=${usuarioId}`);
+  }
+
+  obtenerMasEnTherApp(usuarioId: number): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/mas-en-therapp?usuarioId=${usuarioId}`);
   }
 }

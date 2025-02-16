@@ -16,6 +16,9 @@ export class ConversacionesComponent implements OnInit {
   conversaciones: Usuario[] = [];
   conversacionesFiltradas: Usuario[] = [];
   usuariosSeguidosSinConversacion: Usuario[] = [];
+  usuariosSeguidosSinConversacionFiltrados: Usuario[] = [];
+  masEnTherApp: Usuario[] = [];
+  masEnTherAppFiltrados: Usuario[] = [];
   selectedConversacion?: Usuario;
   searchQuery: string = '';
   private searchTerms = new Subject<string>();
@@ -32,6 +35,7 @@ export class ConversacionesComponent implements OnInit {
     if (this.userId > 0) {
       this.cargarConversaciones();
       this.cargarUsuariosSeguidosSinConversacion();
+      this.cargarMasEnTherApp();
     }
 
     this.searchTerms.pipe(
@@ -40,7 +44,7 @@ export class ConversacionesComponent implements OnInit {
       switchMap((term: string) => term.length > 0 ? this.usuarioService.buscarUsuarios(term) : [])
     ).subscribe({
       next: (usuarios: Usuario[]) => {
-        this.conversacionesFiltradas = usuarios;
+        this.filtrarResultados(usuarios);
       },
       error: (error) => {
         console.error('Error al buscar usuarios:', error);
@@ -64,9 +68,22 @@ export class ConversacionesComponent implements OnInit {
     this.usuarioService.obtenerUsuariosSeguidosSinConversacion(this.userId).subscribe({
       next: (usuarios) => {
         this.usuariosSeguidosSinConversacion = usuarios;
+        this.usuariosSeguidosSinConversacionFiltrados = usuarios;
       },
       error: (error) => {
         console.error('Error al cargar los usuarios seguidos sin conversación:', error);
+      }
+    });
+  }
+
+  cargarMasEnTherApp(): void {
+    this.usuarioService.obtenerMasEnTherApp(this.userId).subscribe({
+      next: (usuarios) => {
+        this.masEnTherApp = usuarios;
+        this.masEnTherAppFiltrados = usuarios;
+      },
+      error: (error) => {
+        console.error('Error al cargar los usuarios de "Más en TherApp":', error);
       }
     });
   }
@@ -82,7 +99,26 @@ export class ConversacionesComponent implements OnInit {
       this.searchTerms.next(this.searchQuery);
     } else {
       this.conversacionesFiltradas = this.conversaciones;
+      this.usuariosSeguidosSinConversacionFiltrados = this.usuariosSeguidosSinConversacion;
+      this.masEnTherAppFiltrados = this.masEnTherApp;
     }
+  }
+
+  filtrarResultados(usuarios: Usuario[]): void {
+    this.conversacionesFiltradas = this.conversaciones.filter(conversacion =>
+      conversacion.username.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      conversacion.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+
+    this.usuariosSeguidosSinConversacionFiltrados = this.usuariosSeguidosSinConversacion.filter(usuario =>
+      usuario.username.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      usuario.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+
+    this.masEnTherAppFiltrados = usuarios.filter(usuario =>
+      !this.usuariosSeguidosSinConversacion.some(u => u.id === usuario.id) &&
+      !this.conversaciones.some(c => c.id === usuario.id)
+    );
   }
 
   abrirConversacion(usuario: Usuario): void {

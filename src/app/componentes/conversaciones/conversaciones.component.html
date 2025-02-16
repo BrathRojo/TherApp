@@ -12,13 +12,24 @@
         <span>{{ conversacion.username }} - {{ conversacion.nombre }}</span>
       </li>
     </ul>
-    <h3>Iniciar conversación</h3>
-    <ul>
-      <li *ngFor="let usuario of usuariosSeguidosSinConversacion" (click)="abrirConversacion(usuario)">
-        <img [src]="usuario.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
-        <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
-      </li>
-    </ul>
+    <ng-container *ngIf="usuariosSeguidosSinConversacionFiltrados.length > 0">
+      <h3>Iniciar conversación</h3>
+      <ul>
+        <li *ngFor="let usuario of usuariosSeguidosSinConversacionFiltrados" (click)="abrirConversacion(usuario)">
+          <img [src]="usuario.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+          <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="masEnTherAppFiltrados.length > 0">
+      <h3>Más en TherApp</h3>
+      <ul>
+        <li *ngFor="let usuario of masEnTherAppFiltrados" (click)="abrirConversacion(usuario)">
+          <img [src]="usuario.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+          <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
+        </li>
+      </ul>
+    </ng-container>
   </div>
   <div class="chat-container">
     <app-chat [usuarioId]="userId" [receptorId]="selectedConversacion?.id || 0"></app-chat>
