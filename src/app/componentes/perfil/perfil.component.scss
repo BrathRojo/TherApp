@@ -1,7 +1,4 @@
-$primary-color: #007bff;
-$text-color: #333;
-$background-color: #f9f9f9;
-$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+@import "../../../styles.scss";
 
 .profile-container {
   display: flex;
@@ -81,5 +78,50 @@ $box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   #fotoInput {
     display: none;
+  }
+}
+.account-buttons {
+  display: flex;
+  flex-direction: row; // Alinea los botones en fila
+  justify-content: center; // Los centra horizontalmente
+  align-items: center;
+  gap: 15px; // Espacio entre los botones
+
+  .btn-switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &.terapeuta {
+      background-color: $primary-color;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+
+    &.organizacion {
+      background-color: $secondary-color;
+
+      &:hover {
+        background-color: darken($secondary-color, 10%);
+      }
+    }
+
+    i {
+      margin-right: 8px;
+      font-size: 16px;
+    }
   }
 }
