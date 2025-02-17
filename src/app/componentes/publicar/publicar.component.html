@@ -1,0 +1,13 @@
+<div class="publicar-container">
+  <h3>Crear Publicación</h3>
+  <form [formGroup]="publicacionForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <textarea formControlName="texto" placeholder="Escribe algo..."></textarea>
+    </div>
+    <div class="form-group">
+      <label for="fileInput">Adjuntar contenido multimedia (máximo 10):</label>
+      <input id="fileInput" type="file" (change)="onFileSelected($event)" multiple>
+    </div>
+    <button type="submit" [disabled]="!publicacionForm.valid && selectedFiles.length === 0">Publicar</button>
+  </form>
+</div>
