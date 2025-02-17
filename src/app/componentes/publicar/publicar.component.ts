@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PublicacionService } from '../../services/publicacion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-publicar',
@@ -11,6 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PublicarComponent implements OnInit {
   publicacionForm: FormGroup;
   selectedFiles: File[] = [];
+  filePreviews: { url: string, type: string }[] = [];
+  maxFiles: number = 10;
 
   constructor(
     private fb: FormBuilder,
@@ -25,9 +28,26 @@ export class PublicarComponent implements OnInit {
   ngOnInit(): void {}
 
   onFileSelected(event: any): void {
-    if (event.target.files.length > 0) {
-      this.selectedFiles = Array.from(event.target.files).slice(0, 10) as File[]; // Limitar a 10 archivos y asegurar el tipo
+    const files = Array.from(event.target.files) as File[];
+    if (files.length + this.selectedFiles.length > this.maxFiles) {
+      this.snackBar.open(`No puedes seleccionar más de ${this.maxFiles} archivos`, 'Cerrar', { duration: 3000 });
+      return;
     }
+
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.filePreviews.push({ url: e.target.result, type: file.type });
+      };
+      reader.readAsDataURL(file);
+    });
+
+    this.selectedFiles = this.selectedFiles.concat(files).slice(0, this.maxFiles);
+  }
+
+  removeFile(index: number): void {
+    this.selectedFiles.splice(index, 1);
+    this.filePreviews.splice(index, 1);
   }
 
   onSubmit(): void {
@@ -49,6 +69,16 @@ export class PublicarComponent implements OnInit {
           this.snackBar.open('Publicación creada con éxito', 'Cerrar', { duration: 3000 });
           this.publicacionForm.reset();
           this.selectedFiles = [];
+          this.filePreviews = [];
+
+          // Mostrar el modal de éxito
+          const successModal = new bootstrap.Modal(document.getElementById('successModal')!);
+          successModal.show();
+
+          // Recargar la página al cerrar el modal
+          document.getElementById('successModal')!.addEventListener('hidden.bs.modal', () => {
+            window.location.reload();
+          });
         },
         error: (error) => {
           console.error('Error al crear la publicación:', error);
