@@ -44,4 +44,8 @@ export class UsuarioService {
       headers: { 'Content-Type': 'application/json' }
     });
   }  
+
+  hacerAdmin(email: String): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/haceradmin`, email);
+  }
 }
