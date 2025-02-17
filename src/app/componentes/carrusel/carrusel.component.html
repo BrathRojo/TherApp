@@ -6,7 +6,7 @@
 </div>
 
 <div class="carousel-inner">
-  <div *ngFor="let card of cards" class="carousel-item active">       
+  <div *ngFor="let card of datos; let i = index" class="carousel-item" [ngClass]="{'active':i===0}">            
     <app-card [datos]="card"></app-card>
   </div>
 </div>
