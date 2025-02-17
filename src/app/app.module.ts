@@ -31,6 +31,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ConversacionesComponent } from './componentes/conversaciones/conversaciones.component';
 import { ResultadosBusquedaComponent } from './componentes/resultados-busqueda/resultados-busqueda.component';
+import { ZonaadminComponent } from './componentes/zonaadmin/zonaadmin.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ResultadosBusquedaComponent } from './componentes/resultados-busqueda/r
     HeadersinbotonesComponent,
     ConversacionesComponent,
     ResultadosBusquedaComponent,
+    ZonaadminComponent,
   ],
   imports: [
     HttpClientModule,
