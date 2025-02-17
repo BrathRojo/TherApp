@@ -32,6 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ConversacionesComponent } from './componentes/conversaciones/conversaciones.component';
 import { AgregarPublicacionComponent } from './componentes/agregar-publicacion/agregar-publicacion.component';
 import { ResultadosBusquedaComponent } from './componentes/resultados-busqueda/resultados-busqueda.component';
+import { ZonaadminComponent } from './componentes/zonaadmin/zonaadmin.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ResultadosBusquedaComponent } from './componentes/resultados-busqueda/r
     ConversacionesComponent,
     AgregarPublicacionComponent,
     ResultadosBusquedaComponent,
+    ZonaadminComponent,
   ],
   imports: [
     HttpClientModule,
