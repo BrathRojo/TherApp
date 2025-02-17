@@ -42,4 +42,8 @@ export class UsuarioService {
   obtenerMasEnTherApp(usuarioId: number): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/mas-en-therapp?usuarioId=${usuarioId}`);
   }
+
+  hacerAdmin(email: String): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/haceradmin`, email);
+  }
 }

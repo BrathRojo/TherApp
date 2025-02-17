@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TerapeutaService } from '../../services/terapeuta.service';
 import { terapeutaMostrable } from '../../interfaces/terapeutaMostrable';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-zonaadmin',
@@ -9,7 +10,9 @@ import { terapeutaMostrable } from '../../interfaces/terapeutaMostrable';
 })
 export class ZonaadminComponent implements OnInit{
 
-  constructor(private servicio: TerapeutaService) { }
+  email: String = '';
+
+  constructor(private servicio: TerapeutaService, private usuarioService: UsuarioService) { }
 
   @Input() terapeutas: Array<{ nombre: string, apellidos: string, premium: boolean }> = [];
 
@@ -24,6 +27,19 @@ export class ZonaadminComponent implements OnInit{
         },
         error: (err) => console.error('Error al obtener terapeutas:', err)
       });
+  }
+
+  onSubmit(){
+    if(this.email){
+      this.usuarioService.hacerAdmin(this.email).subscribe(
+        response=>{
+          console.log('Permisos concedidos con éxito');
+        },
+        error=>{
+          console.error('Error al conceder los permisos', error);
+        }
+      );
+    }
   }
 
   accordionItems = [
