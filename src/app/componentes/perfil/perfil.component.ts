@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsuarioService } from '../../services/usuario.service';
 import { ActivatedRoute } from '@angular/router';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-perfil',
@@ -18,8 +19,8 @@ export class PerfilComponent implements OnInit {
   fechaNacimiento: Date = new Date();
   biografia?: string;
   ubicacion?: string;
-
   selectedFile?: File;
+  modalInstance?: bootstrap.Modal;
 
   constructor(private http: HttpClient, private servicio: UsuarioService, private route: ActivatedRoute) {}
 
@@ -36,6 +37,38 @@ export class PerfilComponent implements OnInit {
       this.ubicacion = usuario.ubicacion ? usuario.ubicacion : 'No especificada';
     });
   }
+
+  abrirModal() {
+    const modalElement = document.getElementById('editarPerfilModal');
+    if (modalElement) {
+      this.modalInstance = new bootstrap.Modal(modalElement);
+      this.modalInstance.show();
+    }
+  }
+
+  actualizarPerfil() {
+    const datosActualizados = {
+      nombre: this.nombre,
+      email: this.email,
+      telefono: this.telefono,
+      fechaNacimiento: this.fechaNacimiento,
+      biografia: this.biografia,
+      ubicacion: this.ubicacion
+    };
+  
+    this.http.put(`http://localhost:9000/api/usuarios/${this.nombreUsuario}`, datosActualizados)
+      .subscribe({
+        next: () => {
+          alert('Perfil actualizado con éxito.');
+          this.modalInstance?.hide();
+        },
+        error: err => {
+          console.error('Error al actualizar perfil:', err);
+          alert('Hubo un error al actualizar el perfil.');
+        }
+      });
+  }
+  
 
   triggerInput() {
     document.getElementById('fotoInput')?.click();

@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class="profile-container">
-  <!-- Muestra la foto del usuario si la tienes en 'foto' -->
+  <!-- Imagen de perfil con botón para cambiar -->
   <div class="profile-image-container" (click)="triggerInput()">
     <img [src]="foto" alt="Foto de perfil" class="profile-image">
     <button class="camera-button">
@@ -9,31 +9,76 @@
     </button>
   </div>
   
-  <input
-    id="fotoInput"
-    type="file"
-    accept="image/*"
-    (change)="onFileSelected($event)"
-  />
+  <input id="fotoInput" type="file" accept="image/*" (change)="onFileSelected($event)"/>
 
+  <!-- Información del perfil -->
   <div class="profile-info">
     <p><span>Usuario:</span> {{ nombreUsuario }}</p>
     <p><span>Nombre:</span> {{ nombre }}</p>
-    <p><span>Email: </span> <a href="mailto:{{ email }}" class="email">{{ email }}</a></p>
+    <p><span>Email:</span> {{ email }}</p>
     <p><span>Teléfono:</span> {{ telefono }}</p>
     <p><span>Fecha de Nacimiento:</span> {{ fechaNacimiento | date }}</p>
     <p><span>Biografía:</span> {{ biografia }}</p>
     <p><span>Ubicación:</span> {{ ubicacion }}</p>
   </div>
+
+  <!-- Botón para abrir el modal de edición -->
+  <button class="btn-edit" (click)="abrirModal()">Editar</button>
+
+  <!-- Botones de cambio de cuenta -->
+  <div class="account-buttons">
+    <a routerLink="/cambioCuenta/terapeuta" class="btn-switch terapeuta">
+      <i class="bi bi-person-fill"></i> Cambiar a terapeuta
+    </a>
+
+    <a routerLink="/cambioCuenta/organizacion" class="btn-switch organizacion">
+      <i class="bi bi-building"></i> Cambiar a organización
+    </a>
+  </div>
 </div>
 
-<!-- Botones cambio cuenta -->
-<button>
-  <a routerLink="/cambioCuenta/terapeuta">Cambiar a terapeuta</a>
-</button>
-
-<button>
-  <a routerLink="/cambioCuenta/organizacion">Cambiar a organizacion</a>
-</button>
-
 <app-publicacion></app-publicacion>
+
+<!-- MODAL PARA EDITAR PERFIL -->
+<div class="modal fade" id="editarPerfilModal" tabindex="-1" aria-labelledby="editarPerfilLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarPerfilLabel">Editar Perfil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Nombre:</label>
+            <input type="text" class="form-control" [(ngModel)]="nombre">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email:</label>
+            <input type="email" class="form-control" [(ngModel)]="email">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Teléfono:</label>
+            <input type="text" class="form-control" [(ngModel)]="telefono">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Fecha de Nacimiento:</label>
+            <input type="date" class="form-control" [(ngModel)]="fechaNacimiento">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Biografía:</label>
+            <textarea class="form-control" [(ngModel)]="biografia"></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ubicación:</label>
+            <input type="text" class="form-control" [(ngModel)]="ubicacion">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="actualizarPerfil()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
