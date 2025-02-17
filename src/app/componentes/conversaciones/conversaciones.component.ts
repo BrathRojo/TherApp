@@ -65,13 +65,17 @@ export class ConversacionesComponent implements OnInit {
   }
 
   cargarUsuariosSeguidosSinConversacion(): void {
+    if (this.userId <= 0) {
+      console.warn('⚠️ ID de usuario no válido:', this.userId);
+      return;
+    }
     this.usuarioService.obtenerUsuariosSeguidosSinConversacion(this.userId).subscribe({
       next: (usuarios) => {
         this.usuariosSeguidosSinConversacion = usuarios;
         this.usuariosSeguidosSinConversacionFiltrados = usuarios;
       },
       error: (error) => {
-        console.error('Error al cargar los usuarios seguidos sin conversación:', error);
+        console.error('🚨 Error al cargar los usuarios seguidos sin conversación:', error);
       }
     });
   }

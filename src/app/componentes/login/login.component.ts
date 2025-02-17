@@ -30,16 +30,22 @@ export class LoginComponent {
           this.auth.login(usuario.usuEmailTlf, usuario.clave).subscribe(
             response => {
               console.log('Sesión iniciada', response);
-              // Almacenar el token y el ID en localStorage
+          
+              // Guardar el token y el ID en localStorage
               localStorage.setItem('authToken', response.token);
-              localStorage.setItem('usuarioId', response.id); // Guardar el ID del usuario
-              // Redirigir al usuario a la página de inicio
+              localStorage.setItem('usuarioId', response.id);
+          
+              // Manejo de imagen de perfil
+              const fotoPerfil = response.fotoPerfil ? response.fotoPerfil : 'assets/default.png';
+              localStorage.setItem('fotoPerfil', fotoPerfil); // Guardar la imagen en localStorage
+          
+              // Redirigir a la página de inicio
               this.router.navigate(['/home']);
             },
             error => {
               console.error('Usuario o contraseña incorrectos', error);
             }
-          );
+          );          
         }
       }
 }

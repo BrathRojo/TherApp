@@ -139,7 +139,7 @@
             
               <!-- Caja de comentario -->
               <div class="mt-auto">
-                <input [(ngModel)]="nuevoComentario" class="form-control mb-2" placeholder="Escribe un comentario...">
+                <input [(ngModel)]="nuevoComentario" [ngModelOptions]="{standalone: true}" class="form-control mb-2" placeholder="Escribe un comentario...">
                 <button class="btn btn-primary w-100" (click)="comentar()">Publicar</button>
               </div>
             </div>

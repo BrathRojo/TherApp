@@ -18,31 +18,45 @@ export class ChatComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      // this.usuarioId = Number(params['usuarioId']) || 0;
-      // this.receptorId = Number(params['receptorId']) || 0;
-
+      this.usuarioId = Number(localStorage.getItem('usuarioId')) || 0;
+      this.receptorId = Number(params['receptorId']) || 0;
+  
+      console.log("🛠 Usuario ID:", this.usuarioId, "Receptor ID:", this.receptorId);
+  
       if (this.usuarioId > 0 && this.receptorId > 0) {
         this.cargarMensajes();
       } else {
-        console.error('Error: usuarioId o receptorId no son válidos.', this.usuarioId, this.receptorId);
+        console.warn('⚠️ ID de usuario o receptor no válido. Mensajes no cargados.');
       }
     });
   }
-
+  
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('🔄 Cambios en las propiedades:', changes);
-    
-    if (changes) { 
+    if (changes['receptorId'] && changes['receptorId'].currentValue > 0) {
+      console.log("🔄 Cambio detectado en receptorId:", this.receptorId);
       this.cargarMensajes();
     }
-  }
+  }  
 
   cargarMensajes(): void {
     if (this.usuarioId > 0 && this.receptorId > 0) {
+      console.log("🔄 Cargando mensajes entre", this.usuarioId, "y", this.receptorId);
+  
       this.chatService.obtenerMensajes(this.usuarioId, this.receptorId).subscribe({
         next: (data) => {
           console.log('🔍 Mensajes recibidos:', data);
-          this.mensajes = Array.isArray(data) ? [...data] : [];
+  
+          if (Array.isArray(data) && data.length > 0) {
+            this.mensajes = [...data]; // Cargar mensajes antiguos
+          } else {
+            this.mensajes = []; // Si no hay mensajes, dejar el array vacío
+          }
+  
+          // Auto-scroll al último mensaje después de cargar la conversación
+          setTimeout(() => {
+            const chatContainer = document.querySelector('.chat-container');
+            if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
+          }, 200);
         },
         error: (error) => {
           console.error('🚨 Error al cargar los mensajes:', error);
