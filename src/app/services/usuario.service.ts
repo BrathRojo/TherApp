@@ -45,7 +45,7 @@ export class UsuarioService {
     });
   }  
 
-  hacerAdmin(email: String): Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}/haceradmin`, email);
-  }
+  hacerAdmin(email: String): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/haceradmin`, { email });
+}
 }
