@@ -11,6 +11,7 @@ import { TerapeutasComponent } from './componentes/terapeutas/terapeutas.compone
 import { LoginComponent } from './componentes/login/login.component';
 import { ConversacionesComponent } from './componentes/conversaciones/conversaciones.component';
 import { ResultadosBusquedaComponent } from './componentes/resultados-busqueda/resultados-busqueda.component';
+import { ZonaadminComponent } from './componentes/zonaadmin/zonaadmin.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'terapeutas', component: TerapeutasComponent},
   { path: 'cursos', component: CursosComponent},
   { path: 'chat/:usuarioId',component: ConversacionesComponent },
+  { path: 'zonaadmin', component: ZonaadminComponent},
   { path: 'cambioCuenta/:modo', component: FormularioCuentaComponent },
   { path: 'login', component: LoginComponent},
   { path: 'validacion', component: RegistroComponent },
