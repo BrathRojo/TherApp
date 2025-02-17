@@ -42,4 +42,10 @@ export class UsuarioService {
   obtenerMasEnTherApp(usuarioId: number): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/mas-en-therapp?usuarioId=${usuarioId}`);
   }
+
+  actualizarPerfil(nombreUsuario: string, perfil: any) {
+    return this.http.put(`${this.apiUrl}/${nombreUsuario}`, perfil, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 }
