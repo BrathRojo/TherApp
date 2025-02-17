@@ -1,13 +1,13 @@
-<!-- <div class="container mt-4" *ngFor="let publicacion of publicaciones; let i = index">
-  <div class="card mb-4 position-relative"> -->
+<div class="container mt-4" *ngFor="let publicacion of publicaciones; let i = index">
+  <div class="card mb-4 position-relative">
      <!-- Envoltura para el nombre del usuario y su foto -->
-     <!-- <div class="card-header d-flex align-items-center">
+     <div class="card-header d-flex align-items-center">
       <img src="" alt="Foto de perfil" class="rounded-circle me-2" width="40" height="40">
       <strong>Usuario que publica</strong>
     </div>
     <div class="card-body d-flex justify-content-between">
       <div>
-        <p>{{ publicacion.texto }}</p>
+        <p>{{ publicacion.titulo }}</p>
         <div *ngIf="publicacion.multimedia.length > 0">
           <div [id]="'carouselExampleIndicators' + i" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -43,10 +43,10 @@
           <i class="bi bi-chat-left-text ms-4" (click)="openComentariosModal(publicacion)"></i>
           <span class="ms-2">{{ publicacion.comentarios.length }}</span>
         </div>
-      </div> -->
+      </div>
 
       <!-- Botón en la esquina superior derecha -->
-      <!-- <i class="border rounded m-2 border-secondary-subtle bi bi-three-dots position-absolute top-0 end-0 p-2" (click)="toggleOpciones(i)"></i>
+      <i class="border rounded m-2 border-secondary-subtle bi bi-three-dots position-absolute top-0 end-0 p-2" (click)="toggleOpciones(i)"></i>
 
       <div [id]="'opciones-' + i" class="opciones d-none">
         <p>Editar publicación</p>
@@ -56,11 +56,11 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
   
   <!-- Modal -->
-  <!-- <div class="modal fade" id="comentariosModal" tabindex="-1" aria-labelledby="comentariosModalLabel" aria-hidden="true">
+  <div class="modal fade" id="comentariosModal" tabindex="-1" aria-labelledby="comentariosModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         
@@ -70,10 +70,10 @@
         </div>
   
         <div class="modal-body">
-          <div class="row"> -->
+          <div class="row">
             
             <!-- Sección izquierda: Imagen o video -->
-            <!-- <div class="col-md-6">
+            <div class="col-md-6">
               <ng-container *ngIf="selectedPublicacion && selectedPublicacion.multimedia.length > 0">
                 <div id="carouselExampleIndicatorsModal" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-indicators">
@@ -107,10 +107,10 @@
                   </button>
                 </div>
               </ng-container>
-            </div> -->
+            </div>
   
             <!-- Sección derecha: Comentarios -->
-            <!-- <div class="col-md-6 d-flex flex-column">
+            <div class="col-md-6 d-flex flex-column">
               <div class="comentarios-container overflow-auto">
                 <div *ngFor="let comentario of selectedPublicacion?.comentarios" class="comentario d-flex align-items-start mb-3">
                   <img [src]="comentario.usuario.fotoPerfil" alt="Foto de perfil" class="rounded-circle me-2" width="40" height="40">
@@ -122,10 +122,10 @@
                        [class.comentario-corto]="!comentario.mostrarCompleto"
                        [class.comentario-largo]="comentario.mostrarCompleto">
                       {{ comentario.mostrarCompleto ? comentario.texto : (comentario.texto | slice:0:100) }}
-                    </p> -->
+                    </p>
             
                     <!-- Botón para mostrar más/más corto -->
-                    <!-- <button *ngIf="comentario.texto.length > 100" class="btn btn-link p-0" (click)="comentario.mostrarCompleto = !comentario.mostrarCompleto">
+                    <button *ngIf="comentario.texto.length > 100" class="btn btn-link p-0" (click)="comentario.mostrarCompleto = !comentario.mostrarCompleto">
                       {{ comentario.mostrarCompleto ? 'Mostrar menos' : 'Mostrar más' }}
                     </button>
                   </div>
@@ -135,96 +135,18 @@
                     <span class="ms-2">{{ comentario.likes }}</span>
                   </div>
                 </div>
-              </div> -->
+              </div>
             
               <!-- Caja de comentario -->
-              <!-- <div class="mt-auto">
+              <div class="mt-auto">
                 <input [(ngModel)]="nuevoComentario" class="form-control mb-2" placeholder="Escribe un comentario...">
                 <button class="btn btn-primary w-100" (click)="comentar()">Publicar</button>
               </div>
-            </div> -->
-            
-  
-          <!-- </div> 
-        </div>  -->
-  
-      <!-- </div>
-    </div>
-  </div> -->
-  <div class="container mt-4" *ngFor="let publicacion of publicacion; let i = index">
-    <div class="card mb-4 position-relative">
-      
-      <!-- Nombre del usuario y foto de perfil -->
-      <div class="card-header d-flex align-items-center">
-        <img src="" alt="Foto de perfil" class="rounded-circle me-2" width="40" height="40">
-        <strong>Usuario que publica</strong>
-      </div>
-  
-      <div class="card-body">
-        <!-- Texto de la publicación -->
-        <p>{{ publicacion.texto }}</p>
-  
-        <!-- Multimedia (Carrusel de imágenes/videos) -->
-        <div *ngIf="publicacion.multimedia.length > 0">
-          <div [id]="'carousel' + i" class="carousel slide" data-bs-ride="carousel">
-            
-            <!-- Indicadores del carrusel -->
-            <div class="carousel-indicators">
-              <button *ngFor="let media of publicacion.multimedia; let j = index" 
-                type="button" 
-                [attr.data-bs-target]="'#carousel' + i" 
-                [attr.data-bs-slide-to]="j" 
-                [class.active]="j === 0">
-              </button>
             </div>
-  
-            <!-- Contenido del carrusel -->
-            <div class="carousel-inner">
-              <div *ngFor="let media of publicacion.multimedia; let j = index" class="carousel-item" [class.active]="j === 0">
-                
-                <!-- Mostrar imagen -->
-                <img *ngIf="media.tipo === 'imagen'" [src]="media.url" class="d-block w-100 rounded" alt="Imagen multimedia">
-  
-                <!-- Mostrar video -->
-                <video *ngIf="media.tipo === 'video'" controls class="d-block w-100 rounded">
-                  <source [src]="media.url" type="video/mp4">
-                  Tu navegador no soporta el video.
-                </video>
-  
-              </div>
-            </div>
-  
-            <!-- Botones de navegación -->
-            <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel' + i" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-              <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel' + i" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-              <span class="visually-hidden">Siguiente</span>
-            </button>
             
-          </div>
-        </div>
   
-        <!-- Sección de botones (like y comentarios) -->
-        <div class="d-flex align-items-center mt-2">
-          <i class="bi bi-hand-thumbs-up" [class.text-primary]="publicacion.liked" (click)="toggleLike(publicacion)"></i>
-          <span class="ms-2">{{ publicacion.likes }}</span>
-          <i class="bi bi-chat-left-text ms-4" (click)="openComentariosModal(publicacion)"></i>
-          <span class="ms-2">{{ publicacion.comentarios.length }}</span>
-        </div>
-  
-        <!-- Botón de opciones en la esquina superior derecha -->
-        <i class="border rounded m-2 border-secondary-subtle bi bi-three-dots position-absolute top-0 end-0 p-2" (click)="toggleOpciones(i)"></i>
-  
-        <!-- Menú desplegable de opciones -->
-        <!-- <div [id]="'opciones-' + i" class="opciones d-none">
-          <p (click)="editarPublicacion(publicacion)">Editar publicación</p>
-          <p (click)="eliminarPublicacion(publicacion)">Eliminar foto</p>
-          <p (click)="agregarColaboradores(publicacion)">Añadir colaboradores</p>
-          <p (click)="eliminarColaboradores(publicacion)">Eliminar colaboradores</p>
-        </div> -->
+          </div> 
+        </div> 
   
       </div>
     </div>
