@@ -35,6 +35,31 @@
         </div>
       </div>
 
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-header">
+          <h3 class="mb-0">Lista de Terapeutas</h3>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li *ngFor="let item of terapeutas" class="list-group-item d-flex justify-content-between align-items-center">
+              <span>{{ item.nombre }} {{ item.apellidos }}</span>
+              
+              <div>
+                <span *ngIf="item.premium; else noPremiumBadge" class="badge bg-success me-2">Premium</span>
+                <ng-template #noPremiumBadge>
+                  <span class="badge bg-secondary me-2">No Premium</span>
+                </ng-template>
+      
+                <button *ngIf="item.premium; else noPremiumButton" type="button" class="btn btn-danger btn-sm">Retirar premium</button>
+                <ng-template #noPremiumButton>
+                  <button type="button" class="btn btn-primary btn-sm">Activar premium</button>
+                </ng-template>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
       
 </main>
 <app-footer></app-footer>
