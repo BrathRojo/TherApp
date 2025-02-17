@@ -68,24 +68,24 @@ export class PerfilComponent implements OnInit {
       nombre: this.nombre,
       email: this.email,
       telefono: this.telefono,
-      fechaNacimiento: this.fechaNacimiento,
+      fechaNacimiento: this.fechaNacimiento instanceof Date 
+        ? this.fechaNacimiento.toISOString().split('T')[0] // Convierte a formato YYYY-MM-DD
+        : this.fechaNacimiento,
       biografia: this.biografia,
       ubicacion: this.ubicacion
     };
   
-    this.http.put(`http://localhost:9000/api/usuarios/${this.nombreUsuario}`, datosActualizados)
-      .subscribe({
-        next: () => {
-          alert('Perfil actualizado con éxito.');
-          this.modalInstance?.hide();
-        },
-        error: err => {
-          console.error('Error al actualizar perfil:', err);
-          alert('Hubo un error al actualizar el perfil.');
-        }
-      });
-  }
-  
+    this.servicio.actualizarPerfil(this.nombreUsuario, datosActualizados).subscribe({
+      next: () => {
+        alert('Perfil actualizado con éxito.');
+        this.modalInstance?.hide();
+      },
+      error: err => {
+        console.error('Error al actualizar perfil:', err);
+        alert('Hubo un error al actualizar el perfil.');
+      }
+    });
+  }  
 
   triggerInput() {
     document.getElementById('fotoInput')?.click();
