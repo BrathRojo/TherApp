@@ -1,0 +1,44 @@
+<app-header class="inicio"></app-header>
+<main>
+    <div class="card border-primary mt-3">
+        <!-- Título del marco -->
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Solicitudes de terapeutas</h5>
+        </div>
+      
+        <!-- Contenido del acordeón -->
+        <div class="card-body">
+          <div class="accordion" id="accordionExample">
+            <div *ngFor="let item of accordionItems; let i = index" class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#collapse' + i"
+                        aria-expanded="false"
+                        [attr.aria-controls]="'collapse' + i">
+                  {{ item.title }}
+                </button>
+              </h2>
+              <div [id]="'collapse' + i" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  <strong>{{ item.content }}
+                    <button type="button" class="btn btn-outline-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+                      </svg></button>
+                      <button type="button" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                      </svg></button>
+                  </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+</main>
+<app-footer></app-footer>
+
+
+
+  
