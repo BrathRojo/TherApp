@@ -1,6 +1,9 @@
 <div class="chat-container">
-  <div *ngFor="let mensaje of mensajes">
-    <strong>{{ mensaje.emisorNombre || 'Usuario' }}:</strong> {{ mensaje.contenido }}
+  <div *ngFor="let mensaje of mensajes" class="mensaje"
+       [ngClass]="{'emisor': mensaje.emisor.id === usuarioId, 'receptor': mensaje.receptor.id === usuarioId}">
+
+    <!-- Mostrar el nombre del emisor -->
+    <strong>{{ mensaje.emisor.nombre || 'Usuario' }}:</strong> {{ mensaje.contenido }}
 
     <!-- ✅ Mostrar imagen si el mensaje tiene un archivo adjunto y es una imagen -->
     <div *ngIf="mensaje.archivoUrl">
@@ -23,8 +26,9 @@
     </div>
   </div>
 
+  <!-- ✅ Sección de entrada de mensajes -->
   <div class="input-section">
-    <textarea [(ngModel)]="nuevoMensaje"  placeholder="Escribe un mensaje..."></textarea>
+    <textarea [(ngModel)]="nuevoMensaje" placeholder="Escribe un mensaje..."></textarea>
 
     <!-- ✅ Input para seleccionar un archivo -->
     <input type="file" (change)="seleccionarArchivo($event)">

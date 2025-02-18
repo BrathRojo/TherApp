@@ -33,8 +33,8 @@ export class ChatComponent implements OnInit, OnChanges {
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['receptorId'] && changes['receptorId'].currentValue > 0) {
-      console.log("🔄 Cambio detectado en receptorId:", this.receptorId);
-      this.cargarMensajes();
+      console.log("🔄 Cambio detectado en receptorId:", changes['receptorId'].currentValue);
+      this.cargarMensajes(); // Recargar la conversación
     }
   }  
 
@@ -47,12 +47,12 @@ export class ChatComponent implements OnInit, OnChanges {
           console.log('🔍 Mensajes recibidos:', data);
   
           if (Array.isArray(data) && data.length > 0) {
-            this.mensajes = [...data]; // Cargar mensajes antiguos
+            this.mensajes = [...data]; // ✅ Guardar mensajes en la variable
           } else {
-            this.mensajes = []; // Si no hay mensajes, dejar el array vacío
+            this.mensajes = []; // Si no hay mensajes, vaciar el array
           }
   
-          // Auto-scroll al último mensaje después de cargar la conversación
+          // 🔽 Auto-scroll al último mensaje después de cargar la conversación
           setTimeout(() => {
             const chatContainer = document.querySelector('.chat-container');
             if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -65,7 +65,7 @@ export class ChatComponent implements OnInit, OnChanges {
       });
     }
   }
-
+  
   seleccionarArchivo(event: any): void {
     if (event.target.files.length > 0) {
       this.archivoSeleccionado = event.target.files[0];
@@ -77,11 +77,12 @@ export class ChatComponent implements OnInit, OnChanges {
       this.chatService.enviarMensaje(this.usuarioId, this.receptorId, this.nuevoMensaje, this.archivoSeleccionado).subscribe({
         next: (mensajeEnviado) => {
           console.log('✅ Mensaje enviado:', mensajeEnviado);
-
-          this.mensajes.push(mensajeEnviado);
+  
+          this.mensajes.push(mensajeEnviado); // Añadir el mensaje al array local
           this.nuevoMensaje = '';
           this.archivoSeleccionado = undefined;
-
+  
+          // 🔽 Auto-scroll al último mensaje enviado
           setTimeout(() => {
             const chatContainer = document.querySelector('.chat-container');
             if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -92,5 +93,5 @@ export class ChatComponent implements OnInit, OnChanges {
         }
       });
     }
-  }
+  }  
 }
