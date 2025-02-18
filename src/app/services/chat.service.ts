@@ -23,10 +23,7 @@ export class ChatService {
 
     return this.http.post<any>(`${this.apiUrl}/chat/${usuarioId}/${receptorId}`, formData);
   }
-
-    return this.http.post<any>(`${this.apiUrl}/chat/${usuarioId}/${receptorId}`, formData);
-  }
-
+  
   obtenerConversaciones(usuarioId: number): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/conversaciones/${usuarioId}`);
   }

@@ -44,18 +44,4 @@ export class UsuarioService {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-
-  obtenerUsuariosSeguidosSinConversacion(usuarioId: number): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/seguidos-sin-conversacion?usuarioId=${usuarioId}`);
-  }
-
-  obtenerMasEnTherApp(usuarioId: number): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/mas-en-therapp?usuarioId=${usuarioId}`);
-  }
-
-  actualizarPerfil(nombreUsuario: string, perfil: any) {
-    return this.http.put(`${this.apiUrl}/${nombreUsuario}`, perfil, {
-      headers: { 'Content-Type': 'application/json' }
-    });
-  }
 }
