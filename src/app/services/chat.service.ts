@@ -11,29 +11,20 @@ export class ChatService {
 
   constructor(private http: HttpClient) {}
 
-  // Obtener mensajes entre dos usuarios
   obtenerMensajes(usuarioId: number, receptorId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/chat/${usuarioId}/${receptorId}`);
-  }
+    return this.http.get<any[]>(`${this.apiUrl}/conversacion?usuarioId=${usuarioId}&receptorId=${receptorId}`);
+  }  
 
-  //Ahora enviamos `multipart/form-data`
+  // ✅ Corregir la URL para enviar mensajes
   enviarMensaje(usuarioId: number, receptorId: number, contenido: string, archivo?: File): Observable<any> {
     const formData = new FormData();
-    if (contenido.trim()) {
-        formData.append('contenido', contenido);
-    }
-
-    if (archivo) {
-        console.log('📂 Archivo a enviar:', archivo.name, '| Tamaño:', archivo.size);
-        formData.append('archivo', archivo);
-    } else {
-        console.log('✉️ Enviando solo mensaje de texto.');
-    }
+    if (contenido) formData.append('contenido', contenido);
+    if (archivo) formData.append('archivo', archivo);
 
     return this.http.post<any>(`${this.apiUrl}/chat/${usuarioId}/${receptorId}`, formData);
   }
 
-  obtenerConversaciones(usuarioId: number): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/conversaciones/${usuarioId}`);
+  obtenerConversaciones(usuarioId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/conversaciones/${usuarioId}`);
   }
 }
