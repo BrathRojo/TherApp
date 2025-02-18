@@ -1,30 +1,17 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Publicacion } from '../interfaces/publicacion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublicacionService {
+  private apiUrl = 'http://localhost:9000/api/publicaciones';
 
-  private urlApi = 'http://localhost:9000/api/publicaciones';
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  publicar(publicacion: {}): Observable<any> {
-    console.log('pub', publicacion);
-    
-    const usuario = localStorage.getItem('usuario');
-    // return this.http.post<any>(this.urlApi + '?username=' + usuario, publicacion);
-    return this.http.post<any>(this.urlApi + '?username=' + usuario, {
-      "texto": "Texto de la publicación",
-      "fechaPublicacion": "2023-10-01",
-      "contenidos": [
-        {
-          "tipo": "foto",
-          "url": "http://example.com/foto1.jpg"
-        }
-      ]
-    });
+  crearPublicacion(formData: FormData): Observable<Publicacion> {
+    return this.http.post<Publicacion>(this.apiUrl, formData);
   }
 }
