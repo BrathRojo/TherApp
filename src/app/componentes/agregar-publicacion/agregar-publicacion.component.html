@@ -1,5 +1,0 @@
-<form [formGroup]="publicacionForm" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="publicacion" placeholder="Escribe tu publicacion aqui" name="publicacion" id="publicacion">
-    <input type="file" formControlName="archivo" name="archivo" id="archivo">
-    <button type="submit" [disabled]="!publicacionForm.valid">Publicar</button>
-</form>
