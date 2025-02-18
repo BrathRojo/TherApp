@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
+import { SolicitudesService } from '../../services/solicitudes.service';
 
 @Component({
   selector: 'app-formulario-cuenta',
@@ -14,13 +15,16 @@ export class FormularioCuentaComponent implements OnInit {
   modoCambio: string = '';
   nombreUsuario: string = '';
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private usuarioService: UsuarioService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private usuarioService: UsuarioService, private solicitudService: SolicitudesService) {
     this.registroForm = this.fb.group({
       nombre: [this.nombreUsuario, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
 
-      numeroColegiado: [''],
+      nColegiado: [''],
       experiencia: [''],
       especialidad: [''],
+      precio: [''],
+      apellidos: [''],
+      email: [''],
       
       cif: [''],
       direccion: [''],
@@ -30,11 +34,11 @@ export class FormularioCuentaComponent implements OnInit {
   }
 
   formatCodigo(): void {
-    let value = this.registroForm.get('numeroColegiado')?.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    let value = this.registroForm.get('nColegiado')?.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
     if (value.length > 2) {
       value = value.slice(0, 2) + '-' + value.slice(2);
     }
-    this.registroForm.get('numeroColegiado')?.setValue(value, { emitEvent: false });
+    this.registroForm.get('nColegiado')?.setValue(value, { emitEvent: false });
   }
 
   ngOnInit(): void {
@@ -53,8 +57,12 @@ export class FormularioCuentaComponent implements OnInit {
     );
 
     if (this.modoCambio === "terapeuta") {
-      this.registroForm.get('numeroColegiado')?.setValidators([Validators.required, Validators.pattern('^[A-Z]{1,2}-[0-9]{1,5}$'), Validators.maxLength(8)]);
+      this.registroForm.get('email')?.setValidators([Validators.required]);
+      this.registroForm.get('nColegiado')?.setValidators([Validators.required, Validators.pattern('^[A-Z]{1,2}-[0-9]{1,5}$'), Validators.maxLength(8)]);
       this.registroForm.get('especialidad')?.setValidators([Validators.required]);
+      this.registroForm.get('experiencia')?.setValidators([Validators.required]);
+      this.registroForm.get('precio')?.setValidators([Validators.required]);
+      this.registroForm.get('apellidos')?.setValidators([Validators.required]);
     }
     else {
       this.registroForm.get('cif')?.setValidators([Validators.required]);
@@ -64,8 +72,30 @@ export class FormularioCuentaComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.registroForm.valid) {
-      console.log('Datos del formulario:', this.registroForm.value);
+    if (this.registroForm.invalid) {
+      console.log("Formulario inválido");
+      return;
     }
+  
+    const solicitud = {
+      email: this.registroForm.get('email')?.value,
+      apellidos: this.registroForm.get('apellidos')?.value,
+      nColegiado: this.registroForm.get('nColegiado')?.value,
+      experiencia: this.registroForm.get('experiencia')?.value,
+      especialidad: this.registroForm.get('especialidad')?.value,
+      precio: this.registroForm.get('precio')?.value
+    };
+  
+    this.solicitudService.enviarSolicitud(solicitud).subscribe({
+      next: () => {
+        console.log("Solicitud enviada con éxito");
+      },
+      error: (error) => {
+        console.error("Error al enviar la solicitud:", error);
+      }
+    });
+
+    console.log('Datos del formulario:', this.registroForm.value);
+    
   }
 }
