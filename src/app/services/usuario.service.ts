@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../interfaces/usuario';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Usuario } from '../interfaces/usuario';
 export class UsuarioService {
   private apiUrl = 'http://localhost:9000/api/usuarios';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   getPerfilUsuario(nombre: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/get/${nombre}`);
@@ -37,6 +38,13 @@ export class UsuarioService {
 
   obtenerMasEnTherApp(usuarioId: number): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/mas-en-therapp?usuarioId=${usuarioId}`);
+  }
+
+  cambiarFotoPerfil(nombreUsuario: string, archivo: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('foto', archivo);
+
+    return this.http.post<any>(`${this.apiUrl}/${nombreUsuario}/foto`, formData);
   }
 
   actualizarPerfil(nombreUsuario: string, perfil: any) {

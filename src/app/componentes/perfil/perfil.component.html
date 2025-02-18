@@ -3,7 +3,7 @@
 <div class="profile-container">
   <!-- Imagen de perfil con botón para cambiar -->
   <div class="profile-image-container" (click)="triggerInput()">
-    <img [src]="foto" alt="Foto de perfil" class="profile-image">
+    <img [src]="'http://localhost:9000/api/multimedia/files/' + foto" alt="Foto de perfil" class="profile-image">
     <button class="camera-button">
       <i class="bi bi-camera"></i>
     </button>
@@ -13,7 +13,6 @@
 
   <!-- Información del perfil -->
   <div class="profile-info">
-    <p><span>Usuarioid:</span> {{ id }}</p>
     <p><span>Usuario:</span> {{ nombreUsuario }}</p>
     <p><span>Nombre:</span> {{ nombre }}</p>
     <p><span>Email:</span> {{ email }}</p>
