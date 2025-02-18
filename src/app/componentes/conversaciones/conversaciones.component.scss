@@ -24,6 +24,7 @@
 .sidebar li {
     padding: 10px;
     cursor: pointer;
+
 }
 
 .sidebar li:hover {
@@ -34,3 +35,25 @@
     flex: 1;
     padding: 10px;
 }
+
+/* Estilo para la foto de perfil */
+.foto-perfil {
+    width: 100px;  // Ajusta el tamaño que necesites
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: opacity 0.3s ease-in-out; // Transición suave
+  }
+  
+  /* Negrita para el nombre del usuario */
+  li .usuario-nombre {
+    font-weight: bold !important;
+  }
+  
+  /* Ocultar la imagen en tablets (pantallas de 768px o menos) */
+  @media (max-width: 768px) {
+    .foto-perfil {
+      display: none;
+    }
+  }
+  
