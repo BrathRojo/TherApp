@@ -50,9 +50,9 @@
                   <span class="badge bg-secondary me-2">No Premium</span>
                 </ng-template>
       
-                <button *ngIf="item.premium; else noPremiumButton" type="button" class="btn btn-danger btn-sm">Retirar premium</button>
+                <button *ngIf="item.premium; else noPremiumButton" type="button" class="btn btn-danger btn-sm" (click)="cambiarPremium(item.email)">Retirar premium</button>
                 <ng-template #noPremiumButton>
-                  <button type="button" class="btn btn-primary btn-sm">Activar premium</button>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="cambiarPremium(item.email)">Activar premium</button>
                 </ng-template>
               </div>
             </li>
@@ -81,4 +81,4 @@
 
 
 
-  
+
