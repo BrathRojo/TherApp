@@ -30,7 +30,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ConversacionesComponent } from './componentes/conversaciones/conversaciones.component';
-import { AgregarPublicacionComponent } from './componentes/agregar-publicacion/agregar-publicacion.component';
 import { ResultadosBusquedaComponent } from './componentes/resultados-busqueda/resultados-busqueda.component';
 import { ZonaadminComponent } from './componentes/zonaadmin/zonaadmin.component';
 
@@ -58,7 +57,6 @@ import { ZonaadminComponent } from './componentes/zonaadmin/zonaadmin.component'
     LoginComponent,
     HeadersinbotonesComponent,
     ConversacionesComponent,
-    AgregarPublicacionComponent,
     ResultadosBusquedaComponent,
     ZonaadminComponent,
   ],
