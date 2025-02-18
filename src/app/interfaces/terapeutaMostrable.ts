@@ -6,4 +6,5 @@ export interface terapeutaMostrable{
     especialidad: string;
     precio: number;
     premium: boolean;
+    email: string;
 }
