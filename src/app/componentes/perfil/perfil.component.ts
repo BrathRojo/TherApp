@@ -26,7 +26,7 @@ export class PerfilComponent implements OnInit {
 
   selectedFile?: File;
 
-  constructor(private http: HttpClient, private servicio: UsuarioService, private route: ActivatedRoute, private seguidores: SeguidoresService, private router: Router) {}
+  constructor(private http: HttpClient, private usuarios: UsuarioService, private route: ActivatedRoute, private seguidores: SeguidoresService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -37,7 +37,7 @@ export class PerfilComponent implements OnInit {
   }
 
   cargarPerfil() {
-    this.servicio.getPerfilUsuario(this.nombreUsuario).subscribe(usuario => {
+    this.usuarios.getPerfilUsuario(this.nombreUsuario).subscribe(usuario => {
       this.id = usuario.id;
       this.foto = usuario.fotoPerfil ? usuario.fotoPerfil : 'assets/default.png';
       this.nombreUsuario = usuario.username;
@@ -85,22 +85,9 @@ export class PerfilComponent implements OnInit {
       alert('No has seleccionado ninguna foto.');
       return;
     }
-    const formData = new FormData();
-    formData.append('foto', this.selectedFile);
 
-    this.http.post(`http://localhost:9000/api/usuarios/${this.nombreUsuario}/foto`, formData)
-      .subscribe({
-        next: (resp) => {
-          console.log('Foto subida correctamente', resp);
-          alert('Foto subida con éxito.');
-          // Opcional: Recargar la foto del backend 
-          // o reasignar this.foto = 'uploads/usuario_1_...' 
-        },
-        error: (err) => {
-          console.error('Error al subir foto', err);
-          alert('Error subiendo foto.');
-        }
-      });
+    this.usuarios.cambiarFotoPerfil(this.nombreUsuario, this.selectedFile).subscribe(() => {
+      this.cargarPerfil();
+    });
   }
-
 }
