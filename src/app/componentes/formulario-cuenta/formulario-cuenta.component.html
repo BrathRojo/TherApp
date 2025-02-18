@@ -9,17 +9,26 @@
 
     <div *ngIf="modoCambio == 'terapeuta'">
 
-      <label for="numeroColegiado">Número de colegiado:</label>
-      <input id="numeroColegiado" formControlName="numeroColegiado" (input)="formatCodigo()" type="text" placeholder="XX-12345" />
-      <div *ngIf="registroForm.get('numeroColegiado')?.invalid && registroForm.get('numeroColegiado')?.touched">
+      <label for="nColegiado">Número de colegiado:</label>
+      <input id="nColegiado" formControlName="nColegiado" (input)="formatCodigo()" type="text" placeholder="XX-12345" />
+      <div *ngIf="registroForm.get('nColegiado')?.invalid && registroForm.get('nColegiado')?.touched">
         El formato debe ser AB-12345.
       </div>
+
+      <label for="apellidos">Apellidos:</label>
+      <input id="apellidos" formControlName="apellidos" type="text" />
+
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" />
 
       <label for="experiencia">Experiencia:</label>
       <textarea id="experiencia" formControlName="experiencia" rows="3" cols="30"></textarea>
 
       <label for="especialidad">Especialidad:</label>
       <input id="especialidad" formControlName="especialidad" type="text" />
+
+      <label for="precio">Precio</label>
+      <input id="precio" formControlName="precio" type="number"/>
 
     </div>
 

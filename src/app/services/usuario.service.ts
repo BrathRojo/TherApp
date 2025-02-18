@@ -48,4 +48,6 @@ export class UsuarioService {
   hacerAdmin(email: String): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/haceradmin`, { email });
 }
+
+  
 }
