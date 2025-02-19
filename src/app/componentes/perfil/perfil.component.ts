@@ -7,6 +7,7 @@ import * as bootstrap from 'bootstrap';
 import { TerapeutaService } from '../../services/terapeuta.service';
 import { PublicacionService } from '../../services/publicacion.service';
 import { Publicacion } from '../../interfaces/publicacion';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -36,7 +37,7 @@ export class PerfilComponent implements OnInit {
   caducidad: Date = new Date();
   CCV: number = 0;
 
-  constructor(private http: HttpClient, private servicio: UsuarioService, private publicacionService: PublicacionService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
+  constructor(private http: HttpClient, private authService: AuthService, private servicio: UsuarioService, private publicacionService: PublicacionService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -174,7 +175,10 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerPublicaciones(){
+    const storedId = localStorage.getItem('usuarioId');
+    this.id=Number(storedId);
     this.publicacionService.obtenerPublicaciones(this.id).subscribe({
+      
       next:(publicaciones)=>{
         this.publicaciones = publicaciones.map(p=>({
           texto: p.texto,

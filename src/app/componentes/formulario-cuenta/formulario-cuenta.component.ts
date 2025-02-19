@@ -84,18 +84,36 @@ export class FormularioCuentaComponent implements OnInit {
       experiencia: this.registroForm.get('experiencia')?.value,
       especialidad: this.registroForm.get('especialidad')?.value,
       precio: this.registroForm.get('precio')?.value
+      
     };
-  
-    this.solicitudService.enviarSolicitud(solicitud).subscribe({
-      next: () => {
-        console.log("Solicitud enviada con éxito");
-      },
-      error: (error) => {
-        console.error("Error al enviar la solicitud:", error);
-      }
-    });
 
-    console.log('Datos del formulario:', this.registroForm.value);
+    const solicitudOrg = {
+      email: this.registroForm.get('email')?.value,
+      cif: this.registroForm.get('cif')?.value,
+      direccion: this.registroForm.get('direccion')?.value,
+      telefono: this.registroForm.get('telefono')?.value,
+      web: this.registroForm.get('web')?.value
+    };
     
+    if(solicitud != null){
+      this.solicitudService.enviarSolicitud(solicitud).subscribe({
+        next: () => {
+          console.log("Solicitud enviada con éxito");
+        },
+        error: (error) => {
+          console.error("Error al enviar la solicitud:", error);
+        }
+      });
+    }
+    else{
+      this.solicitudService.solicitudOrganizacion(solicitudOrg).subscribe({
+        next: ()=>{
+          console.log("Solicitud enviada con éxito");
+        },
+        error: (error) => {
+          console.error("Error al enviar la solicitud:", error);
+        }
+      });
+    }
   }
 }
