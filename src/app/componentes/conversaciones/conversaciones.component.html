@@ -9,7 +9,7 @@
     <ul>
       <li *ngFor="let conversacion of conversacionesFiltradas" (click)="abrirConversacion(conversacion)">
         <img [src]="conversacion.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
-        <span>{{ conversacion.username }} - {{ conversacion.nombre }}</span>
+        <span class="usuario-nombre">{{ conversacion.nombre }}</span>
       </li>
     </ul>
     <ng-container *ngIf="usuariosSeguidosSinConversacionFiltrados.length > 0">
@@ -17,7 +17,7 @@
       <ul>
         <li *ngFor="let usuario of usuariosSeguidosSinConversacionFiltrados" (click)="abrirConversacion(usuario)">
           <img [src]="usuario.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
-          <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
+          <span class="usuario-nombre">{{ usuario.nombre }}</span>
         </li>
       </ul>
     </ng-container>
@@ -26,7 +26,7 @@
       <ul>
         <li *ngFor="let usuario of masEnTherAppFiltrados" (click)="abrirConversacion(usuario)">
           <img [src]="usuario.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
-          <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
+          <span class="usuario-nombre">{{ usuario.nombre }}</span>
         </li>
       </ul>
     </ng-container>
