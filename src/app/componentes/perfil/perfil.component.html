@@ -48,7 +48,10 @@
   </div>
 </div>
 
-<app-publicacion></app-publicacion>
+<div *ngFor="let publicacion of publicaciones">
+  <app-publicacion [publicaciones]="publicaciones"></app-publicacion>
+</div>
+
 
 <!-- MODAL PARA EDITAR PERFIL -->
 <div class="modal fade" id="editarPerfilModal" tabindex="-1" aria-labelledby="editarPerfilLabel" aria-hidden="true">

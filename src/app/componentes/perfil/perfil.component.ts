@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsuarioService } from '../../services/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SeguidoresService } from '../../services/seguidores.service';
 import * as bootstrap from 'bootstrap';
 import { TerapeutaService } from '../../services/terapeuta.service';
+import { PublicacionService } from '../../services/publicacion.service';
+import { Publicacion } from '../../interfaces/publicacion';
 
 @Component({
   selector: 'app-perfil',
@@ -12,6 +14,8 @@ import { TerapeutaService } from '../../services/terapeuta.service';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
+
+  @Input() publicaciones: Publicacion[] = [];
 
   nombreUsuarioLogueado?: string;
   siguiendo: boolean = false;
@@ -32,13 +36,14 @@ export class PerfilComponent implements OnInit {
   caducidad: Date = new Date();
   CCV: number = 0;
 
-  constructor(private http: HttpClient, private usuarios: UsuarioService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
+  constructor(private http: HttpClient, private servicio: UsuarioService, private publicacionService: PublicacionService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.nombreUsuarioLogueado = localStorage.getItem('usuario')!;
       this.nombreUsuario = params['nombreUsuario'];
       this.cargarPerfil();
+      this.obtenerPublicaciones();
     });
   }
 
@@ -155,4 +160,21 @@ export class PerfilComponent implements OnInit {
       this.cargarPerfil();
     });
   }
+
+  obtenerPublicaciones(){
+    this.publicacionService.obtenerPublicaciones().subscribe({
+      next:(publicaciones)=>{
+        this.publicaciones = publicaciones.map(p=>({
+          texto: p.texto,
+          multimedia: [],
+          likes: 0,
+          comentarios: [],
+          mostrarInputComentario: false,
+          nuevoComentario:'',
+          liked:false
+        }));
+      }
+    })
+  }
+
 }
