@@ -33,6 +33,10 @@
     </div>
 
     <div *ngIf="modoCambio == 'organizacion'">
+
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" />
+
       <label for="cif">CIF:</label>
       <input id="cif" formControlName="cif" type="text" />
       

@@ -16,6 +16,8 @@ export class PublicacionService {
   }
 
   obtenerPublicaciones(id: number): Observable<Publicacion[]> {
+    const url = `${this.apiUrl}/buscarpublicaciones/${id}`;
+    console.log("URL enviada desde Angular:", url);  // 👈 DEBUG
     return this.http.get<Publicacion[]>(`${this.apiUrl}/buscarpublicaciones/${id}`);
   }
 }
