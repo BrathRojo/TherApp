@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,14 +11,15 @@ import { ChatService } from '../../services/chat.service';
 export class ChatComponent implements OnInit, OnChanges {
   @Input() usuarioId!: number;
   @Input() receptorId!: number;
+  @Input() nombreReceptor?: string;
+  @Input() fotoReceptor?: string;
   mensajes: any[] = [];
   nuevoMensaje: string = '';
   archivoSeleccionado?: File;
   selectedConversacion: any = {};
   roomId: string = '';
-  private roomSubscription: any;  // Variable para guardar la suscripción
 
-  constructor(private route: ActivatedRoute, private chatService: ChatService) { }
+  constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UsuarioService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -56,8 +58,8 @@ export class ChatComponent implements OnInit, OnChanges {
             // 🔹 Transformar los mensajes para incluir un objeto `emisor` y `receptor`
             this.mensajes = data.map(mensaje => ({
               ...mensaje,
-              emisor: { id: mensaje.emisorId },  // Crear un objeto con `id`
-              receptor: { id: mensaje.receptorId } // Crear un objeto con `id`
+              emisor: { id: mensaje.emisorId, nombre: mensaje.emisorNombre },  // Crear un objeto con `id`
+              receptor: { id: mensaje.receptorId, nombre: mensaje.receptorNombre } // Crear un objeto con `id`
             }));
   
             console.log("✅ Mensajes transformados:", this.mensajes);
@@ -88,6 +90,8 @@ export class ChatComponent implements OnInit, OnChanges {
           this.mensajes.push(mensajeEnviado); // Añadir el mensaje al array local
           this.nuevoMensaje = '';
           this.archivoSeleccionado = undefined;
+
+          this.cargarMensajes();
   
           // 🔽 Auto-scroll al último mensaje enviado
           setTimeout(() => {
@@ -99,6 +103,7 @@ export class ChatComponent implements OnInit, OnChanges {
           console.error('🚨 Error al enviar el mensaje:', error);
         }
       });
+
     }
   }  
 }
