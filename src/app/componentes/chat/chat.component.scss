@@ -38,12 +38,18 @@
   .input-section {
     display: flex;
     align-items: center; // 🔹 Alinear todos los elementos verticalmente
+    align-items: center; // 🔹 Alinear todos los elementos verticalmente
     margin-top: 10px;
+    gap: 10px; // 🔹 Espaciado entre elementos
+    flex-wrap: wrap; // 🔹 Asegurar buen comportamiento en pantallas pequeñas
     gap: 10px; // 🔹 Espaciado entre elementos
     flex-wrap: wrap; // 🔹 Asegurar buen comportamiento en pantallas pequeñas
 
     textarea {
       flex: 1;
+      min-height: 40px;
+      max-height: 100px;
+      resize: vertical; // 🔹 Permitir redimensionar solo en altura
       min-height: 40px;
       max-height: 100px;
       resize: vertical; // 🔹 Permitir redimensionar solo en altura
