@@ -30,7 +30,7 @@ export class ChatComponent implements OnInit, OnChanges {
       this.chatService.joinRoom(this.roomId);
   
       console.log("🛠 Usuario ID:", this.usuarioId, "Receptor ID:", this.receptorId);
-  
+      
       if (this.usuarioId > 0 && this.receptorId > 0) {
         this.cargarMensajes();
       } else {
@@ -49,6 +49,9 @@ export class ChatComponent implements OnInit, OnChanges {
   cargarMensajes(): void {
     if (this.usuarioId > 0 && this.receptorId > 0) {
       console.log("🔄 Cargando mensajes entre", this.usuarioId, "y", this.receptorId);
+      
+      console.log(this.nombreReceptor);
+      console.log(this.fotoReceptor);
   
       this.chatService.obtenerMensajes(this.usuarioId, this.receptorId).subscribe({
         next: (data) => {

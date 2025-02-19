@@ -1,9 +1,9 @@
 <div class="chat-container">
-  <div *ngIf="fotoReceptor && nombreReceptor" class="header-chat">
-    <img [src]="'http://localhost:9000/api/multimedia/files/' + fotoReceptor" alt="foto-usuario">
+  <div *ngIf="fotoReceptor || nombreReceptor" class="header-chat">
+    <img [src]="fotoReceptor !== null ? 'http://localhost:9000/api/multimedia/files/' + fotoReceptor : 'assets/default.png'" alt="foto-usuario">
     <p class="chat-name">{{ nombreReceptor }}</p>
   </div>
-  <div *ngIf="!fotoReceptor || !nombreReceptor" class="header-chat">
+  <div *ngIf="!fotoReceptor && !nombreReceptor" class="header-chat">
   </div>
   <div class="mensajes">
     <div
