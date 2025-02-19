@@ -10,17 +10,17 @@ import { Solicitud } from '../../interfaces/solicitud';
 @Component({
   selector: 'app-zonaadmin',
   templateUrl: './zonaadmin.component.html',
-  styleUrl: './zonaadmin.component.scss'
+  styleUrls: ['./zonaadmin.component.scss']
 })
-export class ZonaadminComponent implements OnInit{
+export class ZonaadminComponent implements OnInit {
 
   email: String = '';
+  solicitudes: any[] = [];
 
   constructor(private servicio: TerapeutaService, private usuarioService: UsuarioService, private solicitudService: SolicitudesService
     , private snackBar: MatSnackBar) { }
 
   @Input() terapeutas: Array<{ nombre: string, apellidos: string, premium: boolean, email: string }> = [];
-  @Input() solicitudes: Solicitud[] = [];
 
   ngOnInit(): void {
       this.cargarDatos();
@@ -45,16 +45,7 @@ export class ZonaadminComponent implements OnInit{
     this.solicitudService.recibirSolicitudes().subscribe({
       next:(solicitudes)=>{
         console.log("Solicitudes recibidas:", solicitudes); // 👀 Verifica qué se recibe
-        this.solicitudes = solicitudes.map(s=>({
-          id: s.id,
-          email: s.email,
-          apellidos: s.apellidos,
-          nColegiado: s.nColegiado,
-          experiencia: s.experiencia,
-          especialidad: s.especialidad,
-          precio: s.precio,
-          usuario_id: s.usuario_id
-        }));
+        this.solicitudes = solicitudes;
       },
       error: (err) => console.error('Error al obtener solicitudes:', err)
     })
@@ -82,7 +73,7 @@ export class ZonaadminComponent implements OnInit{
         response=>{
           console.log('Estado cambiado con éxito');
           this.snackBar.open('Cambio realizado con éxito', 'Cerrar', {duration:3000});
-          this.cargarDatos();
+          this.cargarSolicitudes(); // Recargar las solicitudes después de aprobar
         },
         error=>{
           console.log('Error al cambiar el estado');
@@ -98,7 +89,7 @@ export class ZonaadminComponent implements OnInit{
         response=>{
           console.log('Estado cambiado con éxito');
           this.snackBar.open('Cambio realizado con éxito', 'Cerrar', {duration:3000});
-          this.cargarDatos();
+          this.cargarSolicitudes(); // Recargar las solicitudes después de rechazar
         },
         error=>{
           console.log('Error al cambiar el estado');
