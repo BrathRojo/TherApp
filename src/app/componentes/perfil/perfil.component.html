@@ -34,7 +34,9 @@
   <!-- Botón para abrir el modal de edición -->
   <button class="btn-edit" (click)="abrirModal()">Editar</button>
 
-  <button *ngIf="nombreUsuario === nombreUsuarioLogueado && esTerapeuta" class="btn btn-edit" (click)="abrirPasarela()">Cambiar a premium</button>
+  <!-- Botón para cambiar a premium o cancelar suscripción -->
+  <button *ngIf="nombreUsuario === nombreUsuarioLogueado && esTerapeuta && !esPremium" class="btn btn-edit" (click)="abrirPasarela()">Cambiar a premium</button>
+  <button *ngIf="nombreUsuario === nombreUsuarioLogueado && esTerapeuta && esPremium" class="btn btn-cancelar" (click)="abrirModalCancelar()">Cancelar suscripción</button>
 
   <!-- Botones de cambio de cuenta -->
   <div class="account-buttons">
@@ -122,6 +124,25 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" (click)="cambiarAPremium()">Pagar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para cancelar suscripción -->
+<div class="modal fade" id="cancelarSuscripcionModal" tabindex="-1" aria-labelledby="cancelarSuscripcionLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cancelarSuscripcionLabel">Cancelar suscripción</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que quieres cancelar tu suscripción a TherApp premium?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="cancelarSuscripcion()">Sí, cancelar</button>
       </div>
     </div>
   </div>

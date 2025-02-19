@@ -32,6 +32,7 @@ export class PerfilComponent implements OnInit {
   caducidad: Date = new Date();
   CCV: number = 0;
   esTerapeuta: boolean = false;
+  esPremium: boolean = false;
 
   constructor(private http: HttpClient, private usuarios: UsuarioService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
 
@@ -45,6 +46,11 @@ export class PerfilComponent implements OnInit {
       const usuarioId = Number(localStorage.getItem('usuarioId'));
       this.usuarios.esTerapeuta(usuarioId).subscribe(esTerapeuta => {
         this.esTerapeuta = esTerapeuta;
+        if (esTerapeuta) {
+          this.terapeutaService.esPremium(usuarioId).subscribe(esPremium => {
+            this.esPremium = esPremium;
+          });
+        }
       });
     });
   }
@@ -100,6 +106,28 @@ export class PerfilComponent implements OnInit {
       this.modalInstance = new bootstrap.Modal(modalElement);
       this.modalInstance.show();
     };
+  }
+
+  abrirModalCancelar() {
+    const modalElement = document.getElementById('cancelarSuscripcionModal');
+    if (modalElement) {
+      this.modalInstance = new bootstrap.Modal(modalElement);
+      this.modalInstance.show();
+    }
+  }
+
+  cancelarSuscripcion() {
+    this.terapeutaService.cancelarPremium(this.email).subscribe({
+      next: () => {
+        alert('Suscripción cancelada con éxito.');
+        this.modalInstance?.hide();
+        this.esPremium = false;
+      },
+      error: err => {
+        console.error('Error al cancelar la suscripción:', err);
+        alert('Hubo un error al cancelar la suscripción.');
+      }
+    });
   }
 
   actualizarPerfil() {
