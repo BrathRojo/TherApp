@@ -34,6 +34,7 @@ export class SolicitudesService {
 
   recibirSolicitudes(): Observable<Solicitud[]>{
     return this.http.get<Solicitud[]>(`${this.apiUrl}/recogersolicitudes`);
+ 
   }
 
   recibirSolicitudesOrg(): Observable<Solicitud[]>{
