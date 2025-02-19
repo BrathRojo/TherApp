@@ -162,7 +162,7 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerPublicaciones(){
-    this.publicacionService.obtenerPublicaciones().subscribe({
+    this.publicacionService.obtenerPublicaciones(this.id).subscribe({
       next:(publicaciones)=>{
         this.publicaciones = publicaciones.map(p=>({
           texto: p.texto,
