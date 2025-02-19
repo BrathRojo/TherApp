@@ -39,4 +39,8 @@ export class TerapeutaService {
   cambiarPremium(email: string): Observable<void>{
     return this.http.post<void>(`${this.apiUrl}/cambiarPremium`, email);
   }
+
+  hacerPremium(email: String): Observable<void>{
+    return this.http.post<void>(`${this.apiUrl}/hacerpremium`,  email );
+  }
 }

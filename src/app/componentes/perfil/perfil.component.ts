@@ -4,6 +4,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SeguidoresService } from '../../services/seguidores.service';
 import * as bootstrap from 'bootstrap';
+import { TerapeutaService } from '../../services/terapeuta.service';
 
 @Component({
   selector: 'app-perfil',
@@ -27,7 +28,11 @@ export class PerfilComponent implements OnInit {
   selectedFile?: File;
   modalInstance?: bootstrap.Modal;
 
-  constructor(private http: HttpClient, private servicio: UsuarioService, private route: ActivatedRoute, private seguidores: SeguidoresService, private router: Router) {}
+  numtarjeta: String = '';
+  caducidad: Date = new Date();
+  CCV: number = 0;
+
+  constructor(private http: HttpClient, private servicio: UsuarioService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -55,12 +60,39 @@ export class PerfilComponent implements OnInit {
     });
   }
 
+  cambiarAPremium(){
+    const datosBancarios = {
+      numtarjeta: this.numtarjeta,
+      caducidad: this.caducidad,
+      CCV: this.CCV
+    }
+
+    this.terapeutaService.hacerPremium(this.email).subscribe({
+      next: () => {
+        alert('Pago realizado con éxito.');
+        this.modalInstance?.hide();
+      },
+      error: err => {
+        console.error('Error al realizar el pago:', err);
+        alert('Hubo un error al actualizar el perfil.');
+      }
+    });
+  }
+
   abrirModal() {
     const modalElement = document.getElementById('editarPerfilModal');
     if (modalElement) {
       this.modalInstance = new bootstrap.Modal(modalElement);
       this.modalInstance.show();
-    }
+    };
+  }
+
+  abrirPasarela(){
+    const modalElement = document.getElementById('pasarelaPagosModal');
+    if (modalElement) {
+      this.modalInstance = new bootstrap.Modal(modalElement);
+      this.modalInstance.show();
+    };
   }
 
   actualizarPerfil() {

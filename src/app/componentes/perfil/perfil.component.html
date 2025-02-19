@@ -35,6 +35,8 @@
   <!-- Botón para abrir el modal de edición -->
   <button class="btn-edit" (click)="abrirModal()">Editar</button>
 
+  <button class="btn btn-edit" (click)="abrirPasarela()">Cambiar a premium</button>
+
   <!-- Botones de cambio de cuenta -->
   <div class="account-buttons">
     <a routerLink="/cambioCuenta/terapeuta" class="btn-switch terapeuta">
@@ -88,6 +90,39 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" (click)="actualizarPerfil()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para la pasarela de pagos -->
+<div class="modal fade" id="pasarelaPagosModal" tabindex="-1" aria-labelledby="pasarelaPagosLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pagosLabel">Completar pago</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Número de la tarjeta:</label>
+            <input type="text" class="form-control" [(ngModel)]="numtarjeta" name="numtarjeta">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Fecha de caducidad:</label>
+            <input type="date" class="form-control" [(ngModel)]="caducidad" name="caducidad">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">CCV:</label>
+            <input type="number" class="form-control" [(ngModel)]="CCV" name="ccv">
+          </div>
+        </form>
+        <h5>Importe: 20 €/mes</h5> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="cambiarAPremium()">Pagar</button>
       </div>
     </div>
   </div>
