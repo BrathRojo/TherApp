@@ -45,7 +45,7 @@ export class PerfilComponent implements OnInit {
   cargarPerfil() {
     this.usuarios.getPerfilUsuario(this.nombreUsuario).subscribe(usuario => {
       this.id = usuario.id;
-      this.foto = usuario.fotoPerfil ? usuario.fotoPerfil : 'assets/default.png';
+      this.foto = usuario.fotoPerfil ? usuario.fotoPerfil : 'default.png';
       this.nombreUsuario = usuario.username;
       this.nombre = usuario.nombre;
       this.email = usuario.email;
