@@ -43,5 +43,5 @@ export class UsuarioService {
     return this.http.put(`${this.apiUrl}/${nombreUsuario}`, perfil, {
       headers: { 'Content-Type': 'application/json' }
     });
-  }
+  }  
 }

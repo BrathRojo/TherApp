@@ -13,6 +13,7 @@ export class ChatComponent implements OnInit, OnChanges {
   mensajes: any[] = [];
   nuevoMensaje: string = '';
   archivoSeleccionado?: File;
+  selectedConversacion: any = {};
 
   constructor(private route: ActivatedRoute, private chatService: ChatService) {}
 
@@ -29,7 +30,7 @@ export class ChatComponent implements OnInit, OnChanges {
         console.warn('⚠️ ID de usuario o receptor no válido. Mensajes no cargados.');
       }
     });
-  }
+  }  
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['receptorId'] && changes['receptorId'].currentValue > 0) {
@@ -47,16 +48,18 @@ export class ChatComponent implements OnInit, OnChanges {
           console.log('🔍 Mensajes recibidos:', data);
   
           if (Array.isArray(data) && data.length > 0) {
-            this.mensajes = [...data]; // ✅ Guardar mensajes en la variable
-          } else {
-            this.mensajes = []; // Si no hay mensajes, vaciar el array
-          }
+            // 🔹 Transformar los mensajes para incluir un objeto `emisor` y `receptor`
+            this.mensajes = data.map(mensaje => ({
+              ...mensaje,
+              emisor: { id: mensaje.emisorId },  // Crear un objeto con `id`
+              receptor: { id: mensaje.receptorId } // Crear un objeto con `id`
+            }));
   
-          // 🔽 Auto-scroll al último mensaje después de cargar la conversación
-          setTimeout(() => {
-            const chatContainer = document.querySelector('.chat-container');
-            if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
-          }, 200);
+            console.log("✅ Mensajes transformados:", this.mensajes);
+          } else {
+            console.warn('⚠️ No hay mensajes para mostrar.');
+            this.mensajes = [];
+          }
         },
         error: (error) => {
           console.error('🚨 Error al cargar los mensajes:', error);
@@ -64,7 +67,7 @@ export class ChatComponent implements OnInit, OnChanges {
         }
       });
     }
-  }
+  }  
   
   seleccionarArchivo(event: any): void {
     if (event.target.files.length > 0) {

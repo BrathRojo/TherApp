@@ -19,7 +19,7 @@ export class ConversacionesComponent implements OnInit {
   usuariosSeguidosSinConversacionFiltrados: Usuario[] = [];
   masEnTherApp: Usuario[] = [];
   masEnTherAppFiltrados: Usuario[] = [];
-  selectedConversacion?: Usuario;
+  selectedConversacion?: Usuario | null = null;//garantizar que no sea undefined
   searchQuery: string = '';
   private searchTerms = new Subject<string>();
 
@@ -55,14 +55,15 @@ export class ConversacionesComponent implements OnInit {
   cargarConversaciones(): void {
     this.chatService.obtenerConversaciones(this.userId).subscribe({
       next: (conversaciones) => {
-        this.conversaciones = conversaciones;
+        console.log('✅ Conversaciones recibidas:', conversaciones);  // 🔥 Muestra los datos en la consola
+        this.conversaciones = conversaciones;  // 📌 Guardamos las conversaciones correctamente
         this.conversacionesFiltradas = conversaciones;
       },
       error: (error) => {
-        console.error('Error al cargar las conversaciones:', error);
+        console.error('🚨 Error al cargar las conversaciones:', error);
       }
     });
-  }
+  }  
 
   cargarUsuariosSeguidosSinConversacion(): void {
     this.usuarioService.obtenerUsuariosSeguidosSinConversacion(this.userId).subscribe({
@@ -121,8 +122,29 @@ export class ConversacionesComponent implements OnInit {
     );
   }
 
-  abrirConversacion(usuario: Usuario): void {
-    this.selectedConversacion = usuario;
-    this.router.navigate(['/chat', usuario.id]);
-  }
+  //METODO ANTERIOR ANTERIOR 
+  // abrirConversacion(usuario: Usuario): void {
+  //   this.selectedConversacion = usuario;
+  //   this.router.navigate(['/chat', usuario.id]);
+  // }
+  abrirConversacion(usuario: Usuario | null): void {
+    if (usuario && usuario.id) {
+      console.log("✅ Usuario seleccionado:", usuario);  // 🔥 Muestra el usuario seleccionado
+      this.selectedConversacion = usuario;
+  
+      // ✅ Pasar correctamente el `id` del usuario receptor a la URL
+      this.router.navigate(['/chat', usuario.id]);
+    } else {
+      console.error('🚨 Error: usuario no válido en abrirConversacion');
+      this.selectedConversacion = { 
+        id: 0, 
+        username: 'Desconocido', 
+        nombre: 'Desconocido', 
+        email: '', 
+        fotoPerfil: '',
+        telefono: '',
+        fechaNacimiento: new Date(),
+      };
+    }
+  }  
 }

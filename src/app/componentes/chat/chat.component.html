@@ -1,9 +1,12 @@
 <div class="chat-container">
   <div *ngFor="let mensaje of mensajes" class="mensaje"
-       [ngClass]="{'emisor': mensaje.emisor.id === usuarioId, 'receptor': mensaje.receptor.id === usuarioId}">
+  [ngClass]="{
+    'emisor': mensaje.emisor?.id === usuarioId, 
+    'receptor': mensaje.receptor?.id === usuarioId
+  }">
 
     <!-- Mostrar el nombre del emisor -->
-    <strong>{{ mensaje.emisor.nombre || 'Usuario' }}:</strong> {{ mensaje.contenido }}
+    <strong>{{ mensaje.emisor?.nombre || 'Usuario' }}:</strong> {{ mensaje.contenido }}
 
     <!-- ✅ Mostrar imagen si el mensaje tiene un archivo adjunto y es una imagen -->
     <div *ngIf="mensaje.archivoUrl">
