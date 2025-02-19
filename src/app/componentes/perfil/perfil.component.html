@@ -34,7 +34,7 @@
   <!-- Botón para abrir el modal de edición -->
   <button class="btn-edit" (click)="abrirModal()">Editar</button>
 
-  <button class="btn btn-edit" (click)="abrirPasarela()">Cambiar a premium</button>
+  <button *ngIf="nombreUsuario === nombreUsuarioLogueado && esTerapeuta" class="btn btn-edit" (click)="abrirPasarela()">Cambiar a premium</button>
 
   <!-- Botones de cambio de cuenta -->
   <div class="account-buttons">
