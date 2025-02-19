@@ -13,40 +13,58 @@ export class ChatComponent implements OnInit, OnChanges {
   mensajes: any[] = [];
   nuevoMensaje: string = '';
   archivoSeleccionado?: File;
+  roomId: string = '';
+  private roomSubscription: any;  // Variable para guardar la suscripción
 
-  constructor(private route: ActivatedRoute, private chatService: ChatService) {}
+  constructor(private route: ActivatedRoute, private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      // this.usuarioId = Number(params['usuarioId']) || 0;
-      // this.receptorId = Number(params['receptorId']) || 0;
+      this.usuarioId = Number(localStorage.getItem('usuarioId')) || 0;
+      this.receptorId = Number(params['receptorId']) || 0;
+      
+      this.roomId = this.usuarioId > this.receptorId ? `${this.receptorId}-${this.usuarioId}` : `${this.usuarioId}-${this.receptorId}`;
+      this.chatService.joinRoom(this.roomId);
+
+      console.log("🛠 Usuario ID:", this.usuarioId, "Receptor ID:", this.receptorId);
 
       if (this.usuarioId > 0 && this.receptorId > 0) {
         this.cargarMensajes();
       } else {
-        console.error('Error: usuarioId o receptorId no son válidos.', this.usuarioId, this.receptorId);
+        console.warn('⚠️ ID de usuario o receptor no válido. Mensajes no cargados.');
       }
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('🔄 Cambios en las propiedades:', changes);
-    
-    if (changes) { 
-      this.cargarMensajes();
+    if (changes['receptorId'] && changes['receptorId'].currentValue > 0) {
+      console.log("🔄 Cambio detectado en receptorId:", changes['receptorId'].currentValue);
+      this.cargarMensajes(); // Recargar la conversación
     }
   }
 
   cargarMensajes(): void {
     if (this.usuarioId > 0 && this.receptorId > 0) {
-      this.chatService.obtenerMensajes(this.usuarioId, this.receptorId).subscribe({
-        next: (data) => {
+      console.log("🔄 Cargando mensajes entre", this.usuarioId, "y", this.receptorId);
+
+      // Verificar si ya estamos suscritos a esta roomId
+      if (this.roomSubscription) {
+        this.roomSubscription.unsubscribe();  // Desuscribirse de la anterior suscripción
+      }
+      this.chatService.obtenerMensajes(this.usuarioId, this.receptorId).subscribe(data =>
+        this.mensajes = data
+      );
+
+      this.roomId = this.usuarioId > this.receptorId ? `${this.receptorId}-${this.usuarioId}` : `${this.usuarioId}-${this.receptorId}`;
+      
+      // Suscribirse al WebSocket
+      this.roomSubscription = this.chatService.joinRoom(this.roomId).subscribe({
+        next: (data: any) => {
           console.log('🔍 Mensajes recibidos:', data);
-          this.mensajes = Array.isArray(data) ? [...data] : [];
+          this.mensajes = data || [];
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('🚨 Error al cargar los mensajes:', error);
-          this.mensajes = [];
         }
       });
     }
@@ -63,11 +81,12 @@ export class ChatComponent implements OnInit, OnChanges {
       this.chatService.enviarMensaje(this.usuarioId, this.receptorId, this.nuevoMensaje, this.archivoSeleccionado).subscribe({
         next: (mensajeEnviado) => {
           console.log('✅ Mensaje enviado:', mensajeEnviado);
-
-          this.mensajes.push(mensajeEnviado);
+          this.chatService.sendMessage(this.roomId, { message: this.nuevoMensaje, user: this.usuarioId });
+          this.mensajes.push(mensajeEnviado); // Añadir el mensaje al array local
           this.nuevoMensaje = '';
           this.archivoSeleccionado = undefined;
 
+          // 🔽 Auto-scroll al último mensaje enviado
           setTimeout(() => {
             const chatContainer = document.querySelector('.chat-container');
             if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;

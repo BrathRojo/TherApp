@@ -1,6 +1,9 @@
 <div class="chat-container">
-  <div *ngFor="let mensaje of mensajes">
-    <strong>{{ mensaje.emisorNombre || 'Usuario' }}:</strong> {{ mensaje.contenido }}
+  <div *ngFor="let mensaje of mensajes" class="mensaje" 
+  [ngClass]="{'emisor': mensaje.emisor?.id === usuarioId, 'receptor': mensaje.receptor?.id === usuarioId}">
+
+    <!-- Mostrar el nombre del emisor -->
+    <strong>{{ mensaje.emisor?.nombre || 'Usuario' }}:</strong> {{ mensaje.contenido }}
 
     <!-- ✅ Mostrar imagen si el mensaje tiene un archivo adjunto y es una imagen -->
     <div *ngIf="mensaje.archivoUrl">
@@ -15,20 +18,21 @@
 
       <!-- ✅ Agregar botón de descarga -->
       <a [href]="'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl"
-         download
-         target="_blank"
-         rel="noopener noreferrer">
-        <button>Descargar</button>
+        download
+        target="_blank"
+        rel="noopener noreferrer"
+        class="download-button">
+        Descargar
       </a>
     </div>
   </div>
 
+  <!-- ✅ Sección de entrada de mensajes -->
   <div class="input-section">
     <textarea [(ngModel)]="nuevoMensaje" placeholder="Escribe un mensaje..."></textarea>
 
-    <!-- ✅ Input para seleccionar un archivo -->
-    <input type="file" (change)="seleccionarArchivo($event)">
-    
+    <input type="file" id="file-upload" class="file-input" (change)="seleccionarArchivo($event)">
+    <label for="file-upload" class="file-label">Seleccionar archivo</label>
     <button (click)="enviarMensaje()">Enviar</button>
   </div>
 </div>
