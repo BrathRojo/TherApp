@@ -142,6 +142,22 @@
   }
 }
 
+.btn-cancelar {
+  background-color: #6c757d; /* Gris */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: darken(#6c757d, 10%);
+  }
+}
+
 .modal-content {
   border-radius: 10px;
 }
