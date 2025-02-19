@@ -14,4 +14,8 @@ export class PublicacionService {
   crearPublicacion(formData: FormData): Observable<Publicacion> {
     return this.http.post<Publicacion>(this.apiUrl, formData);
   }
+
+  obtenerPublicaciones(): Observable<Publicacion[]>{
+    return this.http.get<Publicacion[]>(`${this.apiUrl}/buscarpublicaciones`);
+  }
 }

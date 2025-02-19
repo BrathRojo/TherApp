@@ -10,53 +10,7 @@ import { Comentario } from '../../interfaces/comentario';
   styleUrls: ['./publicacion.component.scss']
 })
 export class PublicacionComponent {
-  @Input() publicacion!: Publicacion;
-  publicaciones: Publicacion[] = [
-    {
-      titulo: 'Esta es una publicación de texto.',
-      multimedia: [],
-      likes: 0,
-      comentarios: [],
-      mostrarInputComentario: false,
-      nuevoComentario: '',
-      liked: false
-    },
-    {
-      titulo: 'Esta es una publicación con imagen y video.',
-      multimedia: [
-        { tipo: 'imagen', url: 'https://picsum.photos/200', titulo:'' },
-        { tipo: 'video', url: 'https://www.w3schools.com/html/mov_bbb.mp4', titulo:'' }
-      ],
-      likes: 0,
-      comentarios: [],
-      mostrarInputComentario: false,
-      nuevoComentario: '',
-      liked: false
-    },
-    {
-      titulo: 'Esta es una publicación con imagen.',
-      multimedia: [
-        { tipo: 'imagen', url: 'https://via.placeholder.com/150', titulo:'' },
-      ],
-      likes: 0,
-      comentarios: [],
-      mostrarInputComentario: false,
-      nuevoComentario: '',
-      liked: false
-    },
-    {
-      titulo: 'Esta es una publicación con múltiples imágenes.',
-      multimedia: [
-        { tipo: 'imagen', url: 'https://picsum.photos/200', titulo:'' },
-        { tipo: 'imagen', url: 'https://picsum.photos/id/237/200/300', titulo:'' }
-      ],
-      likes: 0,
-      comentarios: [],
-      mostrarInputComentario: false,
-      nuevoComentario: '',
-      liked: false
-    }
-  ];
+  @Input() publicaciones: Publicacion[] = [];
 
   selectedPublicacion: Publicacion | null = null;
 

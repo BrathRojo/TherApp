@@ -19,7 +19,7 @@ export class CursosComponent implements OnInit {
       next: (videos: Multimedia[]) => {
         // Transformamos cada objeto Multimedia en una Publicacion
         this.publicaciones = videos.map(video => ({
-          titulo: video.titulo, // Puedes personalizar este texto
+          texto: video.titulo, // Puedes personalizar este texto
           multimedia: [video], // Se incluye el video o imagen
           likes: 0,
           comentarios: [],

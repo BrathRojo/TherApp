@@ -2,7 +2,7 @@ import { Comentario } from "./comentario";
 import { Multimedia } from "./multimedia";
 
 export interface Publicacion {
-  titulo: string;
+  texto: string;
   multimedia: Multimedia[];
   likes: number;
   comentarios: Comentario[];
