@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../interfaces/usuario';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { AuthService } from './auth.service';
 export class UsuarioService {
   private apiUrl = 'http://localhost:9000/api/usuarios';
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   getPerfilUsuario(nombre: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/get/${nombre}`);

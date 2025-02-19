@@ -14,13 +14,18 @@ export class ChatComponent implements OnInit, OnChanges {
   nuevoMensaje: string = '';
   archivoSeleccionado?: File;
   selectedConversacion: any = {};
+  roomId: string = '';
+  private roomSubscription: any;  // Variable para guardar la suscripción
 
-  constructor(private route: ActivatedRoute, private chatService: ChatService) {}
+  constructor(private route: ActivatedRoute, private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.usuarioId = Number(localStorage.getItem('usuarioId')) || 0;
       this.receptorId = Number(params['receptorId']) || 0;
+
+      this.roomId = this.usuarioId > this.receptorId ? `${this.receptorId}-${this.usuarioId}` : `${this.usuarioId}-${this.receptorId}`;
+      this.chatService.joinRoom(this.roomId);
   
       console.log("🛠 Usuario ID:", this.usuarioId, "Receptor ID:", this.receptorId);
   
@@ -61,9 +66,8 @@ export class ChatComponent implements OnInit, OnChanges {
             this.mensajes = [];
           }
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('🚨 Error al cargar los mensajes:', error);
-          this.mensajes = [];
         }
       });
     }
@@ -80,7 +84,7 @@ export class ChatComponent implements OnInit, OnChanges {
       this.chatService.enviarMensaje(this.usuarioId, this.receptorId, this.nuevoMensaje, this.archivoSeleccionado).subscribe({
         next: (mensajeEnviado) => {
           console.log('✅ Mensaje enviado:', mensajeEnviado);
-  
+          this.chatService.sendMessage(this.roomId, { message: this.nuevoMensaje, user: this.usuarioId });
           this.mensajes.push(mensajeEnviado); // Añadir el mensaje al array local
           this.nuevoMensaje = '';
           this.archivoSeleccionado = undefined;
