@@ -54,9 +54,9 @@ export class UsuarioService {
 
   hacerAdmin(email: String): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/haceradmin`, { email });
-}
+  }
 
-  
-
-  
+  esTerapeuta(usuarioId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/${usuarioId}/esTerapeuta`);
+  }
 }

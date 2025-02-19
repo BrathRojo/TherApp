@@ -31,6 +31,7 @@ export class PerfilComponent implements OnInit {
   numtarjeta: String = '';
   caducidad: Date = new Date();
   CCV: number = 0;
+  esTerapeuta: boolean = false;
 
   constructor(private http: HttpClient, private usuarios: UsuarioService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
 
@@ -39,6 +40,12 @@ export class PerfilComponent implements OnInit {
       this.nombreUsuarioLogueado = localStorage.getItem('usuario')!;
       this.nombreUsuario = params['nombreUsuario'];
       this.cargarPerfil();
+
+      // Verificar si el usuario logueado es terapeuta
+      const usuarioId = Number(localStorage.getItem('usuarioId'));
+      this.usuarios.esTerapeuta(usuarioId).subscribe(esTerapeuta => {
+        this.esTerapeuta = esTerapeuta;
+      });
     });
   }
 
