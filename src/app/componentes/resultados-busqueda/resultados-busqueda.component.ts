@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../interfaces/usuario';
+import { SeguidoresService } from '../../services/seguidores.service';
 
 @Component({
   selector: 'app-resultados-busqueda',
@@ -12,14 +13,19 @@ export class ResultadosBusquedaComponent implements OnInit {
   searchQuery: string = '';
   resultadosBusqueda: Usuario[] = [];
   seguidoresComunes: { [key: string]: Usuario[] } = {};
+  siguiendo: { usuarioId: number, seguido: boolean }[] = [];
+  nombreUsuarioLogueado?: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private seguidorService: SeguidoresService
   ) {}
 
   ngOnInit(): void {
+    this.nombreUsuarioLogueado = localStorage.getItem('usuario')!;
+
     this.route.queryParams.subscribe(params => {
       this.searchQuery = params['query'] || '';
       if (this.searchQuery) {
@@ -34,6 +40,9 @@ export class ResultadosBusquedaComponent implements OnInit {
         this.resultadosBusqueda = usuarios;
         this.resultadosBusqueda.forEach(usuario => {
           this.obtenerSeguidoresComunes(usuario.id);
+          this.seguidorService.estaSiguiendo(Number(localStorage.getItem('usuarioId'))!, usuario.id).subscribe(seguir => {
+            this.siguiendo.push({usuarioId: usuario.id, seguido: seguir});
+          });
         });
       },
       error: (error) => {
@@ -66,5 +75,32 @@ export class ResultadosBusquedaComponent implements OnInit {
 
   verPerfil(username: string): void {
     this.router.navigate(['/perfil', username]);
+  }
+
+  seguir(id: number) {
+    this.seguidorService.seguirUsuario(Number(localStorage.getItem('usuarioId'))!, id).subscribe(() => {
+      const usuarioSeguido = this.siguiendo.find(u => u.usuarioId === id);
+      if (usuarioSeguido) {
+        usuarioSeguido.seguido = true;
+      } else {
+        this.siguiendo.push({ usuarioId: id, seguido: true });
+      }
+    });
+  }
+  
+
+  dejarDeSeguir(id: number) {
+    this.seguidorService.dejarDeSeguirUsuario(Number(localStorage.getItem('usuarioId'))!, id).subscribe(() => {
+      const usuarioSeguido = this.siguiendo.find(u => u.usuarioId === id);
+      if (usuarioSeguido) {
+        usuarioSeguido.seguido = false;
+      }
+    });
+  }
+  
+
+  getEstaSiguiendo(usuarioId: number) {
+    const esSeguidor = this.siguiendo.find(m => m.usuarioId === usuarioId);
+    return esSeguidor?.seguido;
   }
 }

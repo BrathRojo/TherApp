@@ -4,13 +4,23 @@
   <h2>Resultados de búsqueda para "{{ searchQuery }}"</h2>
   <div *ngIf="resultadosBusqueda.length > 0; else noResults">
     <div *ngFor="let usuario of resultadosBusqueda" class="usuario-card" (click)="verPerfil(usuario.username)">
-      <img [src]="usuario.fotoPerfil !== null ? 'http://localhost:9000/api/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
-      <div class="usuario-info">
-        <h3>{{ usuario.nombre }}</h3>
-        <p>&#64;{{ usuario.username }}</p>
-        <div *ngIf="seguidoresComunes[usuario.id].length > 0">
-          <p>{{ getSeguidoresComunesText(usuario.id) }}</p>
+      <div>
+        <img [src]="usuario.fotoPerfil !== null ? 'http://localhost:9000/api/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+        <div class="usuario-info">
+          <h3>{{ usuario.nombre }}</h3>
+          <p>&#64;{{ usuario.username }}</p>
+          <div *ngIf="seguidoresComunes[usuario.id].length > 0">
+            <p>{{ getSeguidoresComunesText(usuario.id) }}</p>
+          </div>
         </div>
+      </div>
+      <div class="contenedor-btn-seguir" *ngIf="usuario.username !== nombreUsuarioLogueado" (click)="$event.stopPropagation()">
+        <button class="seguir" *ngIf="!getEstaSiguiendo(usuario.id)" (click)="seguir(usuario.id); $event.stopPropagation()">
+          Seguir <i class="bi bi-plus"></i>
+        </button>
+        <button class="siguiendo" *ngIf="getEstaSiguiendo(usuario.id)" (click)="dejarDeSeguir(usuario.id); $event.stopPropagation()">
+          Siguiendo <i class="bi bi-check"></i>
+        </button>
       </div>
     </div>
   </div>

@@ -8,8 +8,16 @@
       <i class="bi bi-camera"></i>
     </button>
   </div>
-  
   <input id="fotoInput" type="file" accept="image/*" (change)="onFileSelected($event)"/>
+
+  <div class="contenedor-btn-seguir" *ngIf="nombreUsuario !== nombreUsuarioLogueado">
+    <button class="seguir" *ngIf="!siguiendo" (click)="seguir()">
+      Seguir <i class="bi bi-plus"></i>
+    </button>
+    <button class="siguiendo" *ngIf="siguiendo" (click)="dejarDeSeguir()">
+      Siguiendo <i class="bi bi-check"></i>
+    </button>
+  </div>
 
   <!-- Información del perfil -->
   <div class="profile-info">
@@ -20,15 +28,6 @@
     <p><span>Fecha de Nacimiento:</span> {{ fechaNacimiento | date }}</p>
     <p><span>Biografía:</span> {{ biografia }}</p>
     <p><span>Ubicación:</span> {{ ubicacion }}</p>
-  </div>
-
-  <div *ngIf="nombreUsuario !== nombreUsuarioLogueado">
-    <button *ngIf="!siguiendo" (click)="seguir()">
-      Seguir <i class="bi bi-plus"></i>
-    </button>
-    <button *ngIf="siguiendo" (click)="dejarDeSeguir()">
-      Siguiendo <i class="bi bi-check"></i>
-    </button>
   </div>
 
   <!-- Botón para abrir el modal de edición -->
