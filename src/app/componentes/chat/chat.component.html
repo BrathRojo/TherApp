@@ -1,85 +1,102 @@
 <div class="chat-container">
-  <div *ngIf="fotoReceptor && nombreReceptor" class="header-chat">
-    <img [src]="'http://localhost:9000/api/multimedia/files/' + fotoReceptor" alt="foto-usuario">
-    <p class="chat-name">{{ nombreReceptor }}</p>
-  </div>
-  <div *ngIf="!fotoReceptor || !nombreReceptor" class="header-chat">
-  </div>
-  <div class="mensajes">
-    <div
-      *ngFor="let mensaje of mensajes"
-      class="mensaje"
-      [ngClass]="{
-        emisor: mensaje.emisor?.id === usuarioId,
-        receptor: mensaje.receptor?.id === usuarioId
-      }"
-    >
-      <!-- Mostrar el nombre del emisor -->
-      <strong>{{ mensaje.emisor?.nombre }}: </strong>
-      {{ mensaje.contenido }}
-
-      <!-- ✅ Mostrar imagen si el mensaje tiene un archivo adjunto y es una imagen -->
-      <div *ngIf="mensaje.archivoUrl">
+  <div *ngIf="conversacionActiva">
+    <div class="header-chat">
+      <div>
         <img
-          *ngIf="
-            mensaje.archivoUrl.endsWith('.jpg') ||
-            mensaje.archivoUrl.endsWith('.png') ||
-            mensaje.archivoUrl.endsWith('.jpeg')
-          "
-          [src]="
-            'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl
-          "
-          width="200"
-          alt="Imagen adjunta"
+        [src]="fotoReceptor !== null ? 'http://localhost:9000/api/multimedia/files/' + fotoReceptor : 'assets/default.png'"
+        alt="foto-usuario"
         />
+        <p class="chat-name">{{ nombreReceptor }}</p>
+      </div>
+      <button (click)="cerrarChat()" class="cerrar-chat">X</button>
+    </div>
+    <div class="mensajes">
+      <div
+        *ngFor="let mensaje of mensajes"
+        class="mensaje"
+        [ngClass]="{
+          emisor: mensaje.emisor?.id === usuarioId,
+          receptor: mensaje.receptor?.id === usuarioId
+        }"
+      >
+        <!-- Mostrar el nombre del emisor -->
+        <strong style="margin-right: 5px;">{{ mensaje.emisor?.nombre }}:</strong>
+        {{ mensaje.contenido }}
 
-        <!-- ✅ Mostrar video si el mensaje tiene un archivo adjunto y es un video -->
-        <video
-          *ngIf="
-            mensaje.archivoUrl.endsWith('.mp4') ||
-            mensaje.archivoUrl.endsWith('.mov')
-          "
-          controls
-          width="200"
-        >
-          <source
+        <!-- ✅ Mostrar imagen si el mensaje tiene un archivo adjunto y es una imagen -->
+        <div *ngIf="mensaje.archivoUrl">
+          <img
+            *ngIf="
+              mensaje.archivoUrl.endsWith('.jpg') ||
+              mensaje.archivoUrl.endsWith('.png') ||
+              mensaje.archivoUrl.endsWith('.webp') ||
+              mensaje.archivoUrl.endsWith('.jpeg')
+            "
             [src]="
               'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl
             "
-            type="video/mp4"
+            width="200"
+            alt="Imagen adjunta"
           />
-        </video>
 
-        <!-- ✅ Agregar botón de descarga -->
-        <a
-          [href]="
-            'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl
-          "
-          download
-          target="_blank"
-          rel="noopener noreferrer"
-          class="download-button"
-        >
-          Descargar
-        </a>
+          <!-- ✅ Mostrar video si el mensaje tiene un archivo adjunto y es un video -->
+          <video
+            *ngIf="
+              mensaje.archivoUrl.endsWith('.mp4') ||
+              mensaje.archivoUrl.endsWith('.mov')
+            "
+            controls
+            width="200"
+          >
+            <source
+              [src]="
+                'http://localhost:9000/api/multimedia/files/' +
+                mensaje.archivoUrl
+              "
+              type="video/mp4"
+            />
+          </video>
+
+          <!-- ✅ Agregar botón de descarga -->
+          <a
+            [href]="
+              'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl
+            "
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            class="download-button"
+          >
+            Descargar
+          </a>
+        </div>
+        <div *ngIf="mensaje.emisor?.id === usuarioId" class="mensaje-status">
+          <i *ngIf="!mensaje.visto" class="bi bi-check2-all"></i>
+          <i *ngIf="mensaje.visto" class="bi bi-check2-all visto"></i>
+        </div>
       </div>
     </div>
+
+    <!-- ✅ Sección de entrada de mensajes -->
+    <div class="input-section">
+      <textarea
+        [(ngModel)]="nuevoMensaje"
+        placeholder="Escribe un mensaje..."
+      ></textarea>
+
+      <input
+        type="file"
+        id="file-upload"
+        class="file-input"
+        (change)="seleccionarArchivo($event)"
+      />
+      <label for="file-upload" class="file-label">Seleccionar archivo</label>
+      <button (click)="enviarMensaje()">Enviar</button>
+    </div>
   </div>
-
-  <!-- ✅ Sección de entrada de mensajes -->
-  <div class="input-section">
-    <textarea
-      [(ngModel)]="nuevoMensaje"
-      placeholder="Escribe un mensaje..."
-    ></textarea>
-
-    <input
-      type="file"
-      id="file-upload"
-      class="file-input"
-      (change)="seleccionarArchivo($event)"
-    />
-    <label for="file-upload" class="file-label">Seleccionar archivo</label>
-    <button (click)="enviarMensaje()">Enviar</button>
+  <div *ngIf="!conversacionActiva" class="inicio-chat">
+    <img src="assets/Icono.jpeg" alt="LogoTherApp">
+    <h4>TherApp Chat</h4>
+    <p>Envía y recibe mensaje con otras personas de nuestra plataforma</p>
   </div>
 </div>

@@ -62,6 +62,11 @@ export class ChatService {
     return this.http.post<any>(`${this.apiUrl}/chat/${usuarioId}/${receptorId}`, formData);
   }
   
+  obtenerMensajesSinLeer(usuarioId: number, receptorId: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/sinLeer/${usuarioId}/${receptorId}`);
+  }
+  
+
   obtenerConversaciones(usuarioId: number): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/conversaciones/${usuarioId}`);
   }

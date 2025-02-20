@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
 import { UsuarioService } from '../../services/usuario.service';
+import { EstadoService } from '../../services/estado.service';
 
 @Component({
   selector: 'app-chat',
@@ -16,10 +17,10 @@ export class ChatComponent implements OnInit, OnChanges {
   mensajes: any[] = [];
   nuevoMensaje: string = '';
   archivoSeleccionado?: File;
-  selectedConversacion: any = {};
   roomId: string = '';
+  conversacionActiva: boolean = false;
 
-  constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UsuarioService) { }
+  constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UsuarioService, private estado: EstadoService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -37,6 +38,8 @@ export class ChatComponent implements OnInit, OnChanges {
         console.warn('⚠️ ID de usuario o receptor no válido. Mensajes no cargados.');
       }
     });
+    this.estado.setEstado(false);
+    this.estado.estado$.subscribe(valor => this.conversacionActiva = valor);
   }  
   
   ngOnChanges(changes: SimpleChanges): void {
@@ -75,6 +78,23 @@ export class ChatComponent implements OnInit, OnChanges {
     }
   }  
   
+  cerrarChat() {
+    // Añadir clase para la animación de cierre
+    const header = document.querySelector('.header-chat');
+    const mensajes = document.querySelector('.mensajes');
+    if (header && mensajes) {
+      header.classList.add('closing');
+      mensajes.classList.add('closing');
+    }
+  
+    // Esperar la animación antes de ocultar el chat
+    setTimeout(() => {
+      this.conversacionActiva = false;
+      this.estado.setEstado(false);
+    }, 500); // Esperar 500ms (la duración de la animación)
+  }
+  
+
   seleccionarArchivo(event: any): void {
     if (event.target.files.length > 0) {
       this.archivoSeleccionado = event.target.files[0];
