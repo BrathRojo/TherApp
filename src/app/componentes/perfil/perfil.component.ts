@@ -223,10 +223,15 @@ export class PerfilComponent implements OnInit {
           comentarios: [],
           mostrarInputComentario: false,
           nuevoComentario:'',
-          liked:false
+          liked:false,
+          nombre:p.nombre,
+          foto:p.foto || 'default.png'
         }));
       }
+
+      
     })
+    console.log(this.publicaciones[0].foto);
   }
 
   abrirModalCambiarUsuario() {
