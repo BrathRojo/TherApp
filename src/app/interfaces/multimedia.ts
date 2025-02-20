@@ -1,5 +1,4 @@
 export interface Multimedia {
-    tipo: 'imagen' | 'video';
+    tipo: string;
     url: string;
-    titulo: string;
   }

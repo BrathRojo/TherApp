@@ -218,6 +218,7 @@ export class PerfilComponent implements OnInit {
         this.publicaciones = publicaciones.map(p=>({
           texto: p.texto,
           multimedia: [],
+          // multimedia: p.tipo && p.url ? [{ tipo: p.tipo, url: p.url }] : [],
           likes: 0,
           comentarios: [],
           mostrarInputComentario: false,
