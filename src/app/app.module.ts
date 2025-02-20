@@ -31,6 +31,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ConversacionesComponent } from './componentes/conversaciones/conversaciones.component';
 import { ResultadosBusquedaComponent } from './componentes/resultados-busqueda/resultados-busqueda.component';
+import { PublicarComponent } from './componentes/publicar/publicar.component';
+import { PublicacionService } from './services/publicacion.service';
 import { ZonaadminComponent } from './componentes/zonaadmin/zonaadmin.component';
 
 @NgModule({
@@ -58,6 +60,7 @@ import { ZonaadminComponent } from './componentes/zonaadmin/zonaadmin.component'
     HeadersinbotonesComponent,
     ConversacionesComponent,
     ResultadosBusquedaComponent,
+    PublicarComponent,
     ZonaadminComponent,
   ],
   imports: [
@@ -73,7 +76,7 @@ import { ZonaadminComponent } from './componentes/zonaadmin/zonaadmin.component'
     MatInputModule,
     MatAutocompleteModule,
   ],
-  providers: [],
+  providers: [PublicacionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

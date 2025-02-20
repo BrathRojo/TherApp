@@ -13,8 +13,8 @@ export class ChatService {
   constructor(private http: HttpClient) {}
 
   obtenerMensajes(usuarioId: number, receptorId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/conversacion?usuarioId=${usuarioId}&receptorId=${receptorId}`);
-  }  
+    return this.http.get<any[]>(`${this.apiUrl}/chat/${usuarioId}/${receptorId}`);
+  }
 
   // ✅ Corregir la URL para enviar mensajes
   enviarMensaje(usuarioId: number, receptorId: number, contenido: string, archivo?: File): Observable<any> {
@@ -24,8 +24,8 @@ export class ChatService {
 
     return this.http.post<any>(`${this.apiUrl}/chat/${usuarioId}/${receptorId}`, formData);
   }
-
-  obtenerConversaciones(usuarioId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/conversaciones/${usuarioId}`);
+  
+  obtenerConversaciones(usuarioId: number): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/conversaciones/${usuarioId}`);
   }
 }

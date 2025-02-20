@@ -30,9 +30,8 @@
   <div class="input-section">
     <textarea [(ngModel)]="nuevoMensaje" placeholder="Escribe un mensaje..."></textarea>
 
-    <!-- ✅ Input para seleccionar un archivo -->
-    <input type="file" (change)="seleccionarArchivo($event)">
-    
+    <input type="file" id="file-upload" class="file-input" (change)="seleccionarArchivo($event)">
+    <label for="file-upload" class="file-label">Seleccionar archivo</label>
     <button (click)="enviarMensaje()">Enviar</button>
   </div>
 </div>

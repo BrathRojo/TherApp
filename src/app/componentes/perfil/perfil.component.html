@@ -13,6 +13,7 @@
 
   <!-- Información del perfil -->
   <div class="profile-info">
+    <p><span>Usuarioid:</span> {{ id }}</p>
     <p><span>Usuario:</span> {{ nombreUsuario }}</p>
     <p><span>Nombre:</span> {{ nombre }}</p>
     <p><span>Email:</span> {{ email }}</p>
@@ -20,6 +21,15 @@
     <p><span>Fecha de Nacimiento:</span> {{ fechaNacimiento | date }}</p>
     <p><span>Biografía:</span> {{ biografia }}</p>
     <p><span>Ubicación:</span> {{ ubicacion }}</p>
+  </div>
+
+  <div *ngIf="nombreUsuario !== nombreUsuarioLogueado">
+    <button *ngIf="!siguiendo" (click)="seguir()">
+      Seguir <i class="bi bi-plus"></i>
+    </button>
+    <button *ngIf="siguiendo" (click)="dejarDeSeguir()">
+      Siguiendo <i class="bi bi-check"></i>
+    </button>
   </div>
 
   <!-- Botón para abrir el modal de edición -->
@@ -73,7 +83,7 @@
             <label class="form-label">Ubicación:</label>
             <input type="text" class="form-control" [(ngModel)]="ubicacion" name="ubicacion">
           </div>
-        </form>
+        </form> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

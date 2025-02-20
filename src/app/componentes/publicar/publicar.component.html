@@ -1,0 +1,42 @@
+<div class="publicar-container">
+  <h3>Crear Publicación</h3>
+  <form [formGroup]="publicacionForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <textarea formControlName="texto" placeholder="Escribe algo..."></textarea>
+    </div>
+    <div class="form-group">
+      <label for="fileInput">Adjuntar contenido multimedia (máximo 10):</label>
+      <input id="fileInput" type="file" (change)="onFileSelected($event)" multiple>
+    </div>
+    <div class="file-previews">
+      <div *ngFor="let preview of filePreviews; let i = index" class="file-preview">
+        <ng-container *ngIf="preview.type.startsWith('image')">
+          <img [src]="preview.url" alt="Previsualización de imagen" class="preview-image">
+        </ng-container>
+        <ng-container *ngIf="preview.type.startsWith('video')">
+          <video [src]="preview.url" controls class="preview-video"></video>
+        </ng-container>
+        <span class="remove-icon" (click)="removeFile(i)">×</span>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!publicacionForm.valid && selectedFiles.length === 0">Publicar</button>
+  </form>
+</div>
+
+<!-- Modal de éxito -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Publicación Exitosa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Tu publicación ha sido creada con éxito.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
