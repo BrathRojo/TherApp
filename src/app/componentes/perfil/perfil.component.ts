@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectorRef } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
+import { TerapeutaService } from '../../services/terapeuta.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { SeguidoresService } from '../../services/seguidores.service';
 import * as bootstrap from 'bootstrap';
-import { TerapeutaService } from '../../services/terapeuta.service';
 import { PublicacionService } from '../../services/publicacion.service';
 import { Publicacion } from '../../interfaces/publicacion';
 import { AuthService } from '../../services/auth.service';
+import { Usuario } from '../../interfaces/usuario';
 
 @Component({
   selector: 'app-perfil',
@@ -17,13 +18,15 @@ import { AuthService } from '../../services/auth.service';
 export class PerfilComponent implements OnInit {
 
   @Input() publicaciones: Publicacion[] = [];
-
-  nombreUsuarioLogueado?: string;
-  siguiendo: boolean = false;
+  
+  nombreUsuarioLogueado: string = '';
+  nombreUsuario: string = '';
+  esTerapeuta: boolean = false;
+  esPremium: boolean = false;
+  modalInstance?: bootstrap.Modal;
 
   id: number = 0;
   foto?: string;
-  nombreUsuario: string = '';
   nombre: string = '';
   email: string = '';
   telefono: string = '';
@@ -31,15 +34,23 @@ export class PerfilComponent implements OnInit {
   biografia?: string;
   ubicacion?: string;
   selectedFile?: File;
-  modalInstance?: bootstrap.Modal;
+  siguiendo: boolean = false;
 
   numtarjeta: String = '';
   caducidad: Date = new Date();
   CCV: number = 0;
-  esTerapeuta: boolean = false;
-  esPremium: boolean = false;
 
-  constructor(private http: HttpClient, private authService: AuthService, private usuarios: UsuarioService, private publicacionService: PublicacionService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private usuarios: UsuarioService,
+    private route: ActivatedRoute,
+    private terapeutaService: TerapeutaService,
+    private seguidores: SeguidoresService,
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService,
+    private publicacionService: PublicacionService
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -50,10 +61,10 @@ export class PerfilComponent implements OnInit {
 
       // Verificar si el usuario logueado es terapeuta
       const usuarioId = Number(localStorage.getItem('usuarioId'));
-      this.usuarios.esTerapeuta(usuarioId).subscribe(esTerapeuta => {
+      this.usuarios.esTerapeuta(usuarioId).subscribe((esTerapeuta: boolean) => {
         this.esTerapeuta = esTerapeuta;
         if (esTerapeuta) {
-          this.terapeutaService.esPremium(usuarioId).subscribe(esPremium => {
+          this.terapeutaService.esPremium(usuarioId).subscribe((esPremium: boolean) => {
             this.esPremium = esPremium;
           });
         }
@@ -62,7 +73,7 @@ export class PerfilComponent implements OnInit {
   }
 
   cargarPerfil() {
-    this.usuarios.getPerfilUsuario(this.nombreUsuario).subscribe(usuario => {
+    this.usuarios.getPerfilUsuario(this.nombreUsuario).subscribe((usuario: Usuario) => {
       this.id = usuario.id;
       this.foto = usuario.fotoPerfil ? usuario.fotoPerfil : 'default.png';
       this.nombreUsuario = usuario.username;
@@ -129,7 +140,7 @@ export class PerfilComponent implements OnInit {
         this.modalInstance?.hide();
         this.esPremium = false;
       },
-      error: err => {
+      error: (err: any) => {
         console.error('Error al cancelar la suscripción:', err);
         alert('Hubo un error al cancelar la suscripción.');
       }
@@ -153,7 +164,7 @@ export class PerfilComponent implements OnInit {
         alert('Perfil actualizado con éxito.');
         this.modalInstance?.hide();
       },
-      error: err => {
+      error: (err: any) => {
         console.error('Error al actualizar perfil:', err);
         alert('Hubo un error al actualizar el perfil.');
       }
@@ -216,4 +227,27 @@ export class PerfilComponent implements OnInit {
     })
   }
 
+  abrirModalCambiarUsuario() {
+    const modalElement = document.getElementById('cambiarUsuarioModal');
+    if (modalElement) {
+      this.modalInstance = new bootstrap.Modal(modalElement);
+      this.modalInstance.show();
+    }
+  }
+
+  cambiarAUsuario() {
+    const usuarioId = Number(localStorage.getItem('usuarioId'));
+    this.terapeutaService.eliminarTerapeuta(usuarioId).subscribe({
+      next: () => {
+        alert('Cuenta cambiada a usuario con éxito.');
+        this.modalInstance?.hide();
+        this.esTerapeuta = false;
+        this.cdr.detectChanges(); // Refresca la vista
+      },
+      error: (err: any) => {
+        console.error('Error al cambiar la cuenta a usuario:', err);
+        alert('Hubo un error al cambiar la cuenta.');
+      }
+    });
+  }
 }

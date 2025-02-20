@@ -40,9 +40,13 @@
 
   <!-- Botones de cambio de cuenta -->
   <div class="account-buttons">
-    <a routerLink="/cambioCuenta/terapeuta" class="btn-switch terapeuta">
+    <a *ngIf="!esTerapeuta" routerLink="/cambioCuenta/terapeuta" class="btn-switch terapeuta">
       <i class="bi bi-person-fill"></i> Cambiar a terapeuta
     </a>
+
+    <button *ngIf="esTerapeuta" class="btn-switch terapeuta" (click)="abrirModalCambiarUsuario()">
+      <i class="bi bi-person-fill"></i> Cambiar a usuario
+    </button>
 
     <a routerLink="/cambioCuenta/organizacion" class="btn-switch organizacion">
       <i class="bi bi-building"></i> Cambiar a organización
@@ -146,6 +150,25 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
         <button type="button" class="btn btn-primary" (click)="cancelarSuscripcion()">Sí, cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para cambiar a usuario -->
+<div class="modal fade" id="cambiarUsuarioModal" tabindex="-1" aria-labelledby="cambiarUsuarioLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cambiarUsuarioLabel">Cambiar a usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que quieres cambiar tu cuenta a usuario? Esta acción no se puede deshacer.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="cambiarAUsuario()">Sí, cambiar</button>
       </div>
     </div>
   </div>

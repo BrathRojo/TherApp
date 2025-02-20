@@ -51,4 +51,8 @@ export class TerapeutaService {
   cancelarPremium(email: string): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/cancelarPremium`, email);
   }
+
+  eliminarTerapeuta(usuarioId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/eliminar/${usuarioId}`);
+  }
 }
