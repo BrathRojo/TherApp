@@ -1,8 +1,11 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
+<<<<<<< HEAD
 import { UsuarioService } from '../../services/usuario.service';
 import { EstadoService } from '../../services/estado.service';
+=======
+>>>>>>> d94c1ca (crear variable de entorno)
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -18,8 +21,11 @@ export class ChatComponent implements OnInit, OnChanges {
   mensajes: any[] = [];
   nuevoMensaje: string = '';
   archivoSeleccionado?: File;
+<<<<<<< HEAD
   roomId: string = '';
   conversacionActiva: boolean = false;
+=======
+>>>>>>> d94c1ca (crear variable de entorno)
   apiUrl = environment.apiUrl;
 
   constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UsuarioService, private estado: EstadoService) { }

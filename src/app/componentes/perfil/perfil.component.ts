@@ -210,6 +210,7 @@ export class PerfilComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('foto', this.selectedFile);
+
     this.http.post(`${environment.apiUrl}/api/usuarios/${this.nombreUsuario}/foto`, formData)
       .subscribe({
         next: (resp) => {
