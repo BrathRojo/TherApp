@@ -17,16 +17,18 @@ export class HeaderComponent implements OnInit {
   searchQuery: string = '';
   resultadosBusqueda: Usuario[] = [];
   private searchTerms = new Subject<string>();
+  esAdmin: boolean = false; // Nueva propiedad para verificar si el usuario es admin
 
   constructor(private auth: AuthService, private router: Router, private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     this.auth.isLoggedIn().subscribe(loggedIn => {
       this.logged = loggedIn;
+      if (this.logged) {
+        this.usuario = localStorage.getItem('usuario') || '';
+        this.verificarAdmin();
+      }
     });
-    if (this.logged) {
-      this.usuario = localStorage.getItem('usuario') || '';
-    }
 
     this.searchTerms.pipe(
       debounceTime(300), // Espera 300ms después de cada pulsación de tecla
@@ -39,6 +41,13 @@ export class HeaderComponent implements OnInit {
       error: (error) => {
         console.error('Error al buscar usuarios:', error);
       }
+    });
+  }
+
+  verificarAdmin(): void {
+    const usuarioId = Number(localStorage.getItem('usuarioId'));
+    this.usuarioService.esAdmin(usuarioId).subscribe((esAdmin: boolean) => {
+      this.esAdmin = esAdmin;
     });
   }
 
