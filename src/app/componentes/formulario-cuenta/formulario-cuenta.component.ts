@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { SolicitudesService } from '../../services/solicitudes.service';
+import { OrganizacionService } from '../../services/organizacion.service';
 
 @Component({
   selector: 'app-formulario-cuenta',
@@ -15,7 +16,7 @@ export class FormularioCuentaComponent implements OnInit {
   modoCambio: string = '';
   nombreUsuario: string = '';
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private usuarioService: UsuarioService, private solicitudService: SolicitudesService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private organizacionService: OrganizacionService, private usuarioService: UsuarioService, private solicitudService: SolicitudesService) {
     this.registroForm = this.fb.group({
       nombre: [this.nombreUsuario, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
 
@@ -95,7 +96,7 @@ export class FormularioCuentaComponent implements OnInit {
       web: this.registroForm.get('web')?.value
     };
     
-    if(solicitud != null){
+    if(solicitud.precio != ''){
       this.solicitudService.enviarSolicitud(solicitud).subscribe({
         next: () => {
           console.log("Solicitud enviada con éxito");
@@ -106,7 +107,7 @@ export class FormularioCuentaComponent implements OnInit {
       });
     }
     else{
-      this.solicitudService.solicitudOrganizacion(solicitudOrg).subscribe({
+      this.organizacionService.solicitudOrganizacion(solicitudOrg).subscribe({
         next: ()=>{
           console.log("Solicitud enviada con éxito");
         },
