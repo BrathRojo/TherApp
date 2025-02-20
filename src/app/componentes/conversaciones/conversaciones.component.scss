@@ -5,7 +5,7 @@
 }
 
 .sidebar {
-    width: 250px;
+    width: 280px;
     height: 84vh;
     background-color: #f4f4f4;
     padding: 10px;
@@ -24,6 +24,42 @@
 .sidebar li {
     padding: 10px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sin-leer {
+        background-color: green;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 5px #00ff00cc;
+        animation: pulse 1.5s infinite alternate ease-in-out;
+      }
+      
+      @keyframes pulse {
+        from {
+          transform: scale(1);
+          opacity: 1;
+        }
+        to {
+          transform: scale(1.2);
+          opacity: 0.9;
+        }
+      }
+      
 
 }
 

@@ -5,6 +5,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../interfaces/usuario';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { EstadoService } from '../../services/estado.service';
 
 @Component({
   selector: 'app-conversaciones',
@@ -22,12 +23,15 @@ export class ConversacionesComponent implements OnInit {
   selectedConversacion?: Usuario | null = null;//garantizar que no sea undefined
   searchQuery: string = '';
   private searchTerms = new Subject<string>();
+  mensajesSinLeer: { usuarioId: number, cantidad: number }[] = [];
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private chatService: ChatService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private estado: EstadoService
   ) {}
 
   ngOnInit(): void {
@@ -58,11 +62,19 @@ export class ConversacionesComponent implements OnInit {
         console.log('✅ Conversaciones recibidas:', conversaciones);  // 🔥 Muestra los datos en la consola
         this.conversaciones = conversaciones;  // 📌 Guardamos las conversaciones correctamente
         this.conversacionesFiltradas = conversaciones;
+        this.conversacionesFiltradas.forEach(conversacion => {
+          this.chatService.obtenerMensajesSinLeer(this.userId, conversacion.id).subscribe(cantidad => {
+            this.mensajesSinLeer.push({usuarioId: conversacion.id, cantidad: cantidad});
+            
+            console.log(this.mensajesSinLeer);
+          });
+        });
       },
       error: (error) => {
         console.error('🚨 Error al cargar las conversaciones:', error);
       }
     });
+    
   }  
 
   cargarUsuariosSeguidosSinConversacion(): void {
@@ -122,6 +134,11 @@ export class ConversacionesComponent implements OnInit {
     );
   }
 
+  getCantidadMensajes(usuarioId: number) {
+    const mensajeUsuario = this.mensajesSinLeer.find(m => m.usuarioId === usuarioId);
+    return mensajeUsuario?.cantidad
+  }
+
   //METODO ANTERIOR ANTERIOR 
   // abrirConversacion(usuario: Usuario): void {
   //   this.selectedConversacion = usuario;
@@ -131,6 +148,13 @@ export class ConversacionesComponent implements OnInit {
     if (usuario && usuario.id) {
       console.log("✅ Usuario seleccionado:", usuario);  // 🔥 Muestra el usuario seleccionado
       this.selectedConversacion = usuario;
+
+      const mensajeUsuario = this.mensajesSinLeer.find(m => m.usuarioId === usuario.id);
+      if (mensajeUsuario && mensajeUsuario?.cantidad !== 0) {
+        mensajeUsuario.cantidad = 0;
+      }
+
+      this.estado.setEstado(true);
   
       // ✅ Pasar correctamente el `id` del usuario receptor a la URL
       this.router.navigate(['/chat', usuario.id]);
