@@ -9,4 +9,6 @@ export interface Publicacion {
   mostrarInputComentario: boolean;
   nuevoComentario: string;
   liked: boolean;
+  tipo?: string;
+  url?: string;
 }

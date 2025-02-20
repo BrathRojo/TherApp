@@ -20,7 +20,9 @@
 
   <!-- Publicaciones -->
   <section class="publicaciones-section">
-    <app-publicacion></app-publicacion>
+    <div *ngFor="let publicacion of publicaciones">
+      <app-publicacion [publicaciones]="publicacion"></app-publicacion>
+    </div>
   </section>
 </main>
 
