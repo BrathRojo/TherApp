@@ -59,4 +59,8 @@ export class UsuarioService {
   esTerapeuta(usuarioId: number): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiUrl}/${usuarioId}/esTerapeuta`);
   }
+
+  esAdmin(usuarioId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/${usuarioId}/esAdmin`);
+  }
 }
