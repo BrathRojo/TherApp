@@ -72,7 +72,7 @@
         <div *ngIf="resultadosBusqueda.length > 0" class="search-results">
           <ul>
             <li *ngFor="let usuario of resultadosBusqueda" (click)="verPerfil(usuario.username)">
-              <img [src]="usuario.fotoPerfil !== null ? 'http://localhost:9000/api/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+              <img [src]="usuario.fotoPerfil !== null ? apiUrl+'/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
               <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
             </li>
           </ul>

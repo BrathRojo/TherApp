@@ -5,6 +5,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../interfaces/usuario';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { environment } from '../../environments/environments';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
   resultadosBusqueda: Usuario[] = [];
   private searchTerms = new Subject<string>();
   esAdmin: boolean = false; // Nueva propiedad para verificar si el usuario es admin
+  apiUrl = environment.apiUrl;
 
   constructor(private auth: AuthService, private router: Router, private usuarioService: UsuarioService) {}
 

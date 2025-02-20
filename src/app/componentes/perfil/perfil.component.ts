@@ -9,6 +9,7 @@ import { PublicacionService } from '../../services/publicacion.service';
 import { Publicacion } from '../../interfaces/publicacion';
 import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../interfaces/usuario';
+import { environment } from '../../environments/environments';
 
 @Component({
   selector: 'app-perfil',
@@ -24,7 +25,7 @@ export class PerfilComponent implements OnInit {
   esTerapeuta: boolean = false;
   esPremium: boolean = false;
   modalInstance?: bootstrap.Modal;
-
+  apiUrl = environment.apiUrl;
   id: number = 0;
   foto?: string;
   nombre: string = '';

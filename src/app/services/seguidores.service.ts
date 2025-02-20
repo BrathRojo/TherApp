@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
+import { environment } from '../environments/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SeguidoresService {
 
-  private apiUrl = 'http://localhost:9000/api/usuarios'; // URL del backend
+  private apiUrl = `${environment.apiUrl}/usuarios`; // URL del backend
 
   constructor(private http: HttpClient) { }
 

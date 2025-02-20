@@ -3,7 +3,7 @@
     <div class="header-chat">
       <div>
         <img
-        [src]="fotoReceptor !== null ? 'http://localhost:9000/api/multimedia/files/' + fotoReceptor : 'assets/default.png'"
+        [src]="fotoReceptor !== null ? apiUrl+'/multimedia/files/' + fotoReceptor : 'assets/default.png'"
         alt="foto-usuario"
         />
         <p class="chat-name">{{ nombreReceptor }}</p>
@@ -33,7 +33,7 @@
               mensaje.archivoUrl.endsWith('.jpeg')
             "
             [src]="
-              'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl
+              apiUrl+'/multimedia/files/' + mensaje.archivoUrl
             "
             width="200"
             alt="Imagen adjunta"
@@ -50,7 +50,7 @@
           >
             <source
               [src]="
-                'http://localhost:9000/api/multimedia/files/' +
+                apiUrl+'/multimedia/files/' +
                 mensaje.archivoUrl
               "
               type="video/mp4"
@@ -60,7 +60,7 @@
           <!-- ✅ Agregar botón de descarga -->
           <a
             [href]="
-              'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl
+              apiUrl+'/multimedia/files/' + mensaje.archivoUrl
             "
             download
             target="_blank"

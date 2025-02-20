@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { EstadoService } from '../../services/estado.service';
+import { environment } from '../../environments/environments';
 
 @Component({
   selector: 'app-chat',
@@ -19,6 +20,7 @@ export class ChatComponent implements OnInit, OnChanges {
   archivoSeleccionado?: File;
   roomId: string = '';
   conversacionActiva: boolean = false;
+  apiUrl = environment.apiUrl;
 
   constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UsuarioService, private estado: EstadoService) { }
 

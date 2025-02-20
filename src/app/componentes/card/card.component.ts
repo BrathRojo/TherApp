@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Card } from '../../interfaces/card';
+import { environment } from '../../environments/environments';
 
 @Component({
   selector: 'app-card',
@@ -9,5 +10,5 @@ import { Card } from '../../interfaces/card';
 export class CardComponent {
 
   @Input() datos: Card = {foto: "", titulo: "", texto:"", precio:0, enlace:""};
-
+  apiUrl = environment.apiUrl;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../interfaces/usuario';
+import { environment } from '../../environments/environments';
 
 @Component({
   selector: 'app-resultados-busqueda',
@@ -12,6 +13,7 @@ export class ResultadosBusquedaComponent implements OnInit {
   searchQuery: string = '';
   resultadosBusqueda: Usuario[] = [];
   seguidoresComunes: { [key: string]: Usuario[] } = {};
+  apiUrl = environment.apiUrl;
 
   constructor(
     private route: ActivatedRoute,

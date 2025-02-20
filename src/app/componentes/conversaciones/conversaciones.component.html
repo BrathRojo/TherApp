@@ -9,7 +9,7 @@
     <ul>
       <li *ngFor="let conversacion of conversacionesFiltradas; let i = index" (click)="abrirConversacion(conversacion)">
         <div>
-          <img [src]="conversacion.fotoPerfil !== null ? 'http://localhost:9000/api/multimedia/files/' + conversacion.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+          <img [src]="conversacion.fotoPerfil !== null ? apiUrl+'/multimedia/files/' + conversacion.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
           <span>{{ conversacion.username }} - {{ conversacion.nombre }} </span>
         </div>
         <div *ngIf="getCantidadMensajes(conversacion.id)" class="sin-leer">
@@ -21,7 +21,7 @@
       <h3>Iniciar conversación</h3>
       <ul>
         <li *ngFor="let usuario of usuariosSeguidosSinConversacionFiltrados" (click)="abrirConversacion(usuario)">
-          <img [src]="usuario.fotoPerfil !== null ? 'http://localhost:9000/api/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+          <img [src]="usuario.fotoPerfil !== null ? apiUrl+'/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
           <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
         </li>
       </ul>
@@ -30,7 +30,7 @@
       <h3>Más en TherApp</h3>
       <ul>
         <li *ngFor="let usuario of masEnTherAppFiltrados" (click)="abrirConversacion(usuario)">
-          <img [src]="usuario.fotoPerfil !== null ? 'http://localhost:9000/api/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+          <img [src]="usuario.fotoPerfil !== null ? apiUrl+'/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
           <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
         </li>
       </ul>

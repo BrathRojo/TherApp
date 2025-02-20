@@ -6,6 +6,7 @@ import { Usuario } from '../../interfaces/usuario';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { EstadoService } from '../../services/estado.service';
+import { environment } from '../../environments/environments';
 
 @Component({
   selector: 'app-conversaciones',
@@ -24,7 +25,7 @@ export class ConversacionesComponent implements OnInit {
   searchQuery: string = '';
   private searchTerms = new Subject<string>();
   mensajesSinLeer: { usuarioId: number, cantidad: number }[] = [];
-
+  apiUrl = environment.apiUrl;
 
   constructor(
     private route: ActivatedRoute,
