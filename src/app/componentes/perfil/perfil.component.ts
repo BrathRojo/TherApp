@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UsuarioService } from '../../services/usuario.service';
 import { ActivatedRoute } from '@angular/router';
 import * as bootstrap from 'bootstrap';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-perfil',
@@ -90,7 +91,7 @@ export class PerfilComponent implements OnInit {
     const formData = new FormData();
     formData.append('foto', this.selectedFile);
 
-    this.http.post(`http://localhost:9000/api/usuarios/${this.nombreUsuario}/foto`, formData)
+    this.http.post(`${environment.apiUrl}/api/usuarios/${this.nombreUsuario}/foto`, formData)
       .subscribe({
         next: (resp) => {
           console.log('Foto subida correctamente', resp);

@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-chat',
@@ -13,6 +14,7 @@ export class ChatComponent implements OnInit, OnChanges {
   mensajes: any[] = [];
   nuevoMensaje: string = '';
   archivoSeleccionado?: File;
+  apiUrl = environment.apiUrl;
 
   constructor(private route: ActivatedRoute, private chatService: ChatService) {}
 

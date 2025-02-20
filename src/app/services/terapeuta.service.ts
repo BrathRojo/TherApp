@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Terapeuta } from '../interfaces/terapeuta';
 import { terapeutaMostrable } from '../interfaces/terapeutaMostrable';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TerapeutaService {
-  private apiUrl = 'http://localhost:9000/api/terapeutas'; // Asegúrate de que coincide con tu backend
+  private apiUrl = `${environment.apiUrl}/terapeutas;` // Asegúrate de que coincide con tu backend
 
   constructor(private http: HttpClient) {}
 

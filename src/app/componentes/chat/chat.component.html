@@ -8,16 +8,16 @@
     <!-- ✅ Mostrar imagen si el mensaje tiene un archivo adjunto y es una imagen -->
     <div *ngIf="mensaje.archivoUrl">
       <img *ngIf="mensaje.archivoUrl.endsWith('.jpg') || mensaje.archivoUrl.endsWith('.png') || mensaje.archivoUrl.endsWith('.jpeg')" 
-           [src]="'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl"
+           [src]="apiUrl + '/multimedia/files/' + mensaje.archivoUrl"
            width="200" alt="Imagen adjunta">
 
       <!-- ✅ Mostrar video si el mensaje tiene un archivo adjunto y es un video -->
       <video *ngIf="mensaje.archivoUrl.endsWith('.mp4') || mensaje.archivoUrl.endsWith('.mov')" controls width="200">
-        <source [src]="'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl" type="video/mp4">
+        <source [src]="apiUrl + '/multimedia/files/' + mensaje.archivoUrl" type="video/mp4">
       </video>
 
       <!-- ✅ Agregar botón de descarga -->
-      <a [href]="'http://localhost:9000/api/multimedia/files/' + mensaje.archivoUrl"
+      <a [href] = "apiUrl + '/multimedia/files/' + mensaje.archivoUrl"
          download
          target="_blank"
          rel="noopener noreferrer">
