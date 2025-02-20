@@ -9,6 +9,7 @@ import { PublicacionService } from '../../services/publicacion.service';
 import { Publicacion } from '../../interfaces/publicacion';
 import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../interfaces/usuario';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-perfil',
@@ -206,6 +207,22 @@ export class PerfilComponent implements OnInit {
     this.usuarios.cambiarFotoPerfil(this.nombreUsuario, this.selectedFile).subscribe(() => {
       this.cargarPerfil();
     });
+
+    const formData = new FormData();
+    formData.append('foto', this.selectedFile);
+    this.http.post(`${environment.apiUrl}/api/usuarios/${this.nombreUsuario}/foto`, formData)
+      .subscribe({
+        next: (resp) => {
+          console.log('Foto subida correctamente', resp);
+          alert('Foto subida con éxito.');
+          // Opcional: Recargar la foto del backend 
+          // o reasignar this.foto = 'uploads/usuario_1_...' 
+        },
+        error: (err) => {
+          console.error('Error al subir foto', err);
+          alert('Error subiendo foto.');
+        }
+      });
   }
 
   obtenerPublicaciones(){

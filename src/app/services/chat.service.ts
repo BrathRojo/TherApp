@@ -5,14 +5,15 @@ import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import { AuthService } from './auth.service';
 import { Usuario } from '../interfaces/usuario';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  private apiUrl = 'http://localhost:9000/api/messages';
   private stompClient: any;
   private messageSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  private apiUrl = `${environment.apiUrl}/messages`;
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.initConnectionSocket();

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -85,12 +86,12 @@ export class RegistroComponent {
         formData.append('foto', this.selectedFile);
       }
       // Y luego harías:
-      // this.http.post('http://localhost:9000/api/usuarios/registro', formData)...
+      // this.http.post(`${environment.apiUrl}/usuarios/registro`, formData)...
       */
 
       // Aquí, simplemente lo enviamos como JSON
       // (la foto se podría enviar luego o con un endpoint distinto)
-      this.http.post('http://localhost:9000/api/usuarios/registro', usuario).subscribe({
+      this.http.post(`${environment.apiUrl}/usuarios/registro`, usuario).subscribe({
         next: (response) => {
           console.log('✅ Usuario registrado con éxito:', response);
           this.snackBar.open('Registro exitoso. Redirigiendo...', 'Cerrar', { duration: 3000 });
