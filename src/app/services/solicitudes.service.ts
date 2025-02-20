@@ -36,6 +36,10 @@ export class SolicitudesService {
     return this.http.get<Solicitud[]>(`${this.apiUrl}/recogersolicitudes`);
   }
 
+  recibirSolicitudesOrg(): Observable<Solicitud[]>{
+    return this.http.get<Solicitud[]>(`${this.apiUrl}/recogersolicitudes`);
+  }
+
   aprobarSolicitud(email: string): Observable<void>{
     return this.http.post<void>(`${this.apiUrl}/aprobarsolicitud`, email);
   }

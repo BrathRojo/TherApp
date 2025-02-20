@@ -10,28 +10,28 @@ import { Multimedia } from '../../interfaces/multimedia';
 })
 export class CursosComponent implements OnInit {
 
-  publicaciones: Publicacion[] = [];
+  publicaciones: Publicacion = {texto:"", multimedia:[], likes:0, comentarios:[], mostrarInputComentario: false, nuevoComentario: "", liked:false};
 
   constructor(private videoService: VideoService) { }
 
   ngOnInit(): void {
-    this.videoService.mostrarVideos().subscribe({
-      next: (videos: Multimedia[]) => {
-        // Transformamos cada objeto Multimedia en una Publicacion
-        this.publicaciones = videos.map(video => ({
-          texto: video.titulo, // Puedes personalizar este texto
-          multimedia: [video], // Se incluye el video o imagen
-          likes: 0,
-          comentarios: [],
-          mostrarInputComentario: false,
-          nuevoComentario: '',
-          liked: false
-        }));
-      },
-      error: (err) => {
-        console.error("Error cargando videos", err);
-      }
-    });
+    // this.videoService.mostrarVideos().subscribe({
+    //   next: (videos: Multimedia[]) => {
+    //     // Transformamos cada objeto Multimedia en una Publicacion
+    //     this.publicaciones = videos.map(video => ({
+    //       texto: video.titulo, // Puedes personalizar este texto
+    //       multimedia: [video], // Se incluye el video o imagen
+    //       likes: 0,
+    //       comentarios: [],
+    //       mostrarInputComentario: false,
+    //       nuevoComentario: '',
+    //       liked: false
+    //     }));
+    //   },
+    //   error: (err) => {
+    //     console.error("Error cargando videos", err);
+    //   }
+    // });
   }
 
 
