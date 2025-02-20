@@ -181,4 +181,23 @@ export class PerfilComponent implements OnInit {
     })
   }
 
+  obtenerPublicaciones(){
+    const storedId = localStorage.getItem('usuarioId');
+    this.id=Number(storedId);
+    this.publicacionService.obtenerPublicaciones(this.id).subscribe({
+      
+      next:(publicaciones)=>{
+        this.publicaciones = publicaciones.map(p=>({
+          texto: p.texto,
+          multimedia: [],
+          likes: 0,
+          comentarios: [],
+          mostrarInputComentario: false,
+          nuevoComentario:'',
+          liked:false
+        }));
+      }
+    })
+  }
+
 }
