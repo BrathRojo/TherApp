@@ -10,7 +10,7 @@ import { Comentario } from '../../interfaces/comentario';
   styleUrls: ['./publicacion.component.scss']
 })
 export class PublicacionComponent {
-  @Input() publicaciones: Publicacion = {texto:"", multimedia:[], likes:0, comentarios:[], mostrarInputComentario: false, nuevoComentario: "", liked:false};
+  @Input() publicaciones: Publicacion = {texto:"", multimedia:[], likes:0, comentarios:[], mostrarInputComentario: false, nuevoComentario: "", liked:false, nombre:"", foto:""};
 
   selectedPublicacion: Publicacion | null = null;
 

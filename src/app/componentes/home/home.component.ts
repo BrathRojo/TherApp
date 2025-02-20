@@ -35,7 +35,9 @@ export class HomeComponent implements OnInit{
           comentarios: [],
           mostrarInputComentario: false,
           nuevoComentario:'',
-          liked:false
+          liked:false,
+          nombre: p.nombre,
+          foto: p.foto || 'default.png'
         }));
         console.log(this.id);
       }
