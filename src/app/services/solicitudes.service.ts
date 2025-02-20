@@ -23,23 +23,9 @@ export class SolicitudesService {
     return this.http.post<void>(`${this.apiUrl}/enviarsolicitud`, solicitud);
   }
 
-  solicitudOrganizacion(solicitud: {
-    email: string;
-    cif: string;
-    direccion: string;
-    telefono: string;
-    web: string;
-  }): Observable<void>{
-    return this.http.post<void>(`${this.apiUrl}/solicitudorganizacion`, solicitud);
-  }
-
   recibirSolicitudes(): Observable<Solicitud[]>{
     return this.http.get<Solicitud[]>(`${this.apiUrl}/recogersolicitudes`);
  
-  }
-
-  recibirSolicitudesOrg(): Observable<Solicitud[]>{
-    return this.http.get<Solicitud[]>(`${this.apiUrl}/recogersolicitudes`);
   }
 
   aprobarSolicitud(email: string): Observable<void>{
