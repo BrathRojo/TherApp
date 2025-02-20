@@ -13,6 +13,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent {
+  cargando: boolean = false;
   registroForm: FormGroup;
   mostrarDatalist = false;
   selectedFile: File | null = null; // ✅ Guardamos el archivo aquí si se selecciona
@@ -65,6 +66,7 @@ export class RegistroComponent {
   // ✅ Método para enviar datos al backend
   onSubmit(): void {
     if (this.registroForm.valid) {
+      this.cargando = true;
       // Datos del formulario
       const usuario = {
         username: this.registroForm.get('username')?.value,
@@ -93,6 +95,7 @@ export class RegistroComponent {
       this.http.post('http://localhost:9000/api/usuarios/registro', usuario).subscribe({
         next: (response) => {
           console.log('✅ Usuario registrado con éxito:', response);
+          this.cargando = false;
           this.snackBar.open('Registro exitoso. Redirigiendo...', 'Cerrar', { duration: 3000 });
           setTimeout(() => {
             this.router.navigate(['/']); // 🔄 Redirigir a la página de inicio

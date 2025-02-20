@@ -224,13 +224,16 @@
       </div>
     </div>
 
-    <!-- Botón de envío -->
-    <button
-      type="submit"
-      [disabled]="!registroForm.valid"
-      aria-label="Registrarse"
-    >
-      Registrar
-    </button>
+<div *ngIf="cargando" class="loading-overlay">
+  <img src="assets/Icono.png" alt="Cargando..." class="blinking-image" />
+  <p class="blinking-image">Registrando usuario...</p>
+</div>
+
+<!-- Botón de envío -->
+<button type="submit" [disabled]="!registroForm.valid || cargando">
+  {{ cargando ? 'Registrando...' : 'Registrar' }}
+</button>
+
+
   </form>
 </div>
