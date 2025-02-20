@@ -7,17 +7,22 @@
       <input type="text" placeholder="Buscar usuarios..." (input)="onSearch($event)">
     </div>
     <ul>
-      <li *ngFor="let conversacion of conversacionesFiltradas" (click)="abrirConversacion(conversacion)">
-        <img [src]="conversacion.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
-        <span class="usuario-nombre">{{ conversacion.nombre }}</span>
+      <li *ngFor="let conversacion of conversacionesFiltradas; let i = index" (click)="abrirConversacion(conversacion)">
+        <div>
+          <img [src]="conversacion.fotoPerfil !== null ? 'http://localhost:9000/api/multimedia/files/' + conversacion.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+          <span>{{ conversacion.username }} - {{ conversacion.nombre }} </span>
+        </div>
+        <div *ngIf="getCantidadMensajes(conversacion.id)" class="sin-leer">
+          {{ getCantidadMensajes(conversacion.id) }}
+        </div>
       </li>
     </ul>
     <ng-container *ngIf="usuariosSeguidosSinConversacionFiltrados.length > 0">
       <h3>Iniciar conversación</h3>
       <ul>
         <li *ngFor="let usuario of usuariosSeguidosSinConversacionFiltrados" (click)="abrirConversacion(usuario)">
-          <img [src]="usuario.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
-          <span class="usuario-nombre">{{ usuario.nombre }}</span>
+          <img [src]="usuario.fotoPerfil !== null ? 'http://localhost:9000/api/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+          <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
         </li>
       </ul>
     </ng-container>
@@ -25,13 +30,13 @@
       <h3>Más en TherApp</h3>
       <ul>
         <li *ngFor="let usuario of masEnTherAppFiltrados" (click)="abrirConversacion(usuario)">
-          <img [src]="usuario.fotoPerfil || 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
-          <span class="usuario-nombre">{{ usuario.nombre }}</span>
+          <img [src]="usuario.fotoPerfil !== null ? 'http://localhost:9000/api/multimedia/files/' + usuario.fotoPerfil : 'assets/default.png'" alt="Foto de perfil" class="foto-perfil">
+          <span>{{ usuario.username }} - {{ usuario.nombre }}</span>
         </li>
       </ul>
     </ng-container>
   </div>
   <div class="chat-container">
-    <app-chat [usuarioId]="userId" [receptorId]="selectedConversacion?.id || 0"></app-chat>
+    <app-chat [usuarioId]="userId" [receptorId]="selectedConversacion?.id || 0" [nombreReceptor]="selectedConversacion?.nombre" [fotoReceptor]="selectedConversacion?.fotoPerfil"></app-chat>
   </div>
 </div>

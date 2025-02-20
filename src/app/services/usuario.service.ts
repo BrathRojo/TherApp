@@ -39,9 +39,24 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(`${this.apiUrl}/mas-en-therapp?usuarioId=${usuarioId}`);
   }
 
+  cambiarFotoPerfil(nombreUsuario: string, archivo: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('foto', archivo);
+
+    return this.http.post<any>(`${this.apiUrl}/${nombreUsuario}/foto`, formData);
+  }
+
   actualizarPerfil(nombreUsuario: string, perfil: any) {
     return this.http.put(`${this.apiUrl}/${nombreUsuario}`, perfil, {
       headers: { 'Content-Type': 'application/json' }
     });
   }  
+
+  hacerAdmin(email: String): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/haceradmin`, { email });
+}
+
+  
+
+  
 }

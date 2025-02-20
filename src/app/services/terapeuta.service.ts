@@ -35,4 +35,12 @@ export class TerapeutaService {
   getTerapeutasParaMostrar(): Observable<terapeutaMostrable[]>{
     return this.http.get<terapeutaMostrable[]>(`${this.apiUrl}/terapeutas`);
   }
+
+  cambiarPremium(email: string): Observable<void>{
+    return this.http.post<void>(`${this.apiUrl}/cambiarPremium`, email);
+  }
+
+  hacerPremium(email: String): Observable<void>{
+    return this.http.post<void>(`${this.apiUrl}/hacerpremium`,  email );
+  }
 }

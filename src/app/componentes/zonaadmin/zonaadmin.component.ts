@@ -1,14 +1,128 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TerapeutaService } from '../../services/terapeuta.service';
+import { terapeutaMostrable } from '../../interfaces/terapeutaMostrable';
+import { UsuarioService } from '../../services/usuario.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
+import { SolicitudesService } from '../../services/solicitudes.service';
+import { Solicitud } from '../../interfaces/solicitud';
 
 @Component({
   selector: 'app-zonaadmin',
   templateUrl: './zonaadmin.component.html',
   styleUrl: './zonaadmin.component.scss'
 })
-export class ZonaadminComponent {
-  accordionItems = [
-    { id: 1, title: 'Accordion Item #1', content: 'Este es el contenido del primer ítem.' },
-    { id: 2, title: 'Accordion Item #2', content: 'Este es el contenido del segundo ítem.' },
-    { id: 3, title: 'Accordion Item #3', content: 'Este es el contenido del tercer ítem.' }
-  ];
+export class ZonaadminComponent implements OnInit{
+
+  email: String = '';
+
+  constructor(private servicio: TerapeutaService, private usuarioService: UsuarioService, private solicitudService: SolicitudesService
+    , private snackBar: MatSnackBar) { }
+
+  @Input() terapeutas: Array<{ nombre: string, apellidos: string, premium: boolean, email: string }> = [];
+  @Input() solicitudes: Solicitud[] = [];
+
+  ngOnInit(): void {
+      this.cargarDatos();
+      this.cargarSolicitudes();
+  }
+
+  cargarDatos() {
+    this.servicio.getTerapeutasParaMostrar().subscribe({
+      next: (terapeutas) => {
+        this.terapeutas = terapeutas.map(t => ({
+          nombre: t.nombre,
+          apellidos: t.apellidos,
+          premium: t.premium,
+          email: t.email
+        }));
+      },
+      error: (err) => console.error('Error al obtener terapeutas:', err)
+    });
+  }
+
+  cargarSolicitudes(){
+    this.solicitudService.recibirSolicitudes().subscribe({
+      next:(solicitudes)=>{
+        console.log("Solicitudes recibidas:", solicitudes); // 👀 Verifica qué se recibe
+        this.solicitudes = solicitudes.map(s=>({
+          id: s.id,
+          email: s.email,
+          apellidos: s.apellidos,
+          nColegiado: s.nColegiado,
+          experiencia: s.experiencia,
+          especialidad: s.especialidad,
+          precio: s.precio,
+          usuario_id: s.usuario_id
+        }));
+      },
+      error: (err) => console.error('Error al obtener solicitudes:', err)
+    })
+  }
+
+  cambiarPremium(email: string){
+    if(email){
+      this.servicio.cambiarPremium(email).subscribe(
+        response=>{
+          console.log('Estado cambiado con éxito');
+          this.snackBar.open('Cambio realizado con éxito', 'Cerrar', {duration:3000});
+          this.cargarDatos();
+        },
+        error=>{
+          console.log('Error al cambiar el estado');
+          this.snackBar.open('Error al realizar el cambio', 'Cerrar', {duration:3000});
+        }
+      );
+    }
+  }
+
+  aprobarSolicitud(email: string){
+    if(email){
+      this.solicitudService.aprobarSolicitud(email).subscribe(
+        response=>{
+          console.log('Estado cambiado con éxito');
+          this.snackBar.open('Cambio realizado con éxito', 'Cerrar', {duration:3000});
+          this.cargarDatos();
+        },
+        error=>{
+          console.log('Error al cambiar el estado');
+          this.snackBar.open('Error al realizar el cambio', 'Cerrar', {duration:3000});
+        }
+      );
+    }
+  }
+
+  rechazarSolicitud(email: string){
+    if(email){
+      this.solicitudService.rechazarSolicitud(email).subscribe(
+        response=>{
+          console.log('Estado cambiado con éxito');
+          this.snackBar.open('Cambio realizado con éxito', 'Cerrar', {duration:3000});
+          this.cargarDatos();
+        },
+        error=>{
+          console.log('Error al cambiar el estado');
+          this.snackBar.open('Error al realizar el cambio', 'Cerrar', {duration:3000});
+        }
+      );
+    }
+  }
+
+
+  onSubmit(){
+    if(this.email){
+      this.usuarioService.hacerAdmin(this.email).subscribe(
+        response=>{
+          console.log('Permisos concedidos con éxito');
+          this.snackBar.open('Cambio realizado con éxito', 'Cerrar', {duration:3000});
+          document.getElementById('email')!.innerText = '';
+        },
+        error=>{
+          console.error('Error al conceder los permisos', error);
+          this.snackBar.open('Error al realizar el cambio', 'Cerrar', {duration:3000});
+        }
+      );
+    }
+  }
+
 }

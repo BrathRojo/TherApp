@@ -9,22 +9,22 @@
         <!-- Contenido del acordeón -->
         <div class="card-body">
           <div class="accordion" id="accordionExample">
-            <div *ngFor="let item of accordionItems; let i = index" class="accordion-item">
+            <div *ngFor="let item of solicitudes; let i = index" class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         [attr.data-bs-target]="'#collapse' + i"
                         aria-expanded="false"
                         [attr.aria-controls]="'collapse' + i">
-                  {{ item.title }}
+                  Solicitud de {{ item.email }}
                 </button>
               </h2>
               <div [id]="'collapse' + i" class="accordion-collapse collapse">
                 <div class="accordion-body">
-                  <strong>{{ item.content }}
-                    <button type="button" class="btn btn-outline-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                  <strong>{{item.apellidos}} {{ item.nColegiado }}
+                    <button type="button" class="btn btn-outline-success" (click)="aprobarSolicitud(item.email)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
                       </svg></button>
-                      <button type="button" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <button type="button" class="btn btn-outline-danger" (click)="rechazarSolicitud(item.email)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                       </svg></button>
                   </strong>
@@ -35,10 +35,50 @@
         </div>
       </div>
 
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-header">
+          <h3 class="mb-0">Lista de Terapeutas</h3>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li *ngFor="let item of terapeutas" class="list-group-item d-flex justify-content-between align-items-center">
+              <span>{{ item.nombre }} {{ item.apellidos }}</span>
+              
+              <div>
+                <span *ngIf="item.premium; else noPremiumBadge" class="badge bg-success me-2">Premium</span>
+                <ng-template #noPremiumBadge>
+                  <span class="badge bg-secondary me-2">No Premium</span>
+                </ng-template>
+      
+                <button *ngIf="item.premium; else noPremiumButton" type="button" class="btn btn-danger btn-sm" (click)="cambiarPremium(item.email)">Retirar premium</button>
+                <ng-template #noPremiumButton>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="cambiarPremium(item.email)">Activar premium</button>
+                </ng-template>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="card shadow p-4 mb-4 bg-white rounded">
+        <div class="card-header">
+          <h3 class="mb-0">Hacer administrador</h3>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" aria-describedby="emailHelp">
+            </div>
+            <button type="submit" class="btn btn-primary">Dar derechos de administrador</button>
+          </form>
+        </div>
+      </div>
+      
       
 </main>
 <app-footer></app-footer>
 
 
 
-  
+
