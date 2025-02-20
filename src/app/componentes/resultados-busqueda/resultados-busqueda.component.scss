@@ -7,10 +7,17 @@
 .usuario-card {
   display: flex;
   align-items: center;
+  justify-content: space-between; // Asegura que los elementos dentro se separen en los extremos
   margin-bottom: 15px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
 }
 
 .foto-perfil {
@@ -21,6 +28,10 @@
 }
 
 .usuario-info {
+  flex-grow: 1; // Ocupa el espacio disponible
+  display: flex;
+  flex-direction: column;
+
   h3 {
     margin: 0;
     font-size: 1.2em;
@@ -29,5 +40,41 @@
   p {
     margin: 0;
     color: #666;
+  }
+}
+
+.contenedor-btn-seguir {
+  button {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &.seguir {
+      background-color: #007bff;
+      color: white;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+
+    &.siguiendo {
+      background-color: #ddd;
+      color: #333;
+
+      &:hover {
+        background-color: #bbb;
+      }
+    }
+
+    i {
+      font-size: 1.1em;
+    }
   }
 }
