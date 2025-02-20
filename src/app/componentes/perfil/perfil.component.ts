@@ -37,7 +37,7 @@ export class PerfilComponent implements OnInit {
   caducidad: Date = new Date();
   CCV: number = 0;
 
-  constructor(private http: HttpClient, private authService: AuthService, private servicio: UsuarioService, private publicacionService: PublicacionService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
+  constructor(private http: HttpClient, private authService: AuthService, private usuarios: UsuarioService, private publicacionService: PublicacionService, private route: ActivatedRoute, private terapeutaService: TerapeutaService, private seguidores: SeguidoresService, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -160,25 +160,6 @@ export class PerfilComponent implements OnInit {
     this.usuarios.cambiarFotoPerfil(this.nombreUsuario, this.selectedFile).subscribe(() => {
       this.cargarPerfil();
     });
-  }
-
-  obtenerPublicaciones(){
-    const storedId = localStorage.getItem('usuarioId');
-    this.id=Number(storedId);
-    this.publicacionService.obtenerPublicaciones(this.id).subscribe({
-      
-      next:(publicaciones)=>{
-        this.publicaciones = publicaciones.map(p=>({
-          texto: p.texto,
-          multimedia: [],
-          likes: 0,
-          comentarios: [],
-          mostrarInputComentario: false,
-          nuevoComentario:'',
-          liked:false
-        }));
-      }
-    })
   }
 
   obtenerPublicaciones(){
